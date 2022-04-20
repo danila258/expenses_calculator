@@ -32,6 +32,11 @@ private slots:
     void transportFileDialog();
     void otherCostsFileDialog();
 
+    void EditeCostsFile();
+    void EditeInstituteFile();
+    void EditeTransportFile();
+    void EditeCaffeCinemaFile();
+
     void startCalculate();
     
 private:
@@ -39,6 +44,8 @@ private:
     QWidget* studentInputWidget();
     QTabWidget* tabWidget();
     QPushButton* calculateButton();
+    void fileTable(std::vector<std::vector<std::string>> file, const QStringList &labels);
+    QWidget* fileEditWidget(std::vector<std::vector<std::string>> file, const QStringList &labels, std::function<void()>& sendFile);
 
     void errorFileShow();
     void errorInputShow();
@@ -48,6 +55,9 @@ private:
 
     QSpinBox* _ageSpinBox;
     QPushButton* _calculateButton;
+    QTableWidget* _table;
+
+    void (*_sendFile) (std::vector<std::vector<std::string>>);
 
     int _age;
     int _month;
@@ -75,7 +85,7 @@ private:
     bool _flagCinema = false;
     bool _flagCaffe = false;
 
-    bool _calculateAgeFlag;
+    bool _calculateAgeFlag = true;  //TODO как обработать без возраста?
 };
 
 
