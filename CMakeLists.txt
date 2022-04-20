@@ -14,7 +14,7 @@ find_package(
         REQUIRED)
 
 add_executable(student-calculator main.cpp UI.cpp StudentCalculator.h Database.cpp Database.h Student.cpp
-        Student.h Slots.cpp Functions.cpp)
+        Student.h Slots.cpp CalculatorFunctions.cpp)
 
 target_link_libraries(
         student-calculator

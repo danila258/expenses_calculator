@@ -17,6 +17,7 @@ QWidget* StudentCalculator::studentInputWidget() {
 
     QLabel* ageLabel = new QLabel("&Age:");
     QLabel* monthLabel = new QLabel("&Month:");
+    QLabel* nameLabel = new QLabel("&Name:");
     QLabel* cityLabel = new QLabel("&City:");
     QLabel* addressLabel = new QLabel("&Address:");
     QLabel* instituteLabel = new QLabel("&Institute:");
@@ -36,6 +37,7 @@ QWidget* StudentCalculator::studentInputWidget() {
     _ageSpinBox->setRange(7, 200);
     _ageSpinBox->setSuffix(" years old");
 
+    QLineEdit* lineEditName = new QLineEdit;
     QLineEdit* lineEditCity = new QLineEdit;
     QLineEdit* lineEditAddress = new QLineEdit;
     QLineEdit* lineEditInstitute = new QLineEdit;
@@ -44,6 +46,7 @@ QWidget* StudentCalculator::studentInputWidget() {
 
     ageLabel->setBuddy(ageCheckBox);
     monthLabel->setBuddy(monthsList);
+    nameLabel->setBuddy(lineEditName);
     cityLabel->setBuddy(lineEditCity);
     addressLabel->setBuddy(lineEditAddress);
     instituteLabel->setBuddy(lineEditInstitute);
@@ -54,6 +57,7 @@ QWidget* StudentCalculator::studentInputWidget() {
 
     connect(monthsList, SIGNAL(activated(int)), SLOT(monthEdited(int)));
 
+    connect(lineEditName, SIGNAL(textChanged(const QString&)), SLOT(nameEdited(const QString&)));
     connect(lineEditCity, SIGNAL(textChanged(const QString&)), SLOT(cityEdited(const QString&)));
     connect(lineEditAddress, SIGNAL(textChanged(const QString&)), SLOT(addressEdited(const QString&)));
     connect(lineEditInstitute, SIGNAL(textChanged(const QString&)), SLOT(instituteEdited(const QString&)));
@@ -69,18 +73,21 @@ QWidget* StudentCalculator::studentInputWidget() {
 
     layout->addWidget(monthLabel, 1, 0);
     layout->addWidget(monthsList, 1, 1);
-    layout->addWidget(cityLabel, 2, 0);
-    layout->addWidget(lineEditCity, 2, 1);
-    layout->addWidget(addressLabel, 3, 0);
-    layout->addWidget(lineEditAddress, 3, 1);
-    layout->addWidget(instituteLabel, 4, 0);
-    layout->addWidget(lineEditInstitute, 4, 1);
-    layout->addWidget(cinemaLabel, 5, 0);
-    layout->addWidget(lineEditCinema, 5, 1);
-    layout->addWidget(caffeLabel, 6, 0);
-    layout->addWidget(lineEditCaffe, 6, 1);
 
-    layout->addWidget(ageCheckBox, 7, 0);
+    layout->addWidget(nameLabel, 2, 0);
+    layout->addWidget(lineEditName, 2, 1);
+    layout->addWidget(cityLabel, 3, 0);
+    layout->addWidget(lineEditCity, 3, 1);
+    layout->addWidget(addressLabel, 4, 0);
+    layout->addWidget(lineEditAddress, 4, 1);
+    layout->addWidget(instituteLabel, 5, 0);
+    layout->addWidget(lineEditInstitute, 5, 1);
+    layout->addWidget(cinemaLabel, 6, 0);
+    layout->addWidget(lineEditCinema, 6, 1);
+    layout->addWidget(caffeLabel, 7, 0);
+    layout->addWidget(lineEditCaffe, 7, 1);
+
+    layout->addWidget(ageCheckBox, 8, 0);
 
     studentInputWidget->setLayout(layout);
     return studentInputWidget;
@@ -133,7 +140,7 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     return fileChoiceWidget;
 }
 
-QWidget* StudentCalculator::tabWidget() {
+QTabWidget* StudentCalculator::tabWidget() {
     QTabWidget* calculatorTab = new QTabWidget();
 
     calculatorTab->addTab(studentInputWidget(), "&Input");
@@ -142,10 +149,14 @@ QWidget* StudentCalculator::tabWidget() {
     return calculatorTab;
 }
 
-QWidget* StudentCalculator::calculateButton() {
+QPushButton* StudentCalculator::calculateButton() {
     _calculateButton = new QPushButton();
     connect(_calculateButton, SIGNAL(clicked(bool)), SLOT(startCalculate()));
     updateCalculateButton();
 
     return _calculateButton;
 }
+
+
+
+
