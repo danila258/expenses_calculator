@@ -6,7 +6,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt5 COMPONENTS
+find_package(
+        Qt5 COMPONENTS
         Core
         Gui
         Widgets
@@ -15,7 +16,8 @@ find_package(Qt5 COMPONENTS
 add_executable(student-calculator main.cpp StudentCalculator.cpp StudentCalculator.h Database.cpp Database.h Student.cpp
         Student.h)
 
-target_link_libraries(student-calculator
+target_link_libraries(
+        student-calculator
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
