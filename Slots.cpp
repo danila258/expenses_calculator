@@ -1,6 +1,7 @@
 #include "StudentCalculator.h"
 
 void StudentCalculator::startCalculate() {
+    //TODO здесь должны быть использованы твои функции
     Database database = Database(_costsFile, _instituteFile, _transportFile, _otherCostsFile);
 
     if ( !(database.initDatabase()) ) {
@@ -70,6 +71,8 @@ void StudentCalculator::costsFileDialog() {
     _costsFile = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
     _flagCostsFile = !(_costsFile.empty());
     updateCalculateButton();
+
+    //TODO скорее всего здесь должна быть отправлена директория в студент дата
 }
 
 void StudentCalculator::instituteFileDialog() {
@@ -88,4 +91,24 @@ void StudentCalculator::otherCostsFileDialog() {
     _otherCostsFile = QFileDialog::getOpenFileName(this, "Other Costs File", "", "*.csv").toStdString();
     _flagOtherCostsFile = !(_otherCostsFile.empty());
     updateCalculateButton();
+}
+
+void StudentCalculator::EditeCostsFile() {
+    QStringList list = {"City", "Age", "Average food cost per month", "Other costs"};
+    fileEditWidget(_costsData, list, resetCosts());
+}
+
+void StudentCalculator::EditeInstituteFile() {
+    QStringList list = {"City", "Institute", "Dinner cost"};
+    fileEditWidget(_instituteData, list, resetInstitute);
+}
+
+void StudentCalculator::EditeTransportFile() {
+    QStringList list = {"City", "District", "Institute", "Transport cost"};
+    fileEditWidget(_transportData, list, resetTransport);
+}
+
+void StudentCalculator::EditeCaffeCinemaFile() {
+    QStringList list = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
+    fileEditWidget(_cafeCinemaData, list, resetCafeCinema);
 }

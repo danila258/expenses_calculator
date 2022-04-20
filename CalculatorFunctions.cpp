@@ -1,5 +1,17 @@
 #include "StudentCalculator.h"
 
+QWidget* StudentCalculator::fileEditWidget(std::vector<std::vector<std::string>> file, const QStringList &labels,
+                                           std::function<void()>& sendFile) {
+
+    fileTable(file, labels);
+    *(_sendFile) = new sendFile; //TODO как сделать указатель на функцию из твоей публичной?
+
+
+    //осталось 3 кнопки
+
+
+}
+
 void StudentCalculator::updateCalculateButton() {
     int sum = _flagName + _flagCity + _flagAddress + _flagCaffe + _flagCinema + _flagInstitute + _flagCostsFile +
               _flagInstituteFile + _flagOtherCostsFile + _flagTransportFile;

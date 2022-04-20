@@ -106,10 +106,10 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     QPushButton* buttonBrowseTransportFile = new QPushButton("Browse");
     QPushButton* buttonBrowseCaffeCinemaFile = new QPushButton("Browse");
 
-    QPushButton* buttonEditeCostsFile = new QPushButton("Edite");
-    QPushButton* buttonEditeInstituteFile = new QPushButton("Edite");
-    QPushButton* buttonEditeTransportFile = new QPushButton("Edite");
-    QPushButton* buttonEditeCaffeCinemaFile = new QPushButton("Edite");
+    QPushButton* buttonEditeCostsFile = new QPushButton("Edit");
+    QPushButton* buttonEditeInstituteFile = new QPushButton("Edit");
+    QPushButton* buttonEditeTransportFile = new QPushButton("Edit");
+    QPushButton* buttonEditeCaffeCinemaFile = new QPushButton("Edit");
 
     costsLabel->setBuddy(buttonBrowseCostsFile);
     instituteLabel->setBuddy(buttonBrowseInstituteFile);
@@ -120,6 +120,11 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     connect(buttonBrowseInstituteFile, SIGNAL(clicked()), SLOT(instituteFileDialog()));
     connect(buttonBrowseTransportFile, SIGNAL(clicked()), SLOT(transportFileDialog()));
     connect(buttonBrowseCaffeCinemaFile, SIGNAL(clicked()), SLOT(otherCostsFileDialog()));
+
+    connect(buttonEditeCostsFile, SIGNAL(clicked()), SLOT(EditeCostsFile()));
+    connect(buttonEditeInstituteFile, SIGNAL(clicked()), SLOT(EditeInstituteFile()));
+    connect(buttonEditeTransportFile, SIGNAL(clicked()), SLOT(EditeTransportFile()));
+    connect(buttonEditeCaffeCinemaFile, SIGNAL(clicked()), SLOT(EditeCaffeCinemaFile()));
 
     QGridLayout* layout = new QGridLayout();
     layout->addWidget(costsLabel, 0, 0);
@@ -157,6 +162,16 @@ QPushButton* StudentCalculator::calculateButton() {
     return _calculateButton;
 }
 
+void StudentCalculator::fileTable(std::vector<std::vector<std::string>> file, const QStringList &labels) {
 
+    _table = new QTableWidget(file.size(), labels.size(), this);
+    _table->setHorizontalHeaderLabels(labels);
+    _table->setShowGrid(true);
 
-
+    for (int i = 1; i < file.size(); ++i) {
+        for (int k = 0; k < labels.size(); ++k) {
+            QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString(file[i][k]));
+            _table->setItem(i, k, item);
+        }
+    }
+}
