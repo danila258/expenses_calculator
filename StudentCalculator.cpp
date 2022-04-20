@@ -13,7 +13,7 @@ StudentCalculator::StudentCalculator(QWidget *parent) : QWidget(parent){
     setLayout(calculatorLayout);
 }
 
-QWidget* StudentCalculator::studentInfoWidget() {
+QWidget* StudentCalculator::studentInputWidget() {
     QWidget* studentInfoWidget = new QWidget();
 
     QLabel* ageLabel = new QLabel("&Age:");
@@ -48,23 +48,22 @@ QWidget* StudentCalculator::studentInfoWidget() {
     connect(lineEditCinema, SIGNAL(textChanged(const QString&)), SLOT(cinemaEdited(const QString&)));
     connect(lineEditCaffe, SIGNAL(textChanged(const QString&)), SLOT(caffeEdited(const QString&)));
 
-    QVBoxLayout* layout = new QVBoxLayout();
-    layout->addWidget(ageLabel);
-    layout->addWidget(lineEditAge);
-    layout->addWidget(monthLabel);
-    layout->addWidget(lineEditMonth);
-    layout->addWidget(cityLabel);
-    layout->addWidget(lineEditCity);
-    layout->addWidget(addressLabel);
-    layout->addWidget(lineEditAddress);
-    layout->addWidget(instituteLabel);
-    layout->addWidget(lineEditInstitute);
-    layout->addWidget(cinemaLabel);
-    layout->addWidget(lineEditCinema);
-    layout->addWidget(caffeLabel);
-    layout->addWidget(lineEditCaffe);
+    QGridLayout* layout = new QGridLayout();
+    layout->addWidget(ageLabel, 0, 0);
+    layout->addWidget(lineEditAge, 0, 1);
+    layout->addWidget(monthLabel, 1, 0);
+    layout->addWidget(lineEditMonth, 1, 1);
+    layout->addWidget(cityLabel, 2, 0);
+    layout->addWidget(lineEditCity, 2, 1);
+    layout->addWidget(addressLabel, 3, 0);
+    layout->addWidget(lineEditAddress, 3, 1);
+    layout->addWidget(instituteLabel, 4, 0);
+    layout->addWidget(lineEditInstitute, 4, 1);
+    layout->addWidget(cinemaLabel, 5, 0);
+    layout->addWidget(lineEditCinema, 5, 1);
+    layout->addWidget(caffeLabel, 6, 0);
+    layout->addWidget(lineEditCaffe, 6, 1);
 
-    layout->addStretch(1);
     studentInfoWidget->setLayout(layout);
 
     return studentInfoWidget;
@@ -118,8 +117,8 @@ QWidget* StudentCalculator::fileChoiceWidget() {
 QWidget* StudentCalculator::tabWidget() {
     QTabWidget* calculatorTab = new QTabWidget();
 
-    calculatorTab->addTab(studentInfoWidget(), "&Data");
-    calculatorTab->addTab(fileChoiceWidget(), "&File");
+    calculatorTab->addTab(studentInputWidget(), "&Input");
+    calculatorTab->addTab(fileChoiceWidget(), "&Data");
 
     return calculatorTab;
 }
