@@ -13,8 +13,8 @@ find_package(
         Widgets
         REQUIRED)
 
-add_executable(student-calculator main.cpp StudentCalculator.cpp StudentCalculator.h Database.cpp Database.h Student.cpp
-        Student.h)
+add_executable(student-calculator main.cpp UI.cpp StudentCalculator.h Database.cpp Database.h Student.cpp
+        Student.h Slots.cpp Functions.cpp)
 
 target_link_libraries(
         student-calculator
