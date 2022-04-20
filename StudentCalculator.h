@@ -5,7 +5,6 @@
 #include "Database.h"
 #include "Student.h"
 
-#include <vector>
 #include <string>
 using std::string;
 
@@ -21,6 +20,7 @@ private slots:
     void monthEdited(int month);
     void regulateAgeSpinBox(int mode);
 
+    void nameEdited(const QString& name);
     void cityEdited(const QString& city);
     void addressEdited(const QString& address);
     void instituteEdited(const QString& institute);
@@ -37,8 +37,8 @@ private slots:
 private:
     QWidget* fileChoiceWidget();
     QWidget* studentInputWidget();
-    QWidget* tabWidget();
-    QWidget* calculateButton();
+    QTabWidget* tabWidget();
+    QPushButton* calculateButton();
 
     void errorFileShow();
     void errorInputShow();
@@ -52,6 +52,7 @@ private:
     int _age;
     int _month;
 
+    string _name;
     string _city;
     string _address;
     string _institute;
@@ -67,6 +68,7 @@ private:
     bool _flagInstituteFile = false;
     bool _flagTransportFile = false;
     bool _flagOtherCostsFile = false;
+    bool _flagName = false;
     bool _flagCity = false;
     bool _flagAddress = false;
     bool _flagInstitute = false;

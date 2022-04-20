@@ -1,17 +1,17 @@
 #include "StudentCalculator.h"
 
 void StudentCalculator::updateCalculateButton() {
-    int sum = _flagCity + _flagAddress + _flagCaffe + _flagCinema + _flagInstitute + _flagCostsFile +
+    int sum = _flagName + _flagCity + _flagAddress + _flagCaffe + _flagCinema + _flagInstitute + _flagCostsFile +
               _flagInstituteFile + _flagOtherCostsFile + _flagTransportFile;
 
-    if (sum == 9) {
+    if (sum == 10) {
         _calculateButton->setEnabled(true);
         _calculateButton->setText("Calculate");
     }
     else {
         _calculateButton->setEnabled(false);
         QString line = QString::number(sum);
-        _calculateButton->setText(line + "/9");
+        _calculateButton->setText(line + "/10");
     }
 }
 
@@ -28,7 +28,7 @@ void StudentCalculator::errorInputShow() {
 }
 
 void StudentCalculator::studentMoneyShow(int sum) {
-    QString line = "The student spend " + QString::number(sum) + " rubles";
+    QString line = "The " + QString::fromStdString(_name) + " spend " + QString::number(sum) + " rubles";
 
     QMessageBox* studentMoney = new QMessageBox(QMessageBox::Information, "Warning", line,
                                                 QMessageBox::Ok, this);

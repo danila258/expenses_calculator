@@ -30,31 +30,37 @@ void StudentCalculator::monthEdited(int month) {
     _month = month;
 }
 
-void StudentCalculator::cityEdited(const QString &city) {
+void StudentCalculator::nameEdited(const QString& name) {
+    _name = name.toStdString();
+    _flagName = !(_name.empty());
+    updateCalculateButton();
+}
+
+void StudentCalculator::cityEdited(const QString& city) {
     _city = city.toStdString();
     _flagCity = !(_city.empty());
     updateCalculateButton();
 }
 
-void StudentCalculator::addressEdited(const QString &address) {
+void StudentCalculator::addressEdited(const QString& address) {
     _address = address.toStdString();
     _flagAddress = !(_address.empty());
     updateCalculateButton();
 }
 
-void StudentCalculator::instituteEdited(const QString &institute) {
+void StudentCalculator::instituteEdited(const QString& institute) {
     _institute = institute.toStdString();
     _flagInstitute = !(_institute.empty());
     updateCalculateButton();
 }
 
-void StudentCalculator::cinemaEdited(const QString &cinema) {
+void StudentCalculator::cinemaEdited(const QString& cinema) {
     _cinema = cinema.toStdString();
     _flagCinema = !(_cinema.empty());
     updateCalculateButton();
 }
 
-void StudentCalculator::caffeEdited(const QString &caffe) {
+void StudentCalculator::caffeEdited(const QString& caffe) {
     _caffe = caffe.toStdString();
     _flagCaffe = !(_caffe.empty());
     updateCalculateButton();
