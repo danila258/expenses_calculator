@@ -25,10 +25,10 @@ private slots:
     void cinemaEdited(const QString& cinema);
     void caffeEdited(const QString& caffe);
 
-    void costsFileEdited(const QString& costsFile);
-    void instituteFileEdited(const QString& instituteFile);
-    void transportFileEdited(const QString& transportFile);
-    void caffeCinemaFileEdited(const QString& caffeCinemaFile);
+    void costsFileDialog();
+    void instituteFileDialog();
+    void transportFileDialog();
+    void otherCostsFileDialog();
     
 private:
     QWidget* fileChoiceWidget();
@@ -44,8 +44,6 @@ private:
     void startCalculate();
     bool inputInspection();
 
-    QWidget* _messagePosition;
-
     string _age;
     string _month;
     string _city;
@@ -60,7 +58,7 @@ private:
     string _costsFile;
     string _instituteFile;
     string _transportFile;
-    string _caffeCinemaFile;
+    string _otherCostsFile;
 };
 
 

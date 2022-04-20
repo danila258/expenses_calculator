@@ -77,39 +77,41 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     QLabel* transportLabel = new QLabel("&Transport file:");
     QLabel* weekendsLabel = new QLabel("&Weekends file:");
 
-    QLineEdit* lineEditCostsFile = new QLineEdit;
-    QLineEdit* lineEditInstituteFile = new QLineEdit;
-    QLineEdit* lineEditTransportFile = new QLineEdit;
-    QLineEdit* lineEditCaffeCinemaFile = new QLineEdit;
+    QPushButton* buttonBrowseCostsFile = new QPushButton("Browse");
+    QPushButton* buttonBrowseInstituteFile = new QPushButton("Browse");
+    QPushButton* buttonBrowseTransportFile = new QPushButton("Browse");
+    QPushButton* buttonBrowseCaffeCinemaFile = new QPushButton("Browse");
 
-    costsLabel->setBuddy(lineEditCostsFile);
-    instituteLabel->setBuddy(lineEditInstituteFile);
-    transportLabel->setBuddy(lineEditTransportFile);
-    weekendsLabel->setBuddy(lineEditCaffeCinemaFile);
+    QPushButton* buttonEditeCostsFile = new QPushButton("Edite");
+    QPushButton* buttonEditeInstituteFile = new QPushButton("Edite");
+    QPushButton* buttonEditeTransportFile = new QPushButton("Edite");
+    QPushButton* buttonEditeCaffeCinemaFile = new QPushButton("Edite");
 
-    connect(lineEditCostsFile, SIGNAL(textChanged(const QString&)), SLOT(costsFileEdited(const QString&)));
-    connect(lineEditInstituteFile, SIGNAL(textChanged(const QString&)), SLOT(instituteFileEdited(const QString&)));
-    connect(lineEditTransportFile, SIGNAL(textChanged(const QString&)), SLOT(transportFileEdited(const QString&)));
-    connect(lineEditCaffeCinemaFile, SIGNAL(textChanged(const QString&)), SLOT(caffeCinemaFileEdited(const QString&)));
+    costsLabel->setBuddy(buttonBrowseCostsFile);
+    instituteLabel->setBuddy(buttonBrowseInstituteFile);
+    transportLabel->setBuddy(buttonBrowseTransportFile);
+    weekendsLabel->setBuddy(buttonBrowseCaffeCinemaFile);
 
-    lineEditCostsFile->setText("../Resources/Costs.csv");
-    lineEditInstituteFile->setText("../Resources/Institute.csv");
-    lineEditTransportFile->setText("../Resources/Transport2.csv");
-    lineEditCaffeCinemaFile->setText("../Resources/Caffe-and-cinema.csv");
+    connect(buttonBrowseCostsFile, SIGNAL(clicked()), SLOT(costsFileDialog()));
+    connect(buttonBrowseInstituteFile, SIGNAL(clicked()), SLOT(instituteFileDialog()));
+    connect(buttonBrowseTransportFile, SIGNAL(clicked()), SLOT(transportFileDialog()));
+    connect(buttonBrowseCaffeCinemaFile, SIGNAL(clicked()), SLOT(otherCostsFileDialog()));
 
-    QVBoxLayout* layout = new QVBoxLayout();
-    layout->addWidget(costsLabel);
-    layout->addWidget(lineEditCostsFile);
-    layout->addWidget(instituteLabel);
-    layout->addWidget(lineEditInstituteFile);
-    layout->addWidget(transportLabel);
-    layout->addWidget(lineEditTransportFile);
-    layout->addWidget(weekendsLabel);
-    layout->addWidget(lineEditCaffeCinemaFile);
+    QGridLayout* layout = new QGridLayout();
+    layout->addWidget(costsLabel, 0, 0);
+    layout->addWidget(buttonBrowseCostsFile, 0, 1);
+    layout->addWidget(buttonEditeCostsFile, 0, 2);
+    layout->addWidget(instituteLabel, 1, 0);
+    layout->addWidget(buttonBrowseInstituteFile, 1, 1);
+    layout->addWidget(buttonEditeInstituteFile, 1, 2);
+    layout->addWidget(transportLabel, 2, 0);
+    layout->addWidget(buttonBrowseTransportFile, 2, 1);
+    layout->addWidget(buttonEditeTransportFile, 2, 2);
+    layout->addWidget(weekendsLabel, 3, 0);
+    layout->addWidget(buttonBrowseCaffeCinemaFile, 3, 1);
+    layout->addWidget(buttonEditeCaffeCinemaFile, 3, 2);
 
-    layout->addStretch(1);
     fileChoiceWidget->setLayout(layout);
-    _messagePosition = fileChoiceWidget;
 
     return fileChoiceWidget;
 }
@@ -167,7 +169,7 @@ void StudentCalculator::calculateButtonClicked() {
 }
 
 void StudentCalculator::startCalculate() {
-    Database database = Database(_costsFile, _instituteFile, _transportFile, _caffeCinemaFile);
+    Database database = Database(_costsFile, _instituteFile, _transportFile, _otherCostsFile);
 
     if ( !(database.initDatabase()) ) {
         errorFileShow();
@@ -224,6 +226,22 @@ bool StudentCalculator::inputInspection() {
     return flagAge && flagMonth;
 }
 
+void StudentCalculator::costsFileDialog() {
+    _costsFile = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
+}
+
+void StudentCalculator::instituteFileDialog() {
+    _instituteFile = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
+}
+
+void StudentCalculator::transportFileDialog() {
+    _transportFile = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
+}
+
+void StudentCalculator::otherCostsFileDialog() {
+    _otherCostsFile = QFileDialog::getOpenFileName(this, "Other Costs File", "", "*.csv").toStdString();
+}
+
 void StudentCalculator::ageEdited(const QString& age) {
     _age = age.toStdString();
 }
@@ -250,20 +268,4 @@ void StudentCalculator::cinemaEdited(const QString &cinema) {
 
 void StudentCalculator::caffeEdited(const QString &caffe) {
     _caffe = caffe.toStdString();
-}
-
-void StudentCalculator::costsFileEdited(const QString &costsFile) {
-    _costsFile = costsFile.toStdString();
-}
-
-void StudentCalculator::instituteFileEdited(const QString &instituteFile) {
-    _instituteFile = instituteFile.toStdString();
-}
-
-void StudentCalculator::transportFileEdited(const QString &transportFile) {
-    _transportFile = transportFile.toStdString();
-}
-
-void StudentCalculator::caffeCinemaFileEdited(const QString &caffeCinemaFile) {
-    _caffeCinemaFile = caffeCinemaFile.toStdString();
 }
