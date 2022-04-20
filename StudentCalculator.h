@@ -32,7 +32,7 @@ private slots:
     
 private:
     QWidget* fileChoiceWidget();
-    QWidget* studentInfoWidget();
+    QWidget* studentInputWidget();
     QWidget* tabWidget();
     QWidget* calculateButton();
 
