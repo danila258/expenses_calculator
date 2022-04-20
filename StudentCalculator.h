@@ -17,8 +17,10 @@ public:
 private slots:
     void calculateButtonClicked();
 
-    void ageEdited(const QString& age);
-    void monthEdited(const QString& month);
+    void ageEdited(int age);
+    void monthEdited(int month);
+    void regulateAgeSpinBox(int mode);
+
     void cityEdited(const QString& city);
     void addressEdited(const QString& address);
     void instituteEdited(const QString& institute);
@@ -36,24 +38,24 @@ private:
     QWidget* tabWidget();
     QWidget* calculateButton();
 
-    void errorAgeMonthShow();
     void errorFileShow();
     void errorInputShow();
     void studentMoneyShow(size_t count);
 
+    void calculateButtonEnabled();
     void startCalculate();
-    bool inputInspection();
 
-    string _age;
-    string _month;
+    QSpinBox* _ageSpinBox;
+    QWidget* _calculateButton;
+
+    int _age;
+    int _month;
+
     string _city;
     string _address;
     string _institute;
     string _cinema;
     string _caffe;
-
-    size_t _ageI;
-    size_t _monthI;
 
     string _costsFile;
     string _instituteFile;

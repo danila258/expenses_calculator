@@ -14,7 +14,7 @@ StudentCalculator::StudentCalculator(QWidget *parent) : QWidget(parent){
 }
 
 QWidget* StudentCalculator::studentInputWidget() {
-    QWidget* studentInfoWidget = new QWidget();
+    QWidget* studentInputWidget = new QWidget();
 
     QLabel* ageLabel = new QLabel("&Age:");
     QLabel* monthLabel = new QLabel("&Month:");
@@ -24,35 +24,52 @@ QWidget* StudentCalculator::studentInputWidget() {
     QLabel* cinemaLabel = new QLabel("&Cinema:");
     QLabel* caffeLabel = new QLabel("&Caffe:");
 
-    QLineEdit* lineEditAge = new QLineEdit;
-    QLineEdit* lineEditMonth = new QLineEdit;
+    QStringList strMonths = {"January", "February", "March", "April", "May", "June", "July", "August", "September",
+                             "October", "November", "December"};
+
+    QComboBox* monthsList = new QComboBox();
+    monthsList->addItems(strMonths);
+
+    QCheckBox* ageCheckBox = new QCheckBox("Use age in calculations");
+    ageCheckBox->setChecked(true);
+
+    _ageSpinBox = new QSpinBox();
+    _ageSpinBox->setRange(15, 200);
+    _ageSpinBox->setSuffix(" years old");
+
     QLineEdit* lineEditCity = new QLineEdit;
     QLineEdit* lineEditAddress = new QLineEdit;
     QLineEdit* lineEditInstitute = new QLineEdit;
     QLineEdit* lineEditCinema = new QLineEdit;
     QLineEdit* lineEditCaffe = new QLineEdit;
 
-    ageLabel->setBuddy(lineEditAge);
-    monthLabel->setBuddy(lineEditMonth);
+    ageLabel->setBuddy(ageCheckBox);
+    monthLabel->setBuddy(monthsList);
     cityLabel->setBuddy(lineEditCity);
     addressLabel->setBuddy(lineEditAddress);
     instituteLabel->setBuddy(lineEditInstitute);
     cinemaLabel->setBuddy(lineEditCinema);
     caffeLabel->setBuddy(lineEditCaffe);
 
-    connect(lineEditAge, SIGNAL(textChanged(const QString&)), SLOT(ageEdited(const QString&)));
-    connect(lineEditMonth, SIGNAL(textChanged(const QString&)), SLOT(monthEdited(const QString&)));
+    connect(_ageSpinBox, SIGNAL(valueChanged(int)), SLOT(ageEdited(int)));
+
+    connect(monthsList, SIGNAL(activated(int)), SLOT(monthEdited(int)));
+
     connect(lineEditCity, SIGNAL(textChanged(const QString&)), SLOT(cityEdited(const QString&)));
     connect(lineEditAddress, SIGNAL(textChanged(const QString&)), SLOT(addressEdited(const QString&)));
     connect(lineEditInstitute, SIGNAL(textChanged(const QString&)), SLOT(instituteEdited(const QString&)));
     connect(lineEditCinema, SIGNAL(textChanged(const QString&)), SLOT(cinemaEdited(const QString&)));
     connect(lineEditCaffe, SIGNAL(textChanged(const QString&)), SLOT(caffeEdited(const QString&)));
 
+    connect(ageCheckBox, SIGNAL(stateChanged(int)), SLOT(regulateAgeSpinBox(int)));
+
     QGridLayout* layout = new QGridLayout();
+
     layout->addWidget(ageLabel, 0, 0);
-    layout->addWidget(lineEditAge, 0, 1);
+    layout->addWidget(_ageSpinBox, 0, 1);
+
     layout->addWidget(monthLabel, 1, 0);
-    layout->addWidget(lineEditMonth, 1, 1);
+    layout->addWidget(monthsList, 1, 1);
     layout->addWidget(cityLabel, 2, 0);
     layout->addWidget(lineEditCity, 2, 1);
     layout->addWidget(addressLabel, 3, 0);
@@ -64,9 +81,10 @@ QWidget* StudentCalculator::studentInputWidget() {
     layout->addWidget(caffeLabel, 6, 0);
     layout->addWidget(lineEditCaffe, 6, 1);
 
-    studentInfoWidget->setLayout(layout);
+    layout->addWidget(ageCheckBox, 7, 0);
 
-    return studentInfoWidget;
+    studentInputWidget->setLayout(layout);
+    return studentInputWidget;
 }
 
 QWidget* StudentCalculator::fileChoiceWidget() {
@@ -132,13 +150,6 @@ QWidget* StudentCalculator::calculateButton() {
     return calculateButton;
 }
 
-void StudentCalculator::errorAgeMonthShow() {
-    QMessageBox* errorAgeMonth = new QMessageBox(QMessageBox::Warning, "Warning",
-                                                 "Forbidden characters in the Age or Month field",
-                                                 QMessageBox::Ok, this);
-    errorAgeMonth->show();
-}
-
 void StudentCalculator::errorFileShow() {
     QMessageBox* errorFile = new QMessageBox(QMessageBox::Warning, "Warning", "No files in directory",
                                              QMessageBox::Ok, this);
@@ -160,12 +171,7 @@ void StudentCalculator::studentMoneyShow(size_t count) {
 }
 
 void StudentCalculator::calculateButtonClicked() {
-    if (inputInspection()) {
-        startCalculate();
-    }
-    else {
-        errorAgeMonthShow();
-    }
+    startCalculate();
 }
 
 void StudentCalculator::startCalculate() {
@@ -175,55 +181,14 @@ void StudentCalculator::startCalculate() {
         errorFileShow();
     }
     else {
-        if ( !(database.userInputCheck(_ageI, _city, _address, _institute, _caffe, _cinema)) ) {
+        if ( !(database.userInputCheck(_age, _city, _address, _institute, _caffe, _cinema)) ) {
             errorInputShow();
         }
         else {
-            Student human = Student(_ageI, _city, _address, _institute, _cinema, _caffe, database);
-            studentMoneyShow(human.getCosts(_monthI));
+            Student human = Student(_age, _city, _address, _institute, _cinema, _caffe, database);
+            studentMoneyShow(human.getCosts(_month));
         }
     }
-}
-
-bool StudentCalculator::inputInspection() {
-    bool flagAge = true;
-    bool flagMonth = true;
-
-    if (_age[0] == '\0') {
-        flagAge = false;
-    }
-
-    if (_month[0] == '\0') {
-        flagMonth = false;
-    }
-
-    for (size_t i = 0; _age[i] != '\0'; ++i) {
-        if (_age[i] < '0' || _age[i] > '9') {
-            flagAge = false;
-            break;
-        }
-    }
-
-    for (size_t i = 0; _month[i] != '\0'; ++i) {
-        if (_month[i] < '0' || _month[i] > '9') {
-            flagMonth = false;
-            break;
-        }
-    }
-
-    if (flagAge) {
-        _ageI = std::stoi(_age);
-    }
-
-    if (flagMonth) {
-        _monthI = std::stoi(_month);
-
-        if (_monthI > 12 || _monthI == 0) {
-            flagMonth = false;
-        }
-    }
-
-    return flagAge && flagMonth;
 }
 
 void StudentCalculator::costsFileDialog() {
@@ -242,12 +207,16 @@ void StudentCalculator::otherCostsFileDialog() {
     _otherCostsFile = QFileDialog::getOpenFileName(this, "Other Costs File", "", "*.csv").toStdString();
 }
 
-void StudentCalculator::ageEdited(const QString& age) {
-    _age = age.toStdString();
+void StudentCalculator::ageEdited(int age) {
+    _age = age;
 }
 
-void StudentCalculator::monthEdited(const QString &month) {
-    _month = month.toStdString();
+void StudentCalculator::monthEdited(int month) {
+    _month = month;
+}
+
+void StudentCalculator::regulateAgeSpinBox(int mode) {
+    _ageSpinBox->setEnabled(mode);
 }
 
 void StudentCalculator::cityEdited(const QString &city) {
