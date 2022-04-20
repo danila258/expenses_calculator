@@ -1,7 +1,7 @@
 #include "StudentCalculator.h"
 #include "iostream"
 
-StudentCalculator::StudentCalculator(QWidget *parent) : QWidget(parent){
+StudentCalculator::StudentCalculator(QWidget *parent) : QWidget(parent) {
     QVBoxLayout* calculatorLayout = new QVBoxLayout();
 
     calculatorLayout->addWidget(tabWidget());
@@ -30,11 +30,11 @@ QWidget* StudentCalculator::studentInputWidget() {
     QComboBox* monthsList = new QComboBox();
     monthsList->addItems(strMonths);
 
-    QCheckBox* ageCheckBox = new QCheckBox("Use age in calculations");
+    QCheckBox* ageCheckBox = new QCheckBox("Use age");
     ageCheckBox->setChecked(true);
 
     _ageSpinBox = new QSpinBox();
-    _ageSpinBox->setRange(15, 200);
+    _ageSpinBox->setRange(7, 200);
     _ageSpinBox->setSuffix(" years old");
 
     QLineEdit* lineEditCity = new QLineEdit;
@@ -144,10 +144,26 @@ QWidget* StudentCalculator::tabWidget() {
 }
 
 QWidget* StudentCalculator::calculateButton() {
-    QPushButton* calculateButton = new QPushButton("Calculate");
-    connect(calculateButton, SIGNAL(clicked(bool)), SLOT(calculateButtonClicked()));
+    _calculateButton = new QPushButton();
+    connect(_calculateButton, SIGNAL(clicked(bool)), SLOT(startCalculate()));
+    updateCalculateButton();
 
-    return calculateButton;
+    return _calculateButton;
+}
+
+void StudentCalculator::updateCalculateButton() {
+    int sum = _flagCity + _flagAddress + _flagCaffe + _flagCinema + _flagInstitute + _flagCostsFile +
+            _flagInstituteFile + _flagOtherCostsFile + _flagTransportFile;
+
+    if (sum == 9) {
+        _calculateButton->setEnabled(true);
+        _calculateButton->setText("Calculate");
+    }
+    else {
+        _calculateButton->setEnabled(false);
+        QString line = QString::number(sum);
+        _calculateButton->setText(line + "/9");
+    }
 }
 
 void StudentCalculator::errorFileShow() {
@@ -162,16 +178,12 @@ void StudentCalculator::errorInputShow() {
     errorInput->show();
 }
 
-void StudentCalculator::studentMoneyShow(size_t count) {
-    QString line = "The student spend " + QString::number(count) + " rubles";
+void StudentCalculator::studentMoneyShow(int sum) {
+    QString line = "The student spend " + QString::number(sum) + " rubles";
 
     QMessageBox* studentMoney = new QMessageBox(QMessageBox::Information, "Warning", line,
                                                 QMessageBox::Ok, this);
     studentMoney->show();
-}
-
-void StudentCalculator::calculateButtonClicked() {
-    startCalculate();
 }
 
 void StudentCalculator::startCalculate() {
@@ -193,18 +205,31 @@ void StudentCalculator::startCalculate() {
 
 void StudentCalculator::costsFileDialog() {
     _costsFile = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
+    _flagCostsFile = !(_costsFile.empty());
+    updateCalculateButton();
 }
 
 void StudentCalculator::instituteFileDialog() {
     _instituteFile = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
+    _flagInstituteFile = !(_instituteFile.empty());
+    updateCalculateButton();
 }
 
 void StudentCalculator::transportFileDialog() {
     _transportFile = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
+    _flagTransportFile = !(_transportFile.empty());
+    updateCalculateButton();
 }
 
 void StudentCalculator::otherCostsFileDialog() {
     _otherCostsFile = QFileDialog::getOpenFileName(this, "Other Costs File", "", "*.csv").toStdString();
+    _flagOtherCostsFile = !(_otherCostsFile.empty());
+    updateCalculateButton();
+}
+
+void StudentCalculator::regulateAgeSpinBox(int mode) {
+    _ageSpinBox->setEnabled(mode);
+    _calculateAgeFlag = (mode) != 0;
 }
 
 void StudentCalculator::ageEdited(int age) {
@@ -215,26 +240,32 @@ void StudentCalculator::monthEdited(int month) {
     _month = month;
 }
 
-void StudentCalculator::regulateAgeSpinBox(int mode) {
-    _ageSpinBox->setEnabled(mode);
-}
-
 void StudentCalculator::cityEdited(const QString &city) {
     _city = city.toStdString();
+    _flagCity = !(_city.empty());
+    updateCalculateButton();
 }
 
 void StudentCalculator::addressEdited(const QString &address) {
     _address = address.toStdString();
+    _flagAddress = !(_address.empty());
+    updateCalculateButton();
 }
 
 void StudentCalculator::instituteEdited(const QString &institute) {
     _institute = institute.toStdString();
+    _flagInstitute = !(_institute.empty());
+    updateCalculateButton();
 }
 
 void StudentCalculator::cinemaEdited(const QString &cinema) {
     _cinema = cinema.toStdString();
+    _flagCinema = !(_cinema.empty());
+    updateCalculateButton();
 }
 
 void StudentCalculator::caffeEdited(const QString &caffe) {
     _caffe = caffe.toStdString();
+    _flagCaffe = !(_caffe.empty());
+    updateCalculateButton();
 }

@@ -5,6 +5,7 @@
 #include "Database.h"
 #include "Student.h"
 
+#include <vector>
 #include <string>
 using std::string;
 
@@ -15,7 +16,6 @@ public:
     StudentCalculator(QWidget* parent = nullptr);
 
 private slots:
-    void calculateButtonClicked();
 
     void ageEdited(int age);
     void monthEdited(int month);
@@ -31,6 +31,8 @@ private slots:
     void instituteFileDialog();
     void transportFileDialog();
     void otherCostsFileDialog();
+
+    void startCalculate();
     
 private:
     QWidget* fileChoiceWidget();
@@ -40,13 +42,12 @@ private:
 
     void errorFileShow();
     void errorInputShow();
-    void studentMoneyShow(size_t count);
+    void studentMoneyShow(int sum);
 
-    void calculateButtonEnabled();
-    void startCalculate();
+    void updateCalculateButton();
 
     QSpinBox* _ageSpinBox;
-    QWidget* _calculateButton;
+    QPushButton* _calculateButton;
 
     int _age;
     int _month;
@@ -61,6 +62,18 @@ private:
     string _instituteFile;
     string _transportFile;
     string _otherCostsFile;
+
+    bool _flagCostsFile = false;
+    bool _flagInstituteFile = false;
+    bool _flagTransportFile = false;
+    bool _flagOtherCostsFile = false;
+    bool _flagCity = false;
+    bool _flagAddress = false;
+    bool _flagInstitute = false;
+    bool _flagCinema = false;
+    bool _flagCaffe = false;
+
+    bool _calculateAgeFlag;
 };
 
 
