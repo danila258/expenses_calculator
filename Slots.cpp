@@ -126,10 +126,20 @@ void StudentCalculator::addRow() {
 }
 
 void StudentCalculator::cancelEditFile() {
-    close(_fileEditWidget);
+    QWidget::close();
 }
 
 void StudentCalculator::saveNewFile() {
+    std::vector<std::vector<std::string>> file;
+    string item;
+
+    for (int i = 1; i < _table->rowCount(); ++i) {
+        for (int k = 0; k < _table->columnCount(); ++k) {
+            item = _table->itemAt(i, k)->text().toStdString();
+            file[i][k] = item;
+        }
+    }
+
     _sendFile(file);
     cancelEditFile();
 }
