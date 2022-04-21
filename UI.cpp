@@ -54,26 +54,21 @@ QWidget* StudentCalculator::studentInputWidget() {
     caffeLabel->setBuddy(lineEditCaffe);
 
     connect(_ageSpinBox, SIGNAL(valueChanged(int)), SLOT(ageEdited(int)));
-
     connect(monthsList, SIGNAL(activated(int)), SLOT(monthEdited(int)));
-
     connect(lineEditName, SIGNAL(textChanged(const QString&)), SLOT(nameEdited(const QString&)));
     connect(lineEditCity, SIGNAL(textChanged(const QString&)), SLOT(cityEdited(const QString&)));
     connect(lineEditAddress, SIGNAL(textChanged(const QString&)), SLOT(addressEdited(const QString&)));
     connect(lineEditInstitute, SIGNAL(textChanged(const QString&)), SLOT(instituteEdited(const QString&)));
     connect(lineEditCinema, SIGNAL(textChanged(const QString&)), SLOT(cinemaEdited(const QString&)));
     connect(lineEditCaffe, SIGNAL(textChanged(const QString&)), SLOT(caffeEdited(const QString&)));
-
     connect(ageCheckBox, SIGNAL(stateChanged(int)), SLOT(regulateAgeSpinBox(int)));
 
     QGridLayout* layout = new QGridLayout();
 
     layout->addWidget(ageLabel, 0, 0);
     layout->addWidget(_ageSpinBox, 0, 1);
-
     layout->addWidget(monthLabel, 1, 0);
     layout->addWidget(monthsList, 1, 1);
-
     layout->addWidget(nameLabel, 2, 0);
     layout->addWidget(lineEditName, 2, 1);
     layout->addWidget(cityLabel, 3, 0);
@@ -86,7 +81,6 @@ QWidget* StudentCalculator::studentInputWidget() {
     layout->addWidget(lineEditCinema, 6, 1);
     layout->addWidget(caffeLabel, 7, 0);
     layout->addWidget(lineEditCaffe, 7, 1);
-
     layout->addWidget(ageCheckBox, 8, 0);
 
     studentInputWidget->setLayout(layout);
@@ -127,6 +121,7 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     connect(buttonEditeCaffeCinemaFile, SIGNAL(clicked()), SLOT(EditeCaffeCinemaFile()));
 
     QGridLayout* layout = new QGridLayout();
+
     layout->addWidget(costsLabel, 0, 0);
     layout->addWidget(buttonBrowseCostsFile, 0, 1);
     layout->addWidget(buttonEditeCostsFile, 0, 2);
@@ -141,7 +136,6 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     layout->addWidget(buttonEditeCaffeCinemaFile, 3, 2);
 
     fileChoiceWidget->setLayout(layout);
-
     return fileChoiceWidget;
 }
 
