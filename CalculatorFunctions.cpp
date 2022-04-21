@@ -1,8 +1,8 @@
 #include "StudentCalculator.h"
 
-void StudentCalculator::fileEditWidget(std::vector<std::vector<std::string>> file, const QStringList &labels) {
+void StudentCalculator::fileEditWidget(const QStringList &labels) {
 
-    fileTable(file, labels);
+    fileTable(labels);
 
     QPushButton* buttonDeleteRow = new QPushButton("Delete Row");
     QPushButton* buttonAddRow = new QPushButton("Add row");
@@ -38,14 +38,16 @@ void StudentCalculator::updateCalculateButton() {
     }
 }
 
-void StudentCalculator::errorFileShow() {
-    QMessageBox* errorFile = new QMessageBox(QMessageBox::Warning, "Warning", "No files in directory",
-                                             QMessageBox::Ok, this);
-    errorFile->show();
-}
 
-void StudentCalculator::errorInputShow() {
-    QMessageBox* errorInput = new QMessageBox(QMessageBox::Warning, "Warning", "Incorrect student data",
+void StudentCalculator::errorDataLoadShow(const std::vector<string>& errors) {
+    string errorLine = "";
+
+    for (int i = 0; i < errors.size(); ++i) {
+        errorLine += errors[i];
+        errorLine += '\n';
+    }
+
+    QMessageBox* errorInput = new QMessageBox(QMessageBox::Warning, "Warning", QString::fromStdString(errorLine),
                                               QMessageBox::Ok, this);
     errorInput->show();
 }

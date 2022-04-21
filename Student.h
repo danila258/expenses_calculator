@@ -2,28 +2,27 @@
 #define STUDENT_H
 
 #include <string>
-#include "Database.h"
-
-using std::string;
 
 class Student {
 public:
-    Student(size_t age, const string& city, const string& address, const string& institute,
-            const string& cinema, const string& caffe, const Database& data);
+    Student(int age, std::string& city, std::string& address, std::string& institute,
+            std::string cafe, std::string cinema) :
+    _age(age), _city(city), _address(address), _institute(institute), _cafe(cafe), _cinema(cinema) {
+    }
 
-    size_t getWeekendCost() const;
-    size_t getWorkdayCost() const;
-    size_t getCosts(size_t month) const;
+    int _cinemaCost;
+    int _cafeCost;
+    int _avgFoodCost;
+    int _otherCost;
+    int _instituteFoodCost;
+    int _transportCost;
 
-private:
-    size_t _age;
-    string _city;
-    string _address;
-    string _institute;
-    string _cinema;
-    string _caffe;
-
-    Database _data;
+    int _age;
+    std::string _city;
+    std::string _address;
+    std::string _institute;
+    std::string _cafe;
+    std::string _cinema;
 };
 
 #endif //STUDENT_H

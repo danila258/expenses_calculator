@@ -2,7 +2,7 @@
 #define STUDENTCALCULATOR_H
 
 #include <QtWidgets>
-#include "Database.h"
+#include "StudentsDatabase.h"
 #include "Student.h"
 
 #include <string>
@@ -45,15 +45,16 @@ private slots:
     void startCalculate();
     
 private:
+    Database _database;
+
     QWidget* fileChoiceWidget();
     QWidget* studentInputWidget();
     QTabWidget* tabWidget();
     QPushButton* calculateButton();
-    void fileTable(std::vector<std::vector<std::string>> file, const QStringList &labels);
-    void fileEditWidget(std::vector<std::vector<std::string>> file, const QStringList &labels);
+    void fileTable(const QStringList &labels);
+    void fileEditWidget(const QStringList &labels);
 
-    void errorFileShow();
-    void errorInputShow();
+    void errorDataLoadShow(const std::vector<string>& errors);
     void studentMoneyShow(int sum);
 
     void updateCalculateButton();
@@ -63,7 +64,7 @@ private:
     QWidget* _fileEditWidget;
     QTableWidget* _table;
 
-    void (*_sendFile) (std::vector<std::vector<std::string>>);
+    std::vector<std::vector<std::string>>* _bufVector;
 
     int _age;
     int _month;
@@ -73,7 +74,7 @@ private:
     string _address;
     string _institute;
     string _cinema;
-    string _caffe;
+    string _cafe;
 
     string _costsFile;
     string _instituteFile;
