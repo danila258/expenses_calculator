@@ -2,17 +2,20 @@
 #define STUDENTCALCULATOR_H
 
 #include <QtWidgets>
+#include <QMap>
+#include <string>
+using std::string;
+
 #include "StudentsDatabase.h"
 #include "Student.h"
 
-#include <string>
-using std::string;
+#define countCheckedFields 10
 
 class StudentCalculator : public QWidget {
     Q_OBJECT
 
 public:
-    StudentCalculator(QWidget* parent = nullptr);
+    explicit StudentCalculator(QWidget* parent = nullptr);
 
 private slots:
 
@@ -32,10 +35,10 @@ private slots:
     void transportFileDialog();
     void otherCostsFileDialog();
 
-    void EditeCostsFile();
-    void EditeInstituteFile();
-    void EditeTransportFile();
-    void EditeCaffeCinemaFile();
+    void EditCostsFile();
+    void EditInstituteFile();
+    void EditTransportFile();
+    void EditCaffeCinemaFile();
 
     void deleteRow();
     void addRow();
@@ -52,8 +55,8 @@ private:
     QTabWidget* tabWidget();
     QPushButton* calculateButton();
 
-    void fileTable(const QStringList &labels);
-    void fileEditWidget(const QStringList &labels);
+    void fileTable(const QStringList& labels);
+    void fileEditWidget(const QStringList& labels);
 
     void errorDataLoadShow(const std::vector<string>& dataLoudErrors);
     void studentMoneyShow(int sum);
@@ -66,10 +69,10 @@ private:
     QWidget* _fileEditWidget;
     QTableWidget* _table;
 
-    QPushButton* _buttonEditeCostsFile;
-    QPushButton* _buttonEditeInstituteFile;
-    QPushButton* _buttonEditeTransportFile;
-    QPushButton* _buttonEditeOtherCostsFile;
+    QPushButton* _buttonEditCostsFile;
+    QPushButton* _buttonEditInstituteFile;
+    QPushButton* _buttonEditTransportFile;
+    QPushButton* _buttonEditOtherCostsFile;
 
     std::vector<std::vector<std::string>>* _bufVector;
 
@@ -88,16 +91,7 @@ private:
     string _transportFile;
     string _otherCostsFile;
 
-    bool _flagCostsFile = false;
-    bool _flagInstituteFile = false;
-    bool _flagTransportFile = false;
-    bool _flagOtherCostsFile = false;
-    bool _flagName = false;
-    bool _flagCity = false;
-    bool _flagAddress = false;
-    bool _flagInstitute = false;
-    bool _flagCinema = false;
-    bool _flagCaffe = false;
+    std::vector<bool> _completeFieldsArr;
 
     bool _calculateAgeFlag = true;  //TODO как обработать без возраста?
 };
