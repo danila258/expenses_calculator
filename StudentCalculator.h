@@ -37,6 +37,11 @@ private slots:
     void EditeTransportFile();
     void EditeCaffeCinemaFile();
 
+    void deleteRow();
+    void addRow();
+    void cancelEditFile();
+    void saveNewFile();
+
     void startCalculate();
     
 private:
@@ -45,7 +50,7 @@ private:
     QTabWidget* tabWidget();
     QPushButton* calculateButton();
     void fileTable(std::vector<std::vector<std::string>> file, const QStringList &labels);
-    QWidget* fileEditWidget(std::vector<std::vector<std::string>> file, const QStringList &labels, std::function<void()>& sendFile);
+    void fileEditWidget(std::vector<std::vector<std::string>> file, const QStringList &labels);
 
     void errorFileShow();
     void errorInputShow();
@@ -55,6 +60,7 @@ private:
 
     QSpinBox* _ageSpinBox;
     QPushButton* _calculateButton;
+    QWidget* _fileEditWidget;
     QTableWidget* _table;
 
     void (*_sendFile) (std::vector<std::vector<std::string>>);

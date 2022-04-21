@@ -95,20 +95,41 @@ void StudentCalculator::otherCostsFileDialog() {
 
 void StudentCalculator::EditeCostsFile() {
     QStringList list = {"City", "Age", "Average food cost per month", "Other costs"};
-    fileEditWidget(_costsData, list, resetCosts());
+    _sendFile = resetCosts();
+    fileEditWidget(_costsData, list);
 }
 
 void StudentCalculator::EditeInstituteFile() {
     QStringList list = {"City", "Institute", "Dinner cost"};
-    fileEditWidget(_instituteData, list, resetInstitute);
+    _sendFile = resetInstitute;
+    fileEditWidget(_instituteData, list);
 }
 
 void StudentCalculator::EditeTransportFile() {
     QStringList list = {"City", "District", "Institute", "Transport cost"};
-    fileEditWidget(_transportData, list, resetTransport);
+    _sendFile = resetTransport;
+    fileEditWidget(_transportData, list);
 }
 
 void StudentCalculator::EditeCaffeCinemaFile() {
     QStringList list = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
-    fileEditWidget(_cafeCinemaData, list, resetCafeCinema);
+    _sendFile = resetCafeCinema;
+    fileEditWidget(_cafeCinemaData, list);
+}
+
+void StudentCalculator::deleteRow() {
+    _table->removeRow(_table->rowCount() - 1);
+}
+
+void StudentCalculator::addRow() {
+    _table->insertRow(_table->rowCount());
+}
+
+void StudentCalculator::cancelEditFile() {
+    close(_fileEditWidget);
+}
+
+void StudentCalculator::saveNewFile() {
+    _sendFile(file);
+    cancelEditFile();
 }
