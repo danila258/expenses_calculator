@@ -65,37 +65,33 @@ void StudentCalculator::caffeEdited(const QString& caffe) {
 
 void StudentCalculator::costsFileDialog() {
     _costsFile = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
-    _flagCostsFile = !(_costsFile.empty());
-
     _database.setCosts(_costsFile);
 
+    _flagCostsFile = !(_costsFile.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::instituteFileDialog() {
     _instituteFile = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
-    _flagInstituteFile = !(_instituteFile.empty());
-
     _database.setInstitute(_instituteFile);
 
+    _flagInstituteFile = !(_instituteFile.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::transportFileDialog() {
     _transportFile = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
-    _flagTransportFile = !(_transportFile.empty());
-
     _database.setTransport(_transportFile);
 
+    _flagTransportFile = !(_transportFile.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::otherCostsFileDialog() {
     _otherCostsFile = QFileDialog::getOpenFileName(this, "Other Costs File", "", "*.csv").toStdString();
-    _flagOtherCostsFile = !(_otherCostsFile.empty());
-
     _database.setCafeCinema(_otherCostsFile);
 
+    _flagOtherCostsFile = !(_otherCostsFile.empty());
     updateCalculateButton();
 }
 

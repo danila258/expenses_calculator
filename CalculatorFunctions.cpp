@@ -1,7 +1,6 @@
 #include "StudentCalculator.h"
 
 void StudentCalculator::fileEditWidget(const QStringList &labels) {
-
     fileTable(labels);
 
     QPushButton* buttonDeleteRow = new QPushButton("Delete Row");
