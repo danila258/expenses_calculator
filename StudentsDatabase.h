@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <iterator>
 
-std::vector<std::string> errors;
+
 
 class Database {
 public:
@@ -18,6 +18,8 @@ public:
     void setInstitute(std::string filePath);
     void setTransport(std::string filePath);
     void setCafeCinema(std::string filePath);
+
+    std::vector<std::string> errors;
 
 //    std::string getCostsDataStr() const;
 

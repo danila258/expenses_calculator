@@ -54,7 +54,7 @@ private:
     void fileTable(const QStringList &labels);
     void fileEditWidget(const QStringList &labels);
 
-    void errorDataLoadShow(const std::vector<string>& errors);
+    void errorDataLoadShow(const std::vector<string>& dataLoudErrors);
     void studentMoneyShow(int sum);
 
     void updateCalculateButton();

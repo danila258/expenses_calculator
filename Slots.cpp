@@ -149,3 +149,5 @@ void StudentCalculator::saveNewFile() {
     *_bufVector = std::move(file);
     cancelEditFile();
 }
+
+
