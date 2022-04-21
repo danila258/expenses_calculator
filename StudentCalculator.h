@@ -17,9 +17,9 @@ public:
 private slots:
 
     void ageEdited(int age);
-    void monthEdited(int month);
     void regulateAgeSpinBox(int mode);
 
+    void monthEdited(int month);
     void nameEdited(const QString& name);
     void cityEdited(const QString& city);
     void addressEdited(const QString& address);
@@ -51,6 +51,7 @@ private:
     QWidget* studentInputWidget();
     QTabWidget* tabWidget();
     QPushButton* calculateButton();
+
     void fileTable(const QStringList &labels);
     void fileEditWidget(const QStringList &labels);
 
@@ -61,8 +62,14 @@ private:
 
     QSpinBox* _ageSpinBox;
     QPushButton* _calculateButton;
+
     QWidget* _fileEditWidget;
     QTableWidget* _table;
+
+    QPushButton* _buttonEditeCostsFile;
+    QPushButton* _buttonEditeInstituteFile;
+    QPushButton* _buttonEditeTransportFile;
+    QPushButton* _buttonEditeOtherCostsFile;
 
     std::vector<std::vector<std::string>>* _bufVector;
 

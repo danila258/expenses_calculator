@@ -95,45 +95,50 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     QLabel* transportLabel = new QLabel("&Transport file:");
     QLabel* weekendsLabel = new QLabel("&Weekends file:");
 
-    QPushButton* buttonBrowseCostsFile = new QPushButton("Browse");
-    QPushButton* buttonBrowseInstituteFile = new QPushButton("Browse");
-    QPushButton* buttonBrowseTransportFile = new QPushButton("Browse");
-    QPushButton* buttonBrowseCaffeCinemaFile = new QPushButton("Browse");
+    QPushButton* _buttonBrowseCostsFile = new QPushButton("Browse");
+    QPushButton* _buttonBrowseInstituteFile = new QPushButton("Browse");
+    QPushButton* _buttonBrowseTransportFile = new QPushButton("Browse");
+    QPushButton* _buttonBrowseCaffeCinemaFile = new QPushButton("Browse");
 
-    QPushButton* buttonEditeCostsFile = new QPushButton("Edit");
-    QPushButton* buttonEditeInstituteFile = new QPushButton("Edit");
-    QPushButton* buttonEditeTransportFile = new QPushButton("Edit");
-    QPushButton* buttonEditeCaffeCinemaFile = new QPushButton("Edit");
+    _buttonEditeCostsFile = new QPushButton("Edit");
+    _buttonEditeInstituteFile = new QPushButton("Edit");
+    _buttonEditeTransportFile = new QPushButton("Edit");
+    _buttonEditeOtherCostsFile = new QPushButton("Edit");
 
-    costsLabel->setBuddy(buttonBrowseCostsFile);
-    instituteLabel->setBuddy(buttonBrowseInstituteFile);
-    transportLabel->setBuddy(buttonBrowseTransportFile);
-    weekendsLabel->setBuddy(buttonBrowseCaffeCinemaFile);
+    _buttonEditeCostsFile->setEnabled(false);
+    _buttonEditeInstituteFile->setEnabled(false);
+    _buttonEditeTransportFile->setEnabled(false);
+    _buttonEditeOtherCostsFile->setEnabled(false);
 
-    connect(buttonBrowseCostsFile, SIGNAL(clicked()), SLOT(costsFileDialog()));
-    connect(buttonBrowseInstituteFile, SIGNAL(clicked()), SLOT(instituteFileDialog()));
-    connect(buttonBrowseTransportFile, SIGNAL(clicked()), SLOT(transportFileDialog()));
-    connect(buttonBrowseCaffeCinemaFile, SIGNAL(clicked()), SLOT(otherCostsFileDialog()));
+    costsLabel->setBuddy(_buttonBrowseCostsFile);
+    instituteLabel->setBuddy(_buttonBrowseInstituteFile);
+    transportLabel->setBuddy(_buttonBrowseTransportFile);
+    weekendsLabel->setBuddy(_buttonBrowseCaffeCinemaFile);
 
-    connect(buttonEditeCostsFile, SIGNAL(clicked()), SLOT(EditeCostsFile()));
-    connect(buttonEditeInstituteFile, SIGNAL(clicked()), SLOT(EditeInstituteFile()));
-    connect(buttonEditeTransportFile, SIGNAL(clicked()), SLOT(EditeTransportFile()));
-    connect(buttonEditeCaffeCinemaFile, SIGNAL(clicked()), SLOT(EditeCaffeCinemaFile()));
+    connect(_buttonBrowseCostsFile, SIGNAL(clicked()), SLOT(costsFileDialog()));
+    connect(_buttonBrowseInstituteFile, SIGNAL(clicked()), SLOT(instituteFileDialog()));
+    connect(_buttonBrowseTransportFile, SIGNAL(clicked()), SLOT(transportFileDialog()));
+    connect(_buttonBrowseCaffeCinemaFile, SIGNAL(clicked()), SLOT(otherCostsFileDialog()));
+
+    connect(_buttonEditeCostsFile, SIGNAL(clicked()), SLOT(EditeCostsFile()));
+    connect(_buttonEditeInstituteFile, SIGNAL(clicked()), SLOT(EditeInstituteFile()));
+    connect(_buttonEditeTransportFile, SIGNAL(clicked()), SLOT(EditeTransportFile()));
+    connect(_buttonEditeOtherCostsFile, SIGNAL(clicked()), SLOT(EditeCaffeCinemaFile()));
 
     QGridLayout* layout = new QGridLayout();
 
     layout->addWidget(costsLabel, 0, 0);
-    layout->addWidget(buttonBrowseCostsFile, 0, 1);
-    layout->addWidget(buttonEditeCostsFile, 0, 2);
+    layout->addWidget(_buttonBrowseCostsFile, 0, 1);
+    layout->addWidget(_buttonEditeCostsFile, 0, 2);
     layout->addWidget(instituteLabel, 1, 0);
-    layout->addWidget(buttonBrowseInstituteFile, 1, 1);
-    layout->addWidget(buttonEditeInstituteFile, 1, 2);
+    layout->addWidget(_buttonBrowseInstituteFile, 1, 1);
+    layout->addWidget(_buttonEditeInstituteFile, 1, 2);
     layout->addWidget(transportLabel, 2, 0);
-    layout->addWidget(buttonBrowseTransportFile, 2, 1);
-    layout->addWidget(buttonEditeTransportFile, 2, 2);
+    layout->addWidget(_buttonBrowseTransportFile, 2, 1);
+    layout->addWidget(_buttonEditeTransportFile, 2, 2);
     layout->addWidget(weekendsLabel, 3, 0);
-    layout->addWidget(buttonBrowseCaffeCinemaFile, 3, 1);
-    layout->addWidget(buttonEditeCaffeCinemaFile, 3, 2);
+    layout->addWidget(_buttonBrowseCaffeCinemaFile, 3, 1);
+    layout->addWidget(_buttonEditeOtherCostsFile, 3, 2);
 
     fileChoiceWidget->setLayout(layout);
     return fileChoiceWidget;
