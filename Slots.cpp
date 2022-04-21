@@ -1,21 +1,17 @@
 #include "StudentCalculator.h"
 
 void StudentCalculator::startCalculate() {
-    //TODO здесь должны быть использованы твои функции
-    Database database = Database(_costsFile, _instituteFile, _transportFile, _otherCostsFile);
+    Student student(_age, _city, _address, _institute, _cafe, _cinema);
+    errorDataLoadShow(_database.findStudentInfo(student));
 
-    if ( !(database.initDatabase()) ) {
-        errorFileShow();
-    }
-    else {
-        if ( !(database.userInputCheck(_age, _city, _address, _institute, _caffe, _cinema)) ) {
-            errorInputShow();
-        }
-        else {
-            Student human = Student(_age, _city, _address, _institute, _cinema, _caffe, database);
-            studentMoneyShow(human.getCosts(_month));
-        }
-    }
+    const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    const int workdays[] = {16, 19, 22, 21, 18, 21, 21, 23, 22, 21, 21, 22};
+
+    int workdaysCost = workdays[_month] * (student._instituteFoodCost + 2 * student._transportCost);
+    int weekdaysCost = (daysInMonth[_month] - workdays[_month]) * (student._cinemaCost + student._cafeCost);
+
+    int cost = weekdaysCost + workdaysCost + student._avgFoodCost + student._otherCost;
+    studentMoneyShow(cost);
 }
 
 void StudentCalculator::regulateAgeSpinBox(int mode) {
@@ -62,59 +58,69 @@ void StudentCalculator::cinemaEdited(const QString& cinema) {
 }
 
 void StudentCalculator::caffeEdited(const QString& caffe) {
-    _caffe = caffe.toStdString();
-    _flagCaffe = !(_caffe.empty());
+    _cafe = caffe.toStdString();
+    _flagCaffe = !(_cafe.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::costsFileDialog() {
     _costsFile = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
     _flagCostsFile = !(_costsFile.empty());
-    updateCalculateButton();
 
-    //TODO скорее всего здесь должна быть отправлена директория в студент дата
+    _database.setCosts(_costsFile);
+
+    updateCalculateButton();
 }
 
 void StudentCalculator::instituteFileDialog() {
     _instituteFile = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
     _flagInstituteFile = !(_instituteFile.empty());
+
+    _database.setInstitute(_instituteFile);
+
     updateCalculateButton();
 }
 
 void StudentCalculator::transportFileDialog() {
     _transportFile = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
     _flagTransportFile = !(_transportFile.empty());
+
+    _database.setTransport(_transportFile);
+
     updateCalculateButton();
 }
 
 void StudentCalculator::otherCostsFileDialog() {
     _otherCostsFile = QFileDialog::getOpenFileName(this, "Other Costs File", "", "*.csv").toStdString();
     _flagOtherCostsFile = !(_otherCostsFile.empty());
+
+    _database.setCafeCinema(_otherCostsFile);
+
     updateCalculateButton();
 }
 
 void StudentCalculator::EditeCostsFile() {
     QStringList list = {"City", "Age", "Average food cost per month", "Other costs"};
-    _sendFile = resetCosts();
-    fileEditWidget(_costsData, list);
+    _bufVector = &_database._costsData;
+    fileEditWidget(list);
 }
 
 void StudentCalculator::EditeInstituteFile() {
     QStringList list = {"City", "Institute", "Dinner cost"};
-    _sendFile = resetInstitute;
-    fileEditWidget(_instituteData, list);
+    _bufVector = &_database._instituteData;
+    fileEditWidget(list);
 }
 
 void StudentCalculator::EditeTransportFile() {
     QStringList list = {"City", "District", "Institute", "Transport cost"};
-    _sendFile = resetTransport;
-    fileEditWidget(_transportData, list);
+    _bufVector = &_database._transportData;
+    fileEditWidget(list);
 }
 
 void StudentCalculator::EditeCaffeCinemaFile() {
     QStringList list = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
-    _sendFile = resetCafeCinema;
-    fileEditWidget(_cafeCinemaData, list);
+    _bufVector = &_database._cafeCinemaData;
+    fileEditWidget(list);
 }
 
 void StudentCalculator::deleteRow() {
@@ -140,6 +146,6 @@ void StudentCalculator::saveNewFile() {
         }
     }
 
-    _sendFile(file);
+    *_bufVector = std::move(file);
     cancelEditFile();
 }

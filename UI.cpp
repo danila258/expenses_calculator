@@ -162,15 +162,15 @@ QPushButton* StudentCalculator::calculateButton() {
     return _calculateButton;
 }
 
-void StudentCalculator::fileTable(std::vector<std::vector<std::string>> file, const QStringList &labels) {
+void StudentCalculator::fileTable(const QStringList &labels) {
 
-    _table = new QTableWidget(file.size(), labels.size(), this);
+    _table = new QTableWidget(_bufVector->size(), _bufVector->size(), this);
     _table->setHorizontalHeaderLabels(labels);
     _table->setShowGrid(true);
 
-    for (int i = 1; i < file.size(); ++i) {
+    for (int i = 1; i < _bufVector->size(); ++i) {
         for (int k = 0; k < labels.size(); ++k) {
-            QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString(file[i][k]));
+            QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString((*_bufVector)[i][k]));
             _table->setItem(i, k, item);
         }
     }
