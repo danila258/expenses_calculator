@@ -69,7 +69,10 @@ void StudentCalculator::costsFileDialog() {
     _costsFile = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
     _database.setCosts(_costsFile);
 
-    _flagCostsFile = !(_costsFile.empty());
+    bool flag = !(_costsFile.empty());
+    _flagCostsFile = flag;
+    _buttonEditeCostsFile->setEnabled(flag);
+
     updateCalculateButton();
 }
 
@@ -77,7 +80,10 @@ void StudentCalculator::instituteFileDialog() {
     _instituteFile = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
     _database.setInstitute(_instituteFile);
 
-    _flagInstituteFile = !(_instituteFile.empty());
+    bool flag = !(_instituteFile.empty());
+    _flagInstituteFile = flag;
+    _buttonEditeInstituteFile->setEnabled(flag);
+
     updateCalculateButton();
 }
 
@@ -85,7 +91,10 @@ void StudentCalculator::transportFileDialog() {
     _transportFile = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
     _database.setTransport(_transportFile);
 
-    _flagTransportFile = !(_transportFile.empty());
+    bool flag = !(_transportFile.empty());
+    _flagTransportFile = flag;
+    _buttonEditeTransportFile->setEnabled(flag);
+
     updateCalculateButton();
 }
 
@@ -93,7 +102,10 @@ void StudentCalculator::otherCostsFileDialog() {
     _otherCostsFile = QFileDialog::getOpenFileName(this, "Other Costs File", "", "*.csv").toStdString();
     _database.setCafeCinema(_otherCostsFile);
 
-    _flagOtherCostsFile = !(_otherCostsFile.empty());
+    bool flag = !(_otherCostsFile.empty());
+    _flagOtherCostsFile = flag;
+    _buttonEditeOtherCostsFile->setEnabled(flag);
+
     updateCalculateButton();
 }
 
@@ -147,5 +159,3 @@ void StudentCalculator::saveNewFile() {
     *_bufVector = std::move(file);
     cancelEditFile();
 }
-
-

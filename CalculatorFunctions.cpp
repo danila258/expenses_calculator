@@ -20,6 +20,7 @@ void StudentCalculator::fileEditWidget(const QStringList &labels) {
     layout->addWidget(buttonSaveFile, 1, 1);
 
     _fileEditWidget->setLayout(layout);
+    _fileEditWidget->show();
 }
 
 void StudentCalculator::updateCalculateButton() {
