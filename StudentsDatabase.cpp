@@ -305,5 +305,3 @@ void Database::findCafeCinema(Student &student) {
         errors.push_back("Cinema file error.");
     }
 }
-
-

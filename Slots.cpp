@@ -31,37 +31,37 @@ void StudentCalculator::monthEdited(int month) {
 
 void StudentCalculator::nameEdited(const QString& name) {
     _name = name.toStdString();
-    _flagName = !(_name.empty());
+    _completeFieldsArr[0] = !(_name.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::cityEdited(const QString& city) {
     _city = city.toStdString();
-    _flagCity = !(_city.empty());
+    _completeFieldsArr[1] = !(_city.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::addressEdited(const QString& address) {
     _address = address.toStdString();
-    _flagAddress = !(_address.empty());
+    _completeFieldsArr[2] = !(_address.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::instituteEdited(const QString& institute) {
     _institute = institute.toStdString();
-    _flagInstitute = !(_institute.empty());
+    _completeFieldsArr[3] = !(_institute.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::cinemaEdited(const QString& cinema) {
     _cinema = cinema.toStdString();
-    _flagCinema = !(_cinema.empty());
+    _completeFieldsArr[4] = !(_cinema.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::caffeEdited(const QString& caffe) {
     _cafe = caffe.toStdString();
-    _flagCaffe = !(_cafe.empty());
+    _completeFieldsArr[5] = !(_cafe.empty());
     updateCalculateButton();
 }
 
@@ -70,8 +70,8 @@ void StudentCalculator::costsFileDialog() {
     _database.setCosts(_costsFile);
 
     bool flag = !(_costsFile.empty());
-    _flagCostsFile = flag;
-    _buttonEditeCostsFile->setEnabled(flag);
+    _completeFieldsArr[6] = flag;
+    _buttonEditCostsFile->setEnabled(flag);
 
     updateCalculateButton();
 }
@@ -81,8 +81,8 @@ void StudentCalculator::instituteFileDialog() {
     _database.setInstitute(_instituteFile);
 
     bool flag = !(_instituteFile.empty());
-    _flagInstituteFile = flag;
-    _buttonEditeInstituteFile->setEnabled(flag);
+    _completeFieldsArr[7] = flag;
+    _buttonEditInstituteFile->setEnabled(flag);
 
     updateCalculateButton();
 }
@@ -92,42 +92,42 @@ void StudentCalculator::transportFileDialog() {
     _database.setTransport(_transportFile);
 
     bool flag = !(_transportFile.empty());
-    _flagTransportFile = flag;
-    _buttonEditeTransportFile->setEnabled(flag);
+    _completeFieldsArr[8] = flag;
+    _buttonEditTransportFile->setEnabled(flag);
 
     updateCalculateButton();
 }
 
 void StudentCalculator::otherCostsFileDialog() {
-    _otherCostsFile = QFileDialog::getOpenFileName(this, "Other Costs File", "", "*.csv").toStdString();
+    _otherCostsFile = QFileDialog::getOpenFileName(this, "Weekends File", "", "*.csv").toStdString();
     _database.setCafeCinema(_otherCostsFile);
 
     bool flag = !(_otherCostsFile.empty());
-    _flagOtherCostsFile = flag;
-    _buttonEditeOtherCostsFile->setEnabled(flag);
+    _completeFieldsArr[9] = flag;
+    _buttonEditOtherCostsFile->setEnabled(flag);
 
     updateCalculateButton();
 }
 
-void StudentCalculator::EditeCostsFile() {
+void StudentCalculator::EditCostsFile() {
     QStringList list = {"City", "Age", "Average food cost per month", "Other costs"};
     _bufVector = &_database._costsData;
     fileEditWidget(list);
 }
 
-void StudentCalculator::EditeInstituteFile() {
+void StudentCalculator::EditInstituteFile() {
     QStringList list = {"City", "Institute", "Dinner cost"};
     _bufVector = &_database._instituteData;
     fileEditWidget(list);
 }
 
-void StudentCalculator::EditeTransportFile() {
+void StudentCalculator::EditTransportFile() {
     QStringList list = {"City", "District", "Institute", "Transport cost"};
     _bufVector = &_database._transportData;
     fileEditWidget(list);
 }
 
-void StudentCalculator::EditeCaffeCinemaFile() {
+void StudentCalculator::EditCaffeCinemaFile() {
     QStringList list = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
     _bufVector = &_database._cafeCinemaData;
     fileEditWidget(list);

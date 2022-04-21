@@ -1,6 +1,6 @@
 #include "StudentCalculator.h"
 
-StudentCalculator::StudentCalculator(QWidget *parent) : QWidget(parent) {
+StudentCalculator::StudentCalculator(QWidget *parent) : QWidget(parent), _completeFieldsArr(countCheckedFields, 0) {
     QVBoxLayout* calculatorLayout = new QVBoxLayout();
 
     calculatorLayout->addWidget(tabWidget());
@@ -100,15 +100,15 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     QPushButton* _buttonBrowseTransportFile = new QPushButton("Browse");
     QPushButton* _buttonBrowseCaffeCinemaFile = new QPushButton("Browse");
 
-    _buttonEditeCostsFile = new QPushButton("Edit");
-    _buttonEditeInstituteFile = new QPushButton("Edit");
-    _buttonEditeTransportFile = new QPushButton("Edit");
-    _buttonEditeOtherCostsFile = new QPushButton("Edit");
+    _buttonEditCostsFile = new QPushButton("Edit");
+    _buttonEditInstituteFile = new QPushButton("Edit");
+    _buttonEditTransportFile = new QPushButton("Edit");
+    _buttonEditOtherCostsFile = new QPushButton("Edit");
 
-    _buttonEditeCostsFile->setEnabled(false);
-    _buttonEditeInstituteFile->setEnabled(false);
-    _buttonEditeTransportFile->setEnabled(false);
-    _buttonEditeOtherCostsFile->setEnabled(false);
+    _buttonEditCostsFile->setEnabled(false);
+    _buttonEditInstituteFile->setEnabled(false);
+    _buttonEditTransportFile->setEnabled(false);
+    _buttonEditOtherCostsFile->setEnabled(false);
 
     costsLabel->setBuddy(_buttonBrowseCostsFile);
     instituteLabel->setBuddy(_buttonBrowseInstituteFile);
@@ -120,25 +120,25 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     connect(_buttonBrowseTransportFile, SIGNAL(clicked()), SLOT(transportFileDialog()));
     connect(_buttonBrowseCaffeCinemaFile, SIGNAL(clicked()), SLOT(otherCostsFileDialog()));
 
-    connect(_buttonEditeCostsFile, SIGNAL(clicked()), SLOT(EditeCostsFile()));
-    connect(_buttonEditeInstituteFile, SIGNAL(clicked()), SLOT(EditeInstituteFile()));
-    connect(_buttonEditeTransportFile, SIGNAL(clicked()), SLOT(EditeTransportFile()));
-    connect(_buttonEditeOtherCostsFile, SIGNAL(clicked()), SLOT(EditeCaffeCinemaFile()));
+    connect(_buttonEditCostsFile, SIGNAL(clicked()), SLOT(EditCostsFile()));
+    connect(_buttonEditInstituteFile, SIGNAL(clicked()), SLOT(EditInstituteFile()));
+    connect(_buttonEditTransportFile, SIGNAL(clicked()), SLOT(EditTransportFile()));
+    connect(_buttonEditOtherCostsFile, SIGNAL(clicked()), SLOT(EditCaffeCinemaFile()));
 
     QGridLayout* layout = new QGridLayout();
 
     layout->addWidget(costsLabel, 0, 0);
     layout->addWidget(_buttonBrowseCostsFile, 0, 1);
-    layout->addWidget(_buttonEditeCostsFile, 0, 2);
+    layout->addWidget(_buttonEditCostsFile, 0, 2);
     layout->addWidget(instituteLabel, 1, 0);
     layout->addWidget(_buttonBrowseInstituteFile, 1, 1);
-    layout->addWidget(_buttonEditeInstituteFile, 1, 2);
+    layout->addWidget(_buttonEditInstituteFile, 1, 2);
     layout->addWidget(transportLabel, 2, 0);
     layout->addWidget(_buttonBrowseTransportFile, 2, 1);
-    layout->addWidget(_buttonEditeTransportFile, 2, 2);
+    layout->addWidget(_buttonEditTransportFile, 2, 2);
     layout->addWidget(weekendsLabel, 3, 0);
     layout->addWidget(_buttonBrowseCaffeCinemaFile, 3, 1);
-    layout->addWidget(_buttonEditeOtherCostsFile, 3, 2);
+    layout->addWidget(_buttonEditOtherCostsFile, 3, 2);
 
     fileChoiceWidget->setLayout(layout);
     return fileChoiceWidget;

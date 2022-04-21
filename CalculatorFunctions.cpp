@@ -24,16 +24,19 @@ void StudentCalculator::fileEditWidget(const QStringList &labels) {
 }
 
 void StudentCalculator::updateCalculateButton() {
-    int sum = _flagName + _flagCity + _flagAddress + _flagCaffe + _flagCinema + _flagInstitute + _flagCostsFile +
-              _flagInstituteFile + _flagOtherCostsFile + _flagTransportFile;
+    int count = 0;
 
-    if (sum == 10) {
+    for (int i = 0; i < countCheckedFields; ++i) {
+        count += _completeFieldsArr[i];
+    }
+
+    if (count == 10) {
         _calculateButton->setEnabled(true);
         _calculateButton->setText("Calculate");
     }
     else {
         _calculateButton->setEnabled(false);
-        QString line = QString::number(sum);
+        QString line = QString::number(count);
         _calculateButton->setText(line + "/10");
     }
 }
