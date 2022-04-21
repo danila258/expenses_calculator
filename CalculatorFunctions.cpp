@@ -1,15 +1,26 @@
 #include "StudentCalculator.h"
 
-QWidget* StudentCalculator::fileEditWidget(std::vector<std::vector<std::string>> file, const QStringList &labels,
-                                           std::function<void()>& sendFile) {
+void StudentCalculator::fileEditWidget(std::vector<std::vector<std::string>> file, const QStringList &labels) {
 
     fileTable(file, labels);
-    *(_sendFile) = new sendFile; //TODO как сделать указатель на функцию из твоей публичной?
 
+    QPushButton* buttonDeleteRow = new QPushButton("Delete Row");
+    QPushButton* buttonAddRow = new QPushButton("Add row");
+    QPushButton* buttonCancelFile = new QPushButton("Cancel");
+    QPushButton* buttonSaveFile = new QPushButton("Save");
 
-    //осталось 3 кнопки
+    connect(buttonDeleteRow, SIGNAL(clicked()), SLOT(deleteRow()));
+    connect(buttonAddRow, SIGNAL(clicked()), SLOT(addRow()));
+    connect(buttonCancelFile, SIGNAL(clicked()), SLOT(cancelEditFile()));
+    connect(buttonSaveFile, SIGNAL(clicked()), SLOT(saveNewFile()));
 
+    QGridLayout* layout = new QGridLayout();
+    layout->addWidget(buttonDeleteRow, 0, 0);
+    layout->addWidget(buttonAddRow, 0, 1);
+    layout->addWidget(buttonCancelFile, 1, 0);
+    layout->addWidget(buttonSaveFile, 1, 1);
 
+    _fileEditWidget->setLayout(layout);
 }
 
 void StudentCalculator::updateCalculateButton() {
