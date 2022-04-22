@@ -15,14 +15,15 @@ FileEditWidget::FileEditWidget(const QStringList& tableHeader, std::vector<std::
     connect(buttonCancelFile, SIGNAL(clicked()), SLOT(cancelEditFile()));
     connect(buttonSaveFile, SIGNAL(clicked()), SLOT(saveNewFile()));
 
-    QGridLayout* layout = new QGridLayout();
-    layout->addWidget(buttonDeleteRow, 0, 0);
-    layout->addWidget(buttonAddRow, 0, 1);
-    layout->addWidget(buttonCancelFile, 1, 0);
-    layout->addWidget(buttonSaveFile, 1, 1);
+    QGridLayout* FileEditWidgetLayout = new QGridLayout();
 
-    setLayout(layout);
-    show();
+    FileEditWidgetLayout->addWidget(_table, 0, 0);
+    FileEditWidgetLayout->addWidget(buttonDeleteRow, 1, 0);
+    FileEditWidgetLayout->addWidget(buttonAddRow, 1, 1);
+    FileEditWidgetLayout->addWidget(buttonCancelFile, 2, 0);
+    FileEditWidgetLayout->addWidget(buttonSaveFile, 2, 1);
+
+    setLayout(FileEditWidgetLayout);
 }
 
 void FileEditWidget::fileTable(const QStringList& tableHeader) {
@@ -30,10 +31,9 @@ void FileEditWidget::fileTable(const QStringList& tableHeader) {
     _table->setHorizontalHeaderLabels(tableHeader);
     _table->setShowGrid(true);
 
-    for (int i = 0; i < _file.size(); ++i) {
+    for (int i = 0; i < 10 /*_file.size()*/; ++i) {
         for (int k = 0; k < tableHeader.size(); ++k) {
-            QString str = QString::fromStdString(_file[i][k]);
-            QTableWidgetItem* item = new QTableWidgetItem(str);
+            QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString(_file[i][k]));
             _table->setItem(i, k, item);
         }
     }
@@ -53,12 +53,10 @@ void FileEditWidget::cancelEditFile() {
 
 void FileEditWidget::saveNewFile() {
     std::vector<std::vector<std::string>> file;
-    string item;
 
     for (int i = 1; i < _table->rowCount(); ++i) {
         for (int k = 0; k < _table->columnCount(); ++k) {
-            item = _table->itemAt(i, k)->text().toStdString();
-            file[i][k] = item;
+            file[i][k] = _table->itemAt(i, k)->text().toStdString();
         }
     }
 

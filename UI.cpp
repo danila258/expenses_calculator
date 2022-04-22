@@ -33,8 +33,6 @@ QWidget* StudentCalculator::studentInputWidget() {
     QCheckBox* ageCheckBox = new QCheckBox("Use age");
     ageCheckBox->setChecked(true);
 
-    int ageByDefault = 18;
-
     _ageSpinBox = new QSpinBox();
     _ageSpinBox->setRange(7, 200);
     _ageSpinBox->setSuffix(" years old");
@@ -66,27 +64,27 @@ QWidget* StudentCalculator::studentInputWidget() {
     connect(lineEditCaffe, SIGNAL(textChanged(const QString&)), SLOT(caffeEdited(const QString&)));
     connect(ageCheckBox, SIGNAL(stateChanged(int)), SLOT(regulateAgeSpinBox(int)));
 
-    QGridLayout* layout = new QGridLayout();
+    QGridLayout* studentInputWidgetLayout = new QGridLayout();
 
-    layout->addWidget(ageLabel, 0, 0);
-    layout->addWidget(_ageSpinBox, 0, 1);
-    layout->addWidget(monthLabel, 1, 0);
-    layout->addWidget(monthsList, 1, 1);
-    layout->addWidget(nameLabel, 2, 0);
-    layout->addWidget(lineEditName, 2, 1);
-    layout->addWidget(cityLabel, 3, 0);
-    layout->addWidget(lineEditCity, 3, 1);
-    layout->addWidget(addressLabel, 4, 0);
-    layout->addWidget(lineEditAddress, 4, 1);
-    layout->addWidget(instituteLabel, 5, 0);
-    layout->addWidget(lineEditInstitute, 5, 1);
-    layout->addWidget(cinemaLabel, 6, 0);
-    layout->addWidget(lineEditCinema, 6, 1);
-    layout->addWidget(caffeLabel, 7, 0);
-    layout->addWidget(lineEditCaffe, 7, 1);
-    layout->addWidget(ageCheckBox, 8, 0);
+    studentInputWidgetLayout->addWidget(ageLabel, 0, 0);
+    studentInputWidgetLayout->addWidget(_ageSpinBox, 0, 1);
+    studentInputWidgetLayout->addWidget(monthLabel, 1, 0);
+    studentInputWidgetLayout->addWidget(monthsList, 1, 1);
+    studentInputWidgetLayout->addWidget(nameLabel, 2, 0);
+    studentInputWidgetLayout->addWidget(lineEditName, 2, 1);
+    studentInputWidgetLayout->addWidget(cityLabel, 3, 0);
+    studentInputWidgetLayout->addWidget(lineEditCity, 3, 1);
+    studentInputWidgetLayout->addWidget(addressLabel, 4, 0);
+    studentInputWidgetLayout->addWidget(lineEditAddress, 4, 1);
+    studentInputWidgetLayout->addWidget(instituteLabel, 5, 0);
+    studentInputWidgetLayout->addWidget(lineEditInstitute, 5, 1);
+    studentInputWidgetLayout->addWidget(cinemaLabel, 6, 0);
+    studentInputWidgetLayout->addWidget(lineEditCinema, 6, 1);
+    studentInputWidgetLayout->addWidget(caffeLabel, 7, 0);
+    studentInputWidgetLayout->addWidget(lineEditCaffe, 7, 1);
+    studentInputWidgetLayout->addWidget(ageCheckBox, 8, 0);
 
-    studentInputWidget->setLayout(layout);
+    studentInputWidget->setLayout(studentInputWidgetLayout);
     return studentInputWidget;
 }
 
@@ -123,27 +121,27 @@ QWidget* StudentCalculator::fileChoiceWidget() {
     connect(_buttonBrowseTransportFile, SIGNAL(clicked()), SLOT(transportFileDialog()));
     connect(_buttonBrowseCaffeCinemaFile, SIGNAL(clicked()), SLOT(otherCostsFileDialog()));
 
-    connect(_buttonEditCostsFile, SIGNAL(clicked()), SLOT(EditCostsFile()));
-    connect(_buttonEditInstituteFile, SIGNAL(clicked()), SLOT(EditInstituteFile()));
-    connect(_buttonEditTransportFile, SIGNAL(clicked()), SLOT(EditTransportFile()));
-    connect(_buttonEditOtherCostsFile, SIGNAL(clicked()), SLOT(EditCaffeCinemaFile()));
+    connect(_buttonEditCostsFile, SIGNAL(clicked()), SLOT(editCostsFile()));
+    connect(_buttonEditInstituteFile, SIGNAL(clicked()), SLOT(editInstituteFile()));
+    connect(_buttonEditTransportFile, SIGNAL(clicked()), SLOT(editTransportFile()));
+    connect(_buttonEditOtherCostsFile, SIGNAL(clicked()), SLOT(editCaffeCinemaFile()));
 
-    QGridLayout* layout = new QGridLayout();
+    QGridLayout* fileChoiceWidgetLayout = new QGridLayout();
 
-    layout->addWidget(costsLabel, 0, 0);
-    layout->addWidget(_buttonBrowseCostsFile, 0, 1);
-    layout->addWidget(_buttonEditCostsFile, 0, 2);
-    layout->addWidget(instituteLabel, 1, 0);
-    layout->addWidget(_buttonBrowseInstituteFile, 1, 1);
-    layout->addWidget(_buttonEditInstituteFile, 1, 2);
-    layout->addWidget(transportLabel, 2, 0);
-    layout->addWidget(_buttonBrowseTransportFile, 2, 1);
-    layout->addWidget(_buttonEditTransportFile, 2, 2);
-    layout->addWidget(weekendsLabel, 3, 0);
-    layout->addWidget(_buttonBrowseCaffeCinemaFile, 3, 1);
-    layout->addWidget(_buttonEditOtherCostsFile, 3, 2);
+    fileChoiceWidgetLayout->addWidget(costsLabel, 0, 0);
+    fileChoiceWidgetLayout->addWidget(_buttonBrowseCostsFile, 0, 1);
+    fileChoiceWidgetLayout->addWidget(_buttonEditCostsFile, 0, 2);
+    fileChoiceWidgetLayout->addWidget(instituteLabel, 1, 0);
+    fileChoiceWidgetLayout->addWidget(_buttonBrowseInstituteFile, 1, 1);
+    fileChoiceWidgetLayout->addWidget(_buttonEditInstituteFile, 1, 2);
+    fileChoiceWidgetLayout->addWidget(transportLabel, 2, 0);
+    fileChoiceWidgetLayout->addWidget(_buttonBrowseTransportFile, 2, 1);
+    fileChoiceWidgetLayout->addWidget(_buttonEditTransportFile, 2, 2);
+    fileChoiceWidgetLayout->addWidget(weekendsLabel, 3, 0);
+    fileChoiceWidgetLayout->addWidget(_buttonBrowseCaffeCinemaFile, 3, 1);
+    fileChoiceWidgetLayout->addWidget(_buttonEditOtherCostsFile, 3, 2);
 
-    fileChoiceWidget->setLayout(layout);
+    fileChoiceWidget->setLayout(fileChoiceWidgetLayout);
     return fileChoiceWidget;
 }
 

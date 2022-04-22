@@ -113,23 +113,23 @@ void StudentCalculator::otherCostsFileDialog() {
     updateCalculateButton();
 }
 
-void StudentCalculator::EditCostsFile() {
+void StudentCalculator::editCostsFile() {
     QStringList tableHeader = {"City", "Age", "Average food cost per month", "Other costs"};
-    FileEditWidget(tableHeader, _database._costsData);
+    FileEditWidget* editCostsWidget = new FileEditWidget(tableHeader, _database._costsData, this);
+    editCostsWidget->show();
 }
 
-void StudentCalculator::EditInstituteFile() {
+void StudentCalculator::editInstituteFile() {
     QStringList tableHeader = {"City", "Institute", "Dinner cost"};
     FileEditWidget(tableHeader, _database._instituteData);
 }
 
-void StudentCalculator::EditTransportFile() {
+void StudentCalculator::editTransportFile() {
     QStringList tableHeader = {"City", "District", "Institute", "Transport cost"};
     FileEditWidget(tableHeader, _database._transportData);
 }
 
-void StudentCalculator::EditCaffeCinemaFile() {
+void StudentCalculator::editCaffeCinemaFile() {
     QStringList tableHeader = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
     FileEditWidget(tableHeader, _database._cafeCinemaData);
-
 }

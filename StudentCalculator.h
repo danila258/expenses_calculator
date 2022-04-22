@@ -10,6 +10,7 @@ using std::string;
 #include "FileEditWidget.h"
 
 #define countCheckedFields 10
+#define ageByDefault 18
 
 
 class StudentCalculator : public QWidget {
@@ -37,10 +38,10 @@ private slots:
     void transportFileDialog();
     void otherCostsFileDialog();
 
-    void EditCostsFile();
-    void EditInstituteFile();
-    void EditTransportFile();
-    void EditCaffeCinemaFile();
+    void editCostsFile();
+    void editInstituteFile();
+    void editTransportFile();
+    void editCaffeCinemaFile();
 
     void startCalculate();
     

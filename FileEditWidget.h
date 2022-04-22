@@ -1,5 +1,5 @@
-#ifndef STUDENT_CALCULATOR_FILEEDITWIDGET_H
-#define STUDENT_CALCULATOR_FILEEDITWIDGET_H
+#ifndef FILEEDITWIDGET_H
+#define FILEEDITWIDGET_H
 
 #include <QtWidgets>
 #include <string>
@@ -12,13 +12,14 @@ class FileEditWidget : public QWidget {
 public:
     FileEditWidget (const QStringList& tableHeader, std::vector<std::vector<string>>& file, QWidget* parent = nullptr);
 
-private:
-    void fileTable(const QStringList& tableHeader);
-
+private slots:
     void deleteRow();
     void addRow();
     void cancelEditFile();
     void saveNewFile();
+
+private:
+    void fileTable(const QStringList& tableHeader);
 
     std::vector<std::vector<string>>& _file;
 
@@ -27,4 +28,4 @@ private:
 };
 
 
-#endif //STUDENT_CALCULATOR_FILEEDITWIDGET_H
+#endif //FILEEDITWIDGET_H
