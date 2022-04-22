@@ -2,8 +2,11 @@
 
 void StudentCalculator::startCalculate() {
     Student student(_age, _city, _address, _institute, _cafe, _cinema);
-    errorDataLoadShow(_database.findStudentInfo(student));
-    _database.errors.clear();
+    std::vector<string>& errors = _database.findStudentInfo(student);
+    if (!errors.empty()) {
+        errorDataLoadShow(errors);
+    }
+    errors.clear();
 
 
     const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
