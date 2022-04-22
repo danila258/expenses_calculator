@@ -110,52 +110,21 @@ void StudentCalculator::otherCostsFileDialog() {
 }
 
 void StudentCalculator::EditCostsFile() {
-    QStringList list = {"City", "Age", "Average food cost per month", "Other costs"};
-    _bufVector = &_database._costsData;
-    fileEditWidget(list);
+    QStringList tableHeader = {"City", "Age", "Average food cost per month", "Other costs"};
+    FileEditWidget(tableHeader, _database._costsData);
 }
 
 void StudentCalculator::EditInstituteFile() {
-    QStringList list = {"City", "Institute", "Dinner cost"};
-    _bufVector = &_database._instituteData;
-    fileEditWidget(list);
+    QStringList tableHeader = {"City", "Institute", "Dinner cost"};
+    FileEditWidget(tableHeader, _database._instituteData);
 }
 
 void StudentCalculator::EditTransportFile() {
-    QStringList list = {"City", "District", "Institute", "Transport cost"};
-    _bufVector = &_database._transportData;
-    fileEditWidget(list);
+    QStringList tableHeader = {"City", "District", "Institute", "Transport cost"};
+    FileEditWidget(tableHeader, _database._transportData);
 }
 
 void StudentCalculator::EditCaffeCinemaFile() {
-    QStringList list = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
-    _bufVector = &_database._cafeCinemaData;
-    fileEditWidget(list);
-}
-
-void StudentCalculator::deleteRow() {
-    _table->removeRow(_table->rowCount() - 1);
-}
-
-void StudentCalculator::addRow() {
-    _table->insertRow(_table->rowCount());
-}
-
-void StudentCalculator::cancelEditFile() {
-    QWidget::close();
-}
-
-void StudentCalculator::saveNewFile() {
-    std::vector<std::vector<std::string>> file;
-    string item;
-
-    for (int i = 1; i < _table->rowCount(); ++i) {
-        for (int k = 0; k < _table->columnCount(); ++k) {
-            item = _table->itemAt(i, k)->text().toStdString();
-            file[i][k] = item;
-        }
-    }
-
-    *_bufVector = std::move(file);
-    cancelEditFile();
+    QStringList tableHeader = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
+    FileEditWidget(tableHeader, _database._cafeCinemaData);
 }
