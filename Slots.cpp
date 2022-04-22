@@ -2,9 +2,13 @@
 
 void StudentCalculator::startCalculate() {
     Student student(_age, _city, _address, _institute, _cafe, _cinema);
-    errorDataLoadShow(_database.findStudentInfo(student));
-    _database.errors.clear();
 
+    std::vector<string>& errors = _database.findStudentInfo(student);
+  
+    if (!errors.empty()) {
+        errorDataLoadShow(errors);
+    }
+    errors.clear();
 
     const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     const int workdays[] = {16, 19, 22, 21, 18, 21, 21, 23, 22, 21, 21, 22};
@@ -127,4 +131,5 @@ void StudentCalculator::EditTransportFile() {
 void StudentCalculator::EditCaffeCinemaFile() {
     QStringList tableHeader = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
     FileEditWidget(tableHeader, _database._cafeCinemaData);
+
 }
