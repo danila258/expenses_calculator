@@ -33,11 +33,11 @@ QWidget* StudentCalculator::studentInputWidget() {
     QCheckBox* ageCheckBox = new QCheckBox("Use age");
     ageCheckBox->setChecked(true);
 
+    int ageByDefault = 18;
+
     _ageSpinBox = new QSpinBox();
     _ageSpinBox->setRange(7, 200);
     _ageSpinBox->setSuffix(" years old");
-
-    int ageByDefault = 18;
     _ageSpinBox->setValue(ageByDefault);
 
     QLineEdit* lineEditName = new QLineEdit;
