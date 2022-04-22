@@ -1,5 +1,16 @@
 #include "StudentCalculator.h"
 
+
+StudentCalculator::~StudentCalculator() {
+    delete _ageSpinBox;
+    delete _calculateButton;
+
+    delete _buttonEditCostsFile;
+    delete _buttonEditInstituteFile;
+    delete _buttonEditTransportFile;
+    delete _buttonEditOtherCostsFile;
+}
+
 void StudentCalculator::fileEditWidget(const QStringList &labels) {
     fileTable(labels);
 

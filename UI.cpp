@@ -39,7 +39,6 @@ QWidget* StudentCalculator::studentInputWidget() {
 
     int ageByDefault = 18;
     _ageSpinBox->setValue(ageByDefault);
-    _age = ageByDefault;
 
     QLineEdit* lineEditName = new QLineEdit;
     QLineEdit* lineEditCity = new QLineEdit;
@@ -163,18 +162,4 @@ QPushButton* StudentCalculator::calculateButton() {
     updateCalculateButton();
 
     return _calculateButton;
-}
-
-void StudentCalculator::fileTable(const QStringList &labels) {
-
-    _table = new QTableWidget(_bufVector->size(), _bufVector->size(), this);
-    _table->setHorizontalHeaderLabels(labels);
-    _table->setShowGrid(true);
-
-    for (int i = 1; i < _bufVector->size(); ++i) {
-        for (int k = 0; k < labels.size(); ++k) {
-            QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString((*_bufVector)[i][k]));
-            _table->setItem(i, k, item);
-        }
-    }
 }

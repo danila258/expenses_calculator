@@ -2,20 +2,22 @@
 #define STUDENTCALCULATOR_H
 
 #include <QtWidgets>
-#include <QMap>
 #include <string>
 using std::string;
 
 #include "StudentsDatabase.h"
 #include "Student.h"
+#include "FileEditWidget.h"
 
 #define countCheckedFields 10
+
 
 class StudentCalculator : public QWidget {
     Q_OBJECT
 
 public:
     explicit StudentCalculator(QWidget* parent = nullptr);
+    ~StudentCalculator();
 
 private slots:
 
@@ -40,11 +42,6 @@ private slots:
     void EditTransportFile();
     void EditCaffeCinemaFile();
 
-    void deleteRow();
-    void addRow();
-    void cancelEditFile();
-    void saveNewFile();
-
     void startCalculate();
     
 private:
@@ -55,9 +52,6 @@ private:
     QTabWidget* tabWidget();
     QPushButton* calculateButton();
 
-    void fileTable(const QStringList& labels);
-    void fileEditWidget(const QStringList& labels);
-
     void errorDataLoadShow(const std::vector<string>& dataLoudErrors);
     void studentMoneyShow(int sum);
 
@@ -66,15 +60,10 @@ private:
     QSpinBox* _ageSpinBox;
     QPushButton* _calculateButton;
 
-    QWidget* _fileEditWidget;
-    QTableWidget* _table;
-
     QPushButton* _buttonEditCostsFile;
     QPushButton* _buttonEditInstituteFile;
     QPushButton* _buttonEditTransportFile;
     QPushButton* _buttonEditOtherCostsFile;
-
-    std::vector<std::vector<std::string>>* _bufVector;
 
     int _age;
     int _month;
