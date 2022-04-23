@@ -6,7 +6,7 @@
 using std::string;
 
 
-class FileEditWidget : public QWidget {
+class FileEditWidget : public QDialog {
     Q_OBJECT
 
 public:
@@ -19,12 +19,11 @@ private slots:
     void saveNewFile();
 
 private:
-    void fileTable(const QStringList& tableHeader);
+    void fileTable(const QStringList& headerLabels);
 
     std::vector< std::vector<string> >& _file;
 
     QTableWidget* _table;
-
 };
 
 

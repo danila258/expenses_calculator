@@ -2,6 +2,7 @@
 #define STUDENTCALCULATOR_H
 
 #include <QtWidgets>
+#include <QApplication>
 #include <string>
 using std::string;
 
@@ -18,7 +19,7 @@ class StudentCalculator : public QWidget {
 
 public:
     explicit StudentCalculator(QWidget* parent = nullptr);
-    ~StudentCalculator();
+    ~StudentCalculator() override;
 
 private slots:
 
@@ -53,18 +54,20 @@ private:
     QTabWidget* tabWidget();
     QPushButton* calculateButton();
 
-    void errorDataLoadShow(const std::vector<string>& dataLoudErrors);
-    void studentMoneyShow(int sum);
-
     void updateCalculateButton();
 
+    void errorDataLoadShow(const std::vector<string>& dataLoudErrors);
+    void studentMoneyShow(int sum);
+    void fileEditWidgetShow (const QStringList& headerLabels, std::vector< std::vector<string> >& _file);
+
     QSpinBox* _ageSpinBox;
-    QPushButton* _calculateButton;
 
     QPushButton* _buttonEditCostsFile;
     QPushButton* _buttonEditInstituteFile;
     QPushButton* _buttonEditTransportFile;
     QPushButton* _buttonEditOtherCostsFile;
+
+    QPushButton* _calculateButton;
 
     int _age;
     int _month;

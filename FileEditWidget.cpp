@@ -28,7 +28,6 @@ FileEditWidget::FileEditWidget(const QStringList& tableHeader, std::vector<std::
     fileEditWidgetLayout->addLayout(buttonsWidgetLayout);
 
     setLayout(fileEditWidgetLayout);
-    setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 }
 
 void FileEditWidget::fileTable(const QStringList& tableHeader) {
@@ -53,18 +52,21 @@ void FileEditWidget::addRow() {
 }
 
 void FileEditWidget::cancelEditFile() {
-    QWidget::close();
+    this->close();
+    this->setResult(QDialog::Rejected);
 }
 
 void FileEditWidget::saveNewFile() {
     std::vector<std::vector<std::string>> file(_table->rowCount());
 
-    for (int i = 1; i < _table->rowCount(); ++i) {
+    for (int i = 0; i < 10 /*_table->rowCount()*/; ++i) {
         for (int k = 0; k < _table->columnCount(); ++k) {
-            file[i].push_back(_table->itemAt(i, k)->text().toStdString());
+            file[i].push_back(_table->item(i, k)->text().toStdString());
         }
     }
 
-    _file = file;
-    cancelEditFile();
+    _file = std::move(file);
+
+    this->close();
+    this->setResult(QDialog::Accepted);
 }

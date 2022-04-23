@@ -15,8 +15,8 @@ void StudentCalculator::startCalculate() {
 
     int workdaysCost = workdays[_month] * (student._instituteFoodCost + 2 * student._transportCost);
     int weekdaysCost = (daysInMonth[_month] - workdays[_month]) * (student._cinemaCost + student._cafeCost);
-
     int cost = weekdaysCost + workdaysCost + student._avgFoodCost + student._otherCost;
+
     studentMoneyShow(cost);
 }
 
@@ -74,9 +74,9 @@ void StudentCalculator::costsFileDialog() {
     _database.setCosts(_costsFile);
 
     bool flag = !(_costsFile.empty());
-    _completeFieldsArr[6] = flag;
     _buttonEditCostsFile->setEnabled(flag);
 
+    _completeFieldsArr[6] = flag;
     updateCalculateButton();
 }
 
@@ -85,9 +85,9 @@ void StudentCalculator::instituteFileDialog() {
     _database.setInstitute(_instituteFile);
 
     bool flag = !(_instituteFile.empty());
-    _completeFieldsArr[7] = flag;
     _buttonEditInstituteFile->setEnabled(flag);
 
+    _completeFieldsArr[7] = flag;
     updateCalculateButton();
 }
 
@@ -96,9 +96,9 @@ void StudentCalculator::transportFileDialog() {
     _database.setTransport(_transportFile);
 
     bool flag = !(_transportFile.empty());
-    _completeFieldsArr[8] = flag;
     _buttonEditTransportFile->setEnabled(flag);
 
+    _completeFieldsArr[8] = flag;
     updateCalculateButton();
 }
 
@@ -107,29 +107,28 @@ void StudentCalculator::otherCostsFileDialog() {
     _database.setCafeCinema(_otherCostsFile);
 
     bool flag = !(_otherCostsFile.empty());
-    _completeFieldsArr[9] = flag;
     _buttonEditOtherCostsFile->setEnabled(flag);
 
+    _completeFieldsArr[9] = flag;
     updateCalculateButton();
 }
 
 void StudentCalculator::editCostsFile() {
-    QStringList tableHeader = {"City", "Age", "Average food cost per month", "Other costs"};
-    FileEditWidget* editCostsWidget = new FileEditWidget(tableHeader, _database._costsData);
-    editCostsWidget->show();
+    QStringList headerLabels = {"City", "Age", "Average food cost per month", "Other costs"};
+    fileEditWidgetShow(headerLabels, _database._costsData);
 }
 
 void StudentCalculator::editInstituteFile() {
-    QStringList tableHeader = {"City", "Institute", "Dinner cost"};
-    FileEditWidget(tableHeader, _database._instituteData);
+    QStringList headerLabels = {"City", "Institute", "Dinner cost"};
+    fileEditWidgetShow(headerLabels, _database._instituteData);
 }
 
 void StudentCalculator::editTransportFile() {
-    QStringList tableHeader = {"City", "District", "Institute", "Transport cost"};
-    FileEditWidget(tableHeader, _database._transportData);
+    QStringList headerLabels = {"City", "District", "Institute", "Transport cost"};
+    fileEditWidgetShow(headerLabels, _database._transportData);
 }
 
 void StudentCalculator::editCaffeCinemaFile() {
-    QStringList tableHeader = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
-    FileEditWidget(tableHeader, _database._cafeCinemaData);
+    QStringList headerLabels = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
+    fileEditWidgetShow(headerLabels, _database._cafeCinemaData);
 }

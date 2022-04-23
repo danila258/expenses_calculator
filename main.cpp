@@ -6,8 +6,11 @@ int main(int argc, char *argv[]) {
     bool enableHighDpiScaling = false;
 
     {
-        QApplication startApp(argc, argv);
-        if (startApp.screens().at(0)->geometry().width() > 1200 && startApp.screens().at(0)->geometry().height() > 2000) {
+        QApplication testApp(argc, argv);
+
+        if ( (testApp.screens().at(0)->geometry().width() > 1200) &&
+             (testApp.screens().at(0)->geometry().height() > 2000) ) {
+
             enableHighDpiScaling = true;
         }
     }

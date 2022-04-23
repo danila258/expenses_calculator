@@ -156,6 +156,7 @@ QTabWidget* StudentCalculator::tabWidget() {
 
 QPushButton* StudentCalculator::calculateButton() {
     _calculateButton = new QPushButton();
+
     connect(_calculateButton, SIGNAL(clicked(bool)), SLOT(startCalculate()));
     updateCalculateButton();
 

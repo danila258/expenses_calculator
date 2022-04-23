@@ -24,8 +24,7 @@ void StudentCalculator::updateCalculateButton() {
     }
     else {
         _calculateButton->setEnabled(false);
-        QString line = QString::number(count);
-        _calculateButton->setText(line + "/10");
+        _calculateButton->setText(QString::number(count) + "/10");
     }
 }
 
@@ -49,4 +48,15 @@ void StudentCalculator::studentMoneyShow(int sum) {
     QMessageBox* studentMoney = new QMessageBox(QMessageBox::Information, " ", line,
                                                 QMessageBox::Ok, this);
     studentMoney->show();
+}
+
+void StudentCalculator::fileEditWidgetShow(const QStringList& headerLabels, std::vector< std::vector<string> >& _file) {
+    hide();
+    FileEditWidget* fileEditWidget = new FileEditWidget(headerLabels, _file, this);
+
+    if(fileEditWidget->exec() == true) {
+        //resetFile();  здесь должна быть функция перезаписи файла
+    }
+
+    show();
 }
