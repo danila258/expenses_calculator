@@ -115,7 +115,7 @@ void StudentCalculator::otherCostsFileDialog() {
 
 void StudentCalculator::editCostsFile() {
     QStringList tableHeader = {"City", "Age", "Average food cost per month", "Other costs"};
-    FileEditWidget* editCostsWidget = new FileEditWidget(tableHeader, _database._costsData, this);
+    FileEditWidget* editCostsWidget = new FileEditWidget(tableHeader, _database._costsData);
     editCostsWidget->show();
 }
 

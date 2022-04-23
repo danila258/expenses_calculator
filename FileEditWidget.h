@@ -21,7 +21,7 @@ private slots:
 private:
     void fileTable(const QStringList& tableHeader);
 
-    std::vector<std::vector<string>>& _file;
+    std::vector< std::vector<string> >& _file;
 
     QTableWidget* _table;
 

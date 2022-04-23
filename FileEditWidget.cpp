@@ -15,15 +15,20 @@ FileEditWidget::FileEditWidget(const QStringList& tableHeader, std::vector<std::
     connect(buttonCancelFile, SIGNAL(clicked()), SLOT(cancelEditFile()));
     connect(buttonSaveFile, SIGNAL(clicked()), SLOT(saveNewFile()));
 
-    QGridLayout* FileEditWidgetLayout = new QGridLayout();
+    QGridLayout* buttonsWidgetLayout = new QGridLayout();
 
-    FileEditWidgetLayout->addWidget(_table, 0, 0);
-    FileEditWidgetLayout->addWidget(buttonDeleteRow, 1, 0);
-    FileEditWidgetLayout->addWidget(buttonAddRow, 1, 1);
-    FileEditWidgetLayout->addWidget(buttonCancelFile, 2, 0);
-    FileEditWidgetLayout->addWidget(buttonSaveFile, 2, 1);
+    buttonsWidgetLayout->addWidget(buttonDeleteRow, 0, 0);
+    buttonsWidgetLayout->addWidget(buttonAddRow, 0, 1);
+    buttonsWidgetLayout->addWidget(buttonCancelFile, 1, 0);
+    buttonsWidgetLayout->addWidget(buttonSaveFile, 1, 1);
 
-    setLayout(FileEditWidgetLayout);
+    QVBoxLayout* fileEditWidgetLayout = new QVBoxLayout();
+
+    fileEditWidgetLayout->addWidget(_table);
+    fileEditWidgetLayout->addLayout(buttonsWidgetLayout);
+
+    setLayout(fileEditWidgetLayout);
+    setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 }
 
 void FileEditWidget::fileTable(const QStringList& tableHeader) {
@@ -52,14 +57,14 @@ void FileEditWidget::cancelEditFile() {
 }
 
 void FileEditWidget::saveNewFile() {
-    std::vector<std::vector<std::string>> file;
+    std::vector<std::vector<std::string>> file(_table->rowCount());
 
     for (int i = 1; i < _table->rowCount(); ++i) {
         for (int k = 0; k < _table->columnCount(); ++k) {
-            file[i][k] = _table->itemAt(i, k)->text().toStdString();
+            file[i].push_back(_table->itemAt(i, k)->text().toStdString());
         }
     }
 
-    _file = std::move(file);
+    _file = file;
     cancelEditFile();
 }
