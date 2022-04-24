@@ -18,7 +18,7 @@ void StudentCalculator::updateCalculateButton() {
         count += _completeFieldsArr[i];
     }
 
-    if (count == 10) {
+    if ( count == 10 ) {
         _calculateButton->setEnabled(true);
         _calculateButton->setText("Calculate");
     }
@@ -50,13 +50,11 @@ void StudentCalculator::studentMoneyShow(int sum) {
     studentMoney->show();
 }
 
-void StudentCalculator::fileEditWidgetShow(const QStringList& headerLabels, std::vector< std::vector<string> >& _file) {
+bool StudentCalculator::fileEditWidgetShow(const QStringList& headerLabels, std::vector< std::vector<string> >& _file) {
     hide();
     FileEditWidget* fileEditWidget = new FileEditWidget(headerLabels, _file, this);
-
-    if(fileEditWidget->exec() == true) {
-        //resetFile();  здесь должна быть функция перезаписи файла
-    }
-
+    bool dialogCode = fileEditWidget->exec();
     show();
+
+    return dialogCode;
 }

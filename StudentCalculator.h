@@ -58,7 +58,7 @@ private:
 
     void errorDataLoadShow(const std::vector<string>& dataLoudErrors);
     void studentMoneyShow(int sum);
-    void fileEditWidgetShow (const QStringList& headerLabels, std::vector< std::vector<string> >& _file);
+    bool fileEditWidgetShow (const QStringList& headerLabels, std::vector< std::vector<string> >& _file);
 
     QSpinBox* _ageSpinBox;
 

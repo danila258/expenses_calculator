@@ -5,7 +5,7 @@ void StudentCalculator::startCalculate() {
 
     std::vector<string>& errors = _database.findStudentInfo(student);
   
-    if (!errors.empty()) {
+    if ( !errors.empty() ) {
         errorDataLoadShow(errors);
     }
     errors.clear();
@@ -115,20 +115,32 @@ void StudentCalculator::otherCostsFileDialog() {
 
 void StudentCalculator::editCostsFile() {
     QStringList headerLabels = {"City", "Age", "Average food cost per month", "Other costs"};
-    fileEditWidgetShow(headerLabels, _database._costsData);
+
+    if ( fileEditWidgetShow(headerLabels, _database._costsData) ) {
+        _database.resetCosts();
+    }
 }
 
 void StudentCalculator::editInstituteFile() {
     QStringList headerLabels = {"City", "Institute", "Dinner cost"};
-    fileEditWidgetShow(headerLabels, _database._instituteData);
+
+    if ( fileEditWidgetShow(headerLabels, _database._instituteData) ) {
+        _database.resetInstitute();
+    }
 }
 
 void StudentCalculator::editTransportFile() {
     QStringList headerLabels = {"City", "District", "Institute", "Transport cost"};
-    fileEditWidgetShow(headerLabels, _database._transportData);
+
+    if ( fileEditWidgetShow(headerLabels, _database._transportData) ) {
+        _database.resetTransport();
+    }
 }
 
 void StudentCalculator::editCaffeCinemaFile() {
     QStringList headerLabels = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
-    fileEditWidgetShow(headerLabels, _database._cafeCinemaData);
+
+    if ( fileEditWidgetShow(headerLabels, _database._cafeCinemaData) ) {
+
+    }
 }
