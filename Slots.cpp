@@ -71,21 +71,29 @@ void StudentCalculator::caffeEdited(const QString& caffe) {
 
 void StudentCalculator::costsFileDialog() {
     _costsFile = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
+    bool flag;
+
+    if ( flag = _costsFile.empty() ) {
+        return;
+    }
+
     _database.setCosts(_costsFile);
+    _buttonEditCostsFile->setEnabled(!flag);
 
-    bool flag = !(_costsFile.empty());
-    _buttonEditCostsFile->setEnabled(flag);
-
-    _completeFieldsArr[6] = flag;
+    _completeFieldsArr[6] = true;
     updateCalculateButton();
 }
 
 void StudentCalculator::instituteFileDialog() {
     _instituteFile = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
-    _database.setInstitute(_instituteFile);
+    bool flag;
 
-    bool flag = !(_instituteFile.empty());
-    _buttonEditInstituteFile->setEnabled(flag);
+    if ( flag = _instituteFile.empty() ) {
+        return;
+    }
+
+    _database.setInstitute(_instituteFile);
+    _buttonEditInstituteFile->setEnabled(!flag);
 
     _completeFieldsArr[7] = flag;
     updateCalculateButton();
@@ -93,10 +101,14 @@ void StudentCalculator::instituteFileDialog() {
 
 void StudentCalculator::transportFileDialog() {
     _transportFile = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
-    _database.setTransport(_transportFile);
+    bool flag;
 
-    bool flag = !(_transportFile.empty());
-    _buttonEditTransportFile->setEnabled(flag);
+    if ( flag = _transportFile.empty() ) {
+        return;
+    }
+
+    _database.setTransport(_transportFile);
+    _buttonEditTransportFile->setEnabled(!flag);
 
     _completeFieldsArr[8] = flag;
     updateCalculateButton();
@@ -104,10 +116,14 @@ void StudentCalculator::transportFileDialog() {
 
 void StudentCalculator::otherCostsFileDialog() {
     _otherCostsFile = QFileDialog::getOpenFileName(this, "Weekends File", "", "*.csv").toStdString();
-    _database.setCafeCinema(_otherCostsFile);
+    bool flag;
 
-    bool flag = !(_otherCostsFile.empty());
-    _buttonEditOtherCostsFile->setEnabled(flag);
+    if ( flag = _otherCostsFile.empty() ) {
+        return;
+    }
+
+    _database.setCafeCinema(_otherCostsFile);
+    _buttonEditOtherCostsFile->setEnabled(!flag);
 
     _completeFieldsArr[9] = flag;
     updateCalculateButton();

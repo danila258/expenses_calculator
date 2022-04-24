@@ -29,7 +29,6 @@ void StudentCalculator::updateCalculateButton() {
     }
 }
 
-
 void StudentCalculator::errorDataLoadShow(const std::vector<string>& dataLoudErrors) {
     string lineForWarning;
 
