@@ -99,7 +99,7 @@ void StudentCalculator::instituteFileDialog() {
     _database.setInstitute(instituteFilePath);
     _buttonEditInstituteFile->setEnabled(!flag);
 
-    _completeFieldsArr[7] = flag;
+    _completeFieldsArr[7] = true;
     updateCalculateButton();
 }
 
@@ -114,7 +114,7 @@ void StudentCalculator::transportFileDialog() {
     _database.setTransport(transportFilePath);
     _buttonEditTransportFile->setEnabled(!flag);
 
-    _completeFieldsArr[8] = flag;
+    _completeFieldsArr[8] = true;
     updateCalculateButton();
 }
 
@@ -129,7 +129,7 @@ void StudentCalculator::otherCostsFileDialog() {
     _database.setCafeCinema(otherCostsFilePath);
     _buttonEditOtherCostsFile->setEnabled(!flag);
 
-    _completeFieldsArr[9] = flag;
+    _completeFieldsArr[9] = true;
     updateCalculateButton();
 }
 
