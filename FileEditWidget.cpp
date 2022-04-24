@@ -2,6 +2,7 @@
 
 FileEditWidget::FileEditWidget(const QStringList& tableHeader, std::vector<std::vector<std::string>> &file,
                                QWidget *parent) : _file(file) {
+    this->move(parent->pos());
 
     fileTable(tableHeader);
 
