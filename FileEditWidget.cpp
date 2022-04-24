@@ -3,6 +3,7 @@
 FileEditWidget::FileEditWidget(const QStringList& tableHeader, std::vector<std::vector<std::string>> &file,
                                QWidget *parent) : _file(file) {
     move(parent->pos());
+    setWindowFlags(Qt::Window);
     resize(600, 600);
 
     fileTable(tableHeader);
