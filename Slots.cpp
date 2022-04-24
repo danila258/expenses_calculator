@@ -15,9 +15,13 @@ void StudentCalculator::startCalculate() {
 
     int workdaysCost = workdays[_month] * (student._instituteFoodCost + 2 * student._transportCost);
     int weekdaysCost = (daysInMonth[_month] - workdays[_month]) * (student._cinemaCost + student._cafeCost);
-    int cost = weekdaysCost + workdaysCost + student._avgFoodCost + student._otherCost;
 
-    studentMoneyShow(cost);
+    if (_calculateAgeFlag) {
+        studentMoneyShow(weekdaysCost + workdaysCost + student._avgFoodCost + student._otherCost);
+    }
+    else {
+        studentMoneyShow(weekdaysCost + workdaysCost + 15000 + student._otherCost);
+    }
 }
 
 void StudentCalculator::regulateAgeSpinBox(int mode) {

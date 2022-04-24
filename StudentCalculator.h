@@ -81,7 +81,7 @@ private:
 
     std::vector<bool> _completeFieldsArr;
 
-    bool _calculateAgeFlag = true;  //TODO как обработать без возраста?
+    bool _calculateAgeFlag = true;
 };
 
 
