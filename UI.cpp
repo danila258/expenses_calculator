@@ -27,6 +27,7 @@ QWidget* StudentCalculator::studentInputWidget() {
 
     QComboBox* monthsList = new QComboBox();
     monthsList->addItems(strMonths);
+    _month = 0;
 
     QCheckBox* ageCheckBox = new QCheckBox("Use age");
     ageCheckBox->setChecked(true);
@@ -35,6 +36,7 @@ QWidget* StudentCalculator::studentInputWidget() {
     _ageSpinBox->setRange(7, 200);
     _ageSpinBox->setSuffix(" years old");
     _ageSpinBox->setValue(ageByDefault);
+    _age = ageByDefault;
 
     QLineEdit* lineEditName = new QLineEdit;
     QLineEdit* lineEditCity = new QLineEdit;
