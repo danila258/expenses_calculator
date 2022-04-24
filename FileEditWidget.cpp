@@ -30,6 +30,10 @@ FileEditWidget::FileEditWidget(const QStringList& tableHeader, std::vector<std::
     setLayout(fileEditWidgetLayout);
 }
 
+FileEditWidget::~FileEditWidget() {
+    delete _table;
+}
+
 void FileEditWidget::fileTable(const QStringList& tableHeader) {
     _table = new QTableWidget(_file.size(), tableHeader.size(), this);
     _table->setHorizontalHeaderLabels(tableHeader);

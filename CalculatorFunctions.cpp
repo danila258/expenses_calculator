@@ -3,12 +3,13 @@
 
 StudentCalculator::~StudentCalculator() {
     delete _ageSpinBox;
-    delete _calculateButton;
 
     delete _buttonEditCostsFile;
     delete _buttonEditInstituteFile;
     delete _buttonEditTransportFile;
     delete _buttonEditOtherCostsFile;
+
+    delete _calculateButton;
 }
 
 void StudentCalculator::updateCalculateButton() {

@@ -11,6 +11,7 @@ class FileEditWidget : public QDialog {
 
 public:
     FileEditWidget (const QStringList& tableHeader, std::vector<std::vector<string>>& file, QWidget* parent = nullptr);
+    ~FileEditWidget();
 
 private slots:
     void deleteRow();

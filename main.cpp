@@ -21,5 +21,5 @@ int main(int argc, char *argv[]) {
     StudentCalculator calculator;
     calculator.show();
 
-    return Application.exec();
+    return QApplication::exec();
 }
