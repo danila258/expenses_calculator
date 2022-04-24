@@ -79,11 +79,6 @@ private:
     string _cinema;
     string _cafe;
 
-    string _costsFile;
-    string _instituteFile;
-    string _transportFile;
-    string _otherCostsFile;
-
     std::vector<bool> _completeFieldsArr;
 
     bool _calculateAgeFlag = true;  //TODO как обработать без возраста?

@@ -6,8 +6,6 @@ StudentCalculator::StudentCalculator(QWidget *parent) : QWidget(parent), _comple
     calculatorLayout->addWidget(tabWidget());
     calculatorLayout->addWidget(calculateButton());
 
-    resize(350, 0);
-
     setWindowTitle("Calculator");
     setLayout(calculatorLayout);
 }

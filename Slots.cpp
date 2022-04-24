@@ -70,14 +70,14 @@ void StudentCalculator::caffeEdited(const QString& caffe) {
 }
 
 void StudentCalculator::costsFileDialog() {
-    _costsFile = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
+    string costsFilePath = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
     bool flag;
 
-    if ( flag = _costsFile.empty() ) {
+    if ( flag = costsFilePath.empty() ) {
         return;
     }
 
-    _database.setCosts(_costsFile);
+    _database.setCosts(costsFilePath);
     _buttonEditCostsFile->setEnabled(!flag);
 
     _completeFieldsArr[6] = true;
@@ -85,14 +85,14 @@ void StudentCalculator::costsFileDialog() {
 }
 
 void StudentCalculator::instituteFileDialog() {
-    _instituteFile = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
+    string instituteFilePath = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
     bool flag;
 
-    if ( flag = _instituteFile.empty() ) {
+    if ( flag = instituteFilePath.empty() ) {
         return;
     }
 
-    _database.setInstitute(_instituteFile);
+    _database.setInstitute(instituteFilePath);
     _buttonEditInstituteFile->setEnabled(!flag);
 
     _completeFieldsArr[7] = flag;
@@ -100,14 +100,14 @@ void StudentCalculator::instituteFileDialog() {
 }
 
 void StudentCalculator::transportFileDialog() {
-    _transportFile = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
+    string transportFilePath = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
     bool flag;
 
-    if ( flag = _transportFile.empty() ) {
+    if ( flag = transportFilePath.empty() ) {
         return;
     }
 
-    _database.setTransport(_transportFile);
+    _database.setTransport(transportFilePath);
     _buttonEditTransportFile->setEnabled(!flag);
 
     _completeFieldsArr[8] = flag;
@@ -115,14 +115,14 @@ void StudentCalculator::transportFileDialog() {
 }
 
 void StudentCalculator::otherCostsFileDialog() {
-    _otherCostsFile = QFileDialog::getOpenFileName(this, "Weekends File", "", "*.csv").toStdString();
+    string otherCostsFilePath = QFileDialog::getOpenFileName(this, "Weekends File", "", "*.csv").toStdString();
     bool flag;
 
-    if ( flag = _otherCostsFile.empty() ) {
+    if ( flag = otherCostsFilePath.empty() ) {
         return;
     }
 
-    _database.setCafeCinema(_otherCostsFile);
+    _database.setCafeCinema(otherCostsFilePath);
     _buttonEditOtherCostsFile->setEnabled(!flag);
 
     _completeFieldsArr[9] = flag;
