@@ -31,6 +31,7 @@ void StudentCalculator::updateCalculateButton() {
 
 void StudentCalculator::errorDataLoadShow(const QVector<QString>& dataLoudErrors) {
     QString lineForWarning;
+    QPalette _warningPalette(QPalette::WindowText, QColor(Qt::red));
 
     for (int i = 0; i < dataLoudErrors.size(); ++i) {
         lineForWarning += dataLoudErrors[i];
@@ -39,6 +40,7 @@ void StudentCalculator::errorDataLoadShow(const QVector<QString>& dataLoudErrors
 
     QMessageBox* errorInput = new QMessageBox(QMessageBox::Warning, "Warning", lineForWarning,
                                               QMessageBox::Ok, this);
+    errorInput->setPalette(_warningPalette);
     errorInput->show();
 }
 
