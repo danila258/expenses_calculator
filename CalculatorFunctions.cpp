@@ -51,14 +51,12 @@ void StudentCalculator::studentMoneyShow(int sum) {
 }
 
 bool StudentCalculator::fileEditWidgetShow(const QStringList& headerLabels, std::vector< std::vector<string> >& _file) {
-    QPoint calculatorPos = this->pos();
-
     hide();
     FileEditWidget* fileEditWidget = new FileEditWidget(headerLabels, _file, this);
     bool dialogCode = fileEditWidget->exec();
     show();
 
-    this->move(calculatorPos);
+    this->move(fileEditWidget->pos());
 
     return dialogCode;
 }
