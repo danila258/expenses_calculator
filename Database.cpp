@@ -3,28 +3,47 @@
 //StudentsDatabase::StudentsDatabase(std::initializer_list<int> filesColNum) {
 //    _filesData.resize(filesColNum.size());
 //}
+
+//TODO rewrite all for to iterators
+
 Database::Database(int n) {
     _filesData.resize(n);
     _filesPathes.resize(n);
 }
 
-void Database::setFile(std::string& filePath, int fileNum) {
+void Database::storeFile(std::string& filePath, int fileNum) {
     QFile file(QString::fromStdString(filePath));
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() << file.errorString();
         return;
     }
-    _filesPathes[fileNum] = filePath;
+    _filesPathes[fileNum] = QString::fromStdString(filePath);
 
     QStringList buf;
     QTextStream in(&file);
     while (!in.atEnd()) {
         QString line = in.readLine();
-        qDebug() << line;
         buf.append(line.split(','));
         _filesData[fileNum].push_back(buf);
-        qDebug() << buf;
         buf.clear();
+    }
+    qDebug() << _filesData[fileNum];
+}
+
+void Database::restoreFile(int fileNum) {
+    QFile file(_filesPathes[fileNum]);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << file.errorString();
+        return;
+    }
+    for (int i = 0; i < _filesData[fileNum].size(); ++i) {
+        for (int j = 0; j < _filesData[fileNum][j].size(); ++j) {
+            file.write(_filesData[fileNum][i][j].toUtf8());
+            if (j != _filesData[fileNum][j].size() - 1) {
+                file.write(",");
+            }
+        }
+        file.write("\n");
     }
     qDebug() << _filesData[fileNum];
 }
@@ -219,6 +238,8 @@ fileData& Database::operator[](int i) {
 //std::vector<std::vector<std::string>>& Database::getCafeCinemaData() {
 //    return _cafeCinemaData;
 //};
+
+
 
 void Database::resetCosts() {
     std::ofstream file(_costsPath, std::ios_base::trunc);

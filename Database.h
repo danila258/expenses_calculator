@@ -23,7 +23,8 @@ public:
 //    StudentsDatabase(std::initializer_list<int> filesColNum);
     explicit Database(int n);
 
-    void setFile(std::string& filePath, int fileNum);
+    void storeFile(std::string& filePath, int fileNum);
+    void restoreFile(int fileNum);
 
     fileData& operator[](int i);
 
@@ -56,7 +57,7 @@ public:
 
 private:
     std::vector<fileData> _filesData;
-    std::vector<std::string> _filesPathes;
+    std::vector<QString> _filesPathes;
 
     /*      outdated                */
 //    void findCosts(Student& student);
