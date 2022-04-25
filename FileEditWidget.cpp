@@ -42,7 +42,7 @@ void FileEditWidget::fileTable(const QStringList& tableHeader) {
     _table->setHorizontalHeaderLabels(tableHeader);
     _table->setShowGrid(true);
 
-    for (int i = 0; i < 10 /*_file.size()*/; ++i) {
+    for (int i = 0; i < _file.size(); ++i) {
         for (int k = 0; k < tableHeader.size(); ++k) {
             QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString(_file[i][k]));
             _table->setItem(i, k, item);
@@ -66,7 +66,7 @@ void FileEditWidget::cancelEditFile() {
 void FileEditWidget::saveNewFile() {
     std::vector<std::vector<std::string>> file(_table->rowCount());
 
-    for (int i = 0; i < 10 /*_table->rowCount()*/; ++i) {
+    for (int i = 0; i < _table->rowCount(); ++i) {
         for (int k = 0; k < _table->columnCount(); ++k) {
             file[i].push_back(_table->item(i, k)->text().toStdString());
         }

@@ -5,7 +5,8 @@ void StudentCalculator::startCalculate() {
     // TODO make Student a field of StudentCalculator.h
 
     StudentExpenses exp(student, _database[0], _database[1], _database[2], _database[3]);
-    if (!exp.errors.empty()) {
+
+    if ( !exp.errors.empty() ) {
         errorDataLoadShow(exp.errors);
     }
 
@@ -15,7 +16,7 @@ void StudentCalculator::startCalculate() {
     int workdaysCost = workdays[_month] * (exp._instituteFoodCost + 2 * exp._transportCost);
     int weekdaysCost = (daysInMonth[_month] - workdays[_month]) * (exp._cinemaCost + exp._cafeCost);
 
-    if (!exp.errors.empty()) {
+    if ( !exp.errors.empty() ) {
         return;
     }
 
