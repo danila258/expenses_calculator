@@ -1,7 +1,6 @@
 #include "FileEditWidget.h"
 
-FileEditWidget::FileEditWidget(const QStringList& tableHeader, std::vector<std::vector<std::string>> &file,
-                               QWidget *parent) : _file(file) {
+FileEditWidget::FileEditWidget(const QStringList& tableHeader, QVector<QStringList>& file, QWidget *parent) : _file(file) {
     move(parent->pos());
     setWindowFlags(Qt::Window);
     resize(600, 600);
@@ -44,7 +43,7 @@ void FileEditWidget::fileTable(const QStringList& tableHeader) {
 
     for (int i = 0; i < _file.size(); ++i) {
         for (int k = 0; k < tableHeader.size(); ++k) {
-            QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString(_file[i][k]));
+            QTableWidgetItem* item = new QTableWidgetItem(_file[i][k]);
             _table->setItem(i, k, item);
         }
     }
@@ -64,11 +63,11 @@ void FileEditWidget::cancelEditFile() {
 }
 
 void FileEditWidget::saveNewFile() {
-    std::vector<std::vector<std::string>> file(_table->rowCount());
+    QVector<QStringList> file(_table->rowCount());
 
     for (int i = 0; i < _table->rowCount(); ++i) {
         for (int k = 0; k < _table->columnCount(); ++k) {
-            file[i].push_back(_table->item(i, k)->text().toStdString());
+            file[i].push_back(_table->item(i, k)->text());
         }
     }
 

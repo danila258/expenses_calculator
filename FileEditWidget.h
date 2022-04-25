@@ -10,7 +10,7 @@ class FileEditWidget : public QDialog {
     Q_OBJECT
 
 public:
-    FileEditWidget (const QStringList& tableHeader, std::vector<std::vector<string>>& file, QWidget* parent = nullptr);
+    FileEditWidget (const QStringList& tableHeader, QVector<QStringList>& file, QWidget* parent = nullptr);
     ~FileEditWidget();
 
 private slots:
@@ -22,7 +22,7 @@ private slots:
 private:
     void fileTable(const QStringList& headerLabels);
 
-    std::vector< std::vector<string> >& _file;
+    QVector<QStringList>& _file;
 
     QTableWidget* _table;
 };

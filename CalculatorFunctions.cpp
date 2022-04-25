@@ -50,7 +50,7 @@ void StudentCalculator::studentMoneyShow(int sum) {
     studentMoney->show();
 }
 
-bool StudentCalculator::fileEditWidgetShow(const QStringList& headerLabels, std::vector< std::vector<string> >& _file) {
+bool StudentCalculator::fileEditWidgetShow(const QStringList& headerLabels, QVector<QStringList>& _file) {
     hide();
     FileEditWidget* fileEditWidget = new FileEditWidget(headerLabels, _file, this);
     bool dialogCode = fileEditWidget->exec();

@@ -87,9 +87,9 @@ void StudentCalculator::costsFileDialog() {
         return;
     }
 
-    _database.storeFile(costsFilePath, 0);
-    _buttonEditCostsFile->setEnabled(!flag);
+    _database.storeFile(costsFilePath, costsFile);
 
+    _buttonEditCostsFile->setEnabled(!flag);
     _completeFieldsArr[6] = true;
     updateCalculateButton();
 }
@@ -102,9 +102,9 @@ void StudentCalculator::instituteFileDialog() {
         return;
     }
 
-    _database.storeFile(instituteFilePath, 1);
-    _buttonEditInstituteFile->setEnabled(!flag);
+    _database.storeFile(instituteFilePath, instituteFile);
 
+    _buttonEditInstituteFile->setEnabled(!flag);
     _completeFieldsArr[7] = true;
     updateCalculateButton();
 }
@@ -117,9 +117,9 @@ void StudentCalculator::transportFileDialog() {
         return;
     }
 
-    _database.storeFile(transportFilePath, 2);
-    _buttonEditTransportFile->setEnabled(!flag);
+    _database.storeFile(transportFilePath, transportFile);
 
+    _buttonEditTransportFile->setEnabled(!flag);
     _completeFieldsArr[8] = true;
     updateCalculateButton();
 }
@@ -132,9 +132,9 @@ void StudentCalculator::otherCostsFileDialog() {
         return;
     }
 
-    _database.storeFile(otherCostsFilePath, 3);
-    _buttonEditOtherCostsFile->setEnabled(!flag);
+    _database.storeFile(otherCostsFilePath, otherCostsFile);
 
+    _buttonEditOtherCostsFile->setEnabled(!flag);
     _completeFieldsArr[9] = true;
     updateCalculateButton();
 }
@@ -142,31 +142,31 @@ void StudentCalculator::otherCostsFileDialog() {
 void StudentCalculator::editCostsFile() {
     QStringList headerLabels = {"City", "Age", "Average food cost per month", "Other costs"};
 
-    if ( fileEditWidgetShow(headerLabels, _database._costsData) ) {
-        _database.resetCosts();
+    if ( fileEditWidgetShow(headerLabels, _database[costsFile]) ) {
+        _database.restoreFile(costsFile);
     }
 }
 
 void StudentCalculator::editInstituteFile() {
     QStringList headerLabels = {"City", "Institute", "Dinner cost"};
 
-    if ( fileEditWidgetShow(headerLabels, _database._instituteData) ) {
-        _database.resetInstitute();
+    if ( fileEditWidgetShow(headerLabels, _database[instituteFile]) ) {
+        _database.restoreFile(instituteFile);
     }
 }
 
 void StudentCalculator::editTransportFile() {
     QStringList headerLabels = {"City", "District", "Institute", "Transport cost"};
 
-    if ( fileEditWidgetShow(headerLabels, _database._transportData) ) {
-        _database.resetTransport();
+    if ( fileEditWidgetShow(headerLabels, _database[transportFile]) ) {
+        _database.restoreFile(transportFile);
     }
 }
 
 void StudentCalculator::editCaffeCinemaFile() {
     QStringList headerLabels = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
 
-    if ( fileEditWidgetShow(headerLabels, _database._cafeCinemaData) ) {
-
+    if ( fileEditWidgetShow(headerLabels, _database[otherCostsFile]) ) {
+        _database.restoreFile(otherCostsFile);
     }
 }

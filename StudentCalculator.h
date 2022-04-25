@@ -12,9 +12,15 @@
 
 using std::string;
 
+#define ageByDefault 18
+
 #define countFiles 4
 #define countCheckedFields 10
-#define ageByDefault 18
+
+#define costsFile 0
+#define instituteFile 1
+#define transportFile 2
+#define otherCostsFile 3
 
 
 class StudentCalculator : public QWidget {
@@ -61,7 +67,7 @@ private:
 
     void errorDataLoadShow(const QVector<QString>& dataLoudErrors);
     void studentMoneyShow(int sum);
-    bool fileEditWidgetShow (const QStringList& headerLabels, std::vector< std::vector<string> >& _file);
+    bool fileEditWidgetShow (const QStringList& headerLabels, QVector<QStringList>& _file);
 
     QSpinBox* _ageSpinBox;
 
