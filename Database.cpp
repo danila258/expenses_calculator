@@ -1,6 +1,7 @@
 #include "Database.h"
 
 //TODO rewrite all for to iterators
+// TODO выбираешь вместо Costs file - institute file
 
 Database::Database(int n) {
     _filesData.resize(n);
