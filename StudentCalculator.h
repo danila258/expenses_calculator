@@ -1,17 +1,18 @@
 #ifndef STUDENTCALCULATOR_H
 #define STUDENTCALCULATOR_H
 
+#include <QtWidgets>
+#include <QApplication>
+#include <string>
+
 #include "Database.h"
 #include "Student.h"
 #include "StudentExpenses.h"
 #include "FileEditWidget.h"
 
-#include <QtWidgets>
-#include <QApplication>
-#include <string>
-#include <QString>
 using std::string;
 
+#define countFiles 4
 #define countCheckedFields 10
 #define ageByDefault 18
 

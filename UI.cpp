@@ -9,7 +9,7 @@ StudentCalculator::StudentCalculator(QWidget *parent) : QWidget(parent), _comple
     setWindowTitle("Calculator");
     setLayout(calculatorLayout);
 
-    _database = Database(4);
+    _database = Database(countFiles);
 }
 
 QWidget* StudentCalculator::studentInputWidget() {
