@@ -52,9 +52,9 @@ void StudentCalculator::studentMoneyShow(int sum) {
     studentMoney->show();
 }
 
-bool StudentCalculator::fileEditWidgetShow(const QStringList& headerLabels, QVector<QStringList>& _file) {
+bool StudentCalculator::fileEditWidgetShow(QVector<QStringList>& _file) {
     hide();
-    FileEditWidget* fileEditWidget = new FileEditWidget(headerLabels, _file, this);
+    FileEditWidget* fileEditWidget = new FileEditWidget(_file, this);
     bool dialogCode = fileEditWidget->exec();
     show();
 

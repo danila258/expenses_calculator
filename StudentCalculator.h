@@ -67,7 +67,7 @@ private:
 
     void errorDataLoadShow(const QVector<QString>& dataLoudErrors);
     void studentMoneyShow(int sum);
-    bool fileEditWidgetShow (const QStringList& headerLabels, QVector<QStringList>& _file);
+    bool fileEditWidgetShow (QVector<QStringList>& _file);
 
     QSpinBox* _ageSpinBox;
 

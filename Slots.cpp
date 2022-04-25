@@ -140,33 +140,33 @@ void StudentCalculator::otherCostsFileDialog() {
 }
 
 void StudentCalculator::editCostsFile() {
-    QStringList headerLabels = {"City", "Age", "Average food cost per month", "Other costs"};
-
-    if ( fileEditWidgetShow(headerLabels, _database[costsFile]) ) {
-        _database.restoreFile(costsFile);
+    if ( !fileEditWidgetShow(_database[costsFile]) ) {
+        return;
     }
+
+    _database.restoreFile(costsFile);
 }
 
 void StudentCalculator::editInstituteFile() {
-    QStringList headerLabels = {"City", "Institute", "Dinner cost"};
-
-    if ( fileEditWidgetShow(headerLabels, _database[instituteFile]) ) {
-        _database.restoreFile(instituteFile);
+    if ( !fileEditWidgetShow(_database[instituteFile]) ) {
+        return;
     }
+
+    _database.restoreFile(instituteFile);
 }
 
 void StudentCalculator::editTransportFile() {
-    QStringList headerLabels = {"City", "District", "Institute", "Transport cost"};
-
-    if ( fileEditWidgetShow(headerLabels, _database[transportFile]) ) {
-        _database.restoreFile(transportFile);
+    if ( !fileEditWidgetShow(_database[transportFile]) ) {
+        return;
     }
+
+    _database.restoreFile(transportFile);
 }
 
 void StudentCalculator::editCaffeCinemaFile() {
-    QStringList headerLabels = {"City", "Address", "Caffe", "Average caffe cost", "Cinema", "Cinema cost"};
-
-    if ( fileEditWidgetShow(headerLabels, _database[otherCostsFile]) ) {
-        _database.restoreFile(otherCostsFile);
+    if ( !fileEditWidgetShow(_database[otherCostsFile]) ) {
+        return;
     }
+
+    _database.restoreFile(otherCostsFile);
 }

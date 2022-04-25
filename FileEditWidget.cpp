@@ -1,11 +1,11 @@
 #include "FileEditWidget.h"
 
-FileEditWidget::FileEditWidget(const QStringList& tableHeader, QVector<QStringList>& file, QWidget *parent) : _file(file) {
+FileEditWidget::FileEditWidget(QVector<QStringList>& file, QWidget *parent) : _file(file), _tableHeader(_file[0]) {
     move(parent->pos());
     setWindowFlags(Qt::Window);
     resize(600, 600);
 
-    fileTable(tableHeader);
+    fileTable();
 
     QPushButton* buttonDeleteRow = new QPushButton("Delete Row");
     QPushButton* buttonAddRow = new QPushButton("Add row");
@@ -36,15 +36,15 @@ FileEditWidget::~FileEditWidget() {
     delete _table;
 }
 
-void FileEditWidget::fileTable(const QStringList& tableHeader) {
-    _table = new QTableWidget(_file.size(), tableHeader.size(), this);
-    _table->setHorizontalHeaderLabels(tableHeader);
+void FileEditWidget::fileTable() {
+    _table = new QTableWidget(_file.size() - 1, _file[0].size(), this);
+    _table->setHorizontalHeaderLabels(_tableHeader);
     _table->setShowGrid(true);
 
-    for (int i = 0; i < _file.size(); ++i) {
-        for (int k = 0; k < tableHeader.size(); ++k) {
+    for (int i = 1; i < _file.size(); ++i) {
+        for (int k = 0; k < _file[0].size(); ++k) {
             QTableWidgetItem* item = new QTableWidgetItem(_file[i][k]);
-            _table->setItem(i, k, item);
+            _table->setItem(i - 1, k, item);
         }
     }
 }
@@ -63,11 +63,12 @@ void FileEditWidget::cancelEditFile() {
 }
 
 void FileEditWidget::saveNewFile() {
-    QVector<QStringList> file(_table->rowCount());
+    QVector<QStringList> file(_table->rowCount() + 1);
+    file[0] = _tableHeader;
 
     for (int i = 0; i < _table->rowCount(); ++i) {
         for (int k = 0; k < _table->columnCount(); ++k) {
-            file[i].push_back(_table->item(i, k)->text());
+            file[i + 1].push_back(_table->item(i, k)->text());
         }
     }
 

@@ -10,7 +10,7 @@ class FileEditWidget : public QDialog {
     Q_OBJECT
 
 public:
-    FileEditWidget (const QStringList& tableHeader, QVector<QStringList>& file, QWidget* parent = nullptr);
+    FileEditWidget (QVector<QStringList>& file, QWidget* parent = nullptr);
     ~FileEditWidget();
 
 private slots:
@@ -20,9 +20,10 @@ private slots:
     void saveNewFile();
 
 private:
-    void fileTable(const QStringList& headerLabels);
+    void fileTable();
 
     QVector<QStringList>& _file;
+    const QStringList& _tableHeader;
 
     QTableWidget* _table;
 };
