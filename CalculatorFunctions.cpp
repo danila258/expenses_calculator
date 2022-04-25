@@ -29,15 +29,15 @@ void StudentCalculator::updateCalculateButton() {
     }
 }
 
-void StudentCalculator::errorDataLoadShow(const std::vector<string>& dataLoudErrors) {
-    string lineForWarning;
+void StudentCalculator::errorDataLoadShow(const QVector<QString>& dataLoudErrors) {
+    QString lineForWarning;
 
     for (int i = 0; i < dataLoudErrors.size(); ++i) {
         lineForWarning += dataLoudErrors[i];
         lineForWarning += '\n';
     }
 
-    QMessageBox* errorInput = new QMessageBox(QMessageBox::Warning, "Warning", QString::fromStdString(lineForWarning),
+    QMessageBox* errorInput = new QMessageBox(QMessageBox::Warning, "Warning", lineForWarning,
                                               QMessageBox::Ok, this);
     errorInput->show();
 }

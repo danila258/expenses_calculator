@@ -2,26 +2,31 @@
 
 void StudentCalculator::startCalculate() {
     Student student(_age, _city, _address, _institute, _cafe, _cinema);
+    // TODO make Student a field of StudentCalculator.h
 
-    std::vector<string>& errors = _database.findStudentInfo(student);
-  
-    if ( !errors.empty() ) {
-        errorDataLoadShow(errors);
+    StudentExpenses exp(student, _database[0], _database[1], _database[2], _database[3]);
+    if (!exp.errors.empty()) {
+        errorDataLoadShow(exp.errors);
     }
-    errors.clear();
 
     const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     const int workdays[] = {16, 19, 22, 21, 18, 21, 21, 23, 22, 21, 21, 22};
 
-    int workdaysCost = workdays[_month] * (student._instituteFoodCost + 2 * student._transportCost);
-    int weekdaysCost = (daysInMonth[_month] - workdays[_month]) * (student._cinemaCost + student._cafeCost);
+    int workdaysCost = workdays[_month] * (exp._instituteFoodCost + 2 * exp._transportCost);
+    int weekdaysCost = (daysInMonth[_month] - workdays[_month]) * (exp._cinemaCost + exp._cafeCost);
+
+    if (!exp.errors.empty()) {
+        return;
+    }
 
     if (_calculateAgeFlag) {
-        studentMoneyShow(weekdaysCost + workdaysCost + student._avgFoodCost + student._otherCost);
+        studentMoneyShow(weekdaysCost + workdaysCost + exp._avgFoodCost + exp._otherCost);
     }
     else {
-        studentMoneyShow(weekdaysCost + workdaysCost + 15000 + student._otherCost);
+        studentMoneyShow(weekdaysCost + workdaysCost + 15000 + exp._otherCost);
     }
+
+    exp.errors.clear();
 }
 
 void StudentCalculator::regulateAgeSpinBox(int mode) {
@@ -81,7 +86,8 @@ void StudentCalculator::costsFileDialog() {
         return;
     }
 
-    _database.setCosts(costsFilePath);
+//    _database.setCosts(costsFilePath);
+    _database.setFile(costsFilePath, 0);
     _buttonEditCostsFile->setEnabled(!flag);
 
     _completeFieldsArr[6] = true;
@@ -96,7 +102,7 @@ void StudentCalculator::instituteFileDialog() {
         return;
     }
 
-    _database.setInstitute(instituteFilePath);
+    _database.setFile(instituteFilePath, 1);
     _buttonEditInstituteFile->setEnabled(!flag);
 
     _completeFieldsArr[7] = true;
@@ -111,7 +117,7 @@ void StudentCalculator::transportFileDialog() {
         return;
     }
 
-    _database.setTransport(transportFilePath);
+    _database.setFile(transportFilePath, 2);
     _buttonEditTransportFile->setEnabled(!flag);
 
     _completeFieldsArr[8] = true;
@@ -126,7 +132,8 @@ void StudentCalculator::otherCostsFileDialog() {
         return;
     }
 
-    _database.setCafeCinema(otherCostsFilePath);
+//    _database.setCafeCinema(otherCostsFilePath);
+    _database.setFile(otherCostsFilePath, 3);
     _buttonEditOtherCostsFile->setEnabled(!flag);
 
     _completeFieldsArr[9] = true;

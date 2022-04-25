@@ -1,14 +1,16 @@
 #ifndef STUDENTCALCULATOR_H
 #define STUDENTCALCULATOR_H
 
+#include "Database.h"
+#include "Student.h"
+#include "StudentExpenses.h"
+#include "FileEditWidget.h"
+
 #include <QtWidgets>
 #include <QApplication>
 #include <string>
+#include <QString>
 using std::string;
-
-#include "StudentsDatabase.h"
-#include "Student.h"
-#include "FileEditWidget.h"
 
 #define countCheckedFields 10
 #define ageByDefault 18
@@ -56,7 +58,7 @@ private:
 
     void updateCalculateButton();
 
-    void errorDataLoadShow(const std::vector<string>& dataLoudErrors);
+    void errorDataLoadShow(const QVector<QString>& dataLoudErrors);
     void studentMoneyShow(int sum);
     bool fileEditWidgetShow (const QStringList& headerLabels, std::vector< std::vector<string> >& _file);
 

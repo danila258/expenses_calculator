@@ -1,5 +1,5 @@
-#ifndef STUDENTSDATABASE_H
-#define STUDENTSDATABASE_H
+#ifndef DATABASE_H
+#define DATABASE_H
 
 #include "Student.h"
 #include <string>
@@ -7,19 +7,32 @@
 #include <sstream>
 #include <vector>
 
-#include <algorithm>
-#include <iterator>
+//#include <algorithm>
+//#include <iterator>
 
+#include <QFile>
+#include <QStringList>
+#include <QTextStream>
+#include <QDebug>
 
+typedef QVector<QStringList> fileData;
 
 class Database {
 public:
-    void setCosts(std::string filePath);
-    void setInstitute(std::string filePath);
-    void setTransport(std::string filePath);
-    void setCafeCinema(std::string filePath);
+    Database() = default;
+//    StudentsDatabase(std::initializer_list<int> filesColNum);
+    explicit Database(int n);
 
-    std::vector<std::string> errors;
+    void setFile(std::string& filePath, int fileNum);
+
+    fileData& operator[](int i);
+
+    /*      outdated                */
+//    void setCosts(std::string filePath);
+//    void setInstitute(std::string filePath);
+//    void setTransport(std::string filePath);
+//    void setCafeCinema(std::string filePath);
+
 
 //    std::string getCostsDataStr() const;
 
@@ -33,18 +46,23 @@ public:
     void resetTransport();
     void resetCafeCinema();
 
-    std::vector<std::string>& findStudentInfo(Student& student);
+//    std::vector<std::string>& findStudentInfo(Student& student);
 
     std::vector<std::vector<std::string>> _costsData{};
     std::vector<std::vector<std::string>> _instituteData{};
     std::vector<std::vector<std::string>> _transportData{};
     std::vector<std::vector<std::string>> _cafeCinemaData{};
+    /*      outdated                */
 
 private:
-    void findCosts(Student& student);
-    void findInstitute(Student& student);
-    void findTransport(Student& student);
-    void findCafeCinema(Student& student);
+    std::vector<fileData> _filesData;
+    std::vector<std::string> _filesPathes;
+
+    /*      outdated                */
+//    void findCosts(Student& student);
+//    void findInstitute(Student& student);
+//    void findTransport(Student& student);
+//    void findCafeCinema(Student& student);
 
     std::string _costsPath;
     std::string _institutePath;
@@ -62,8 +80,7 @@ private:
 
     int _cafeCinemaDataRows{};
     int _cafeCinemaDataColumns{6};
-
-
+    /*      outdated                */
 };
 
-#endif //STUDENTSDATABASE_H
+#endif //DATABASE_H
