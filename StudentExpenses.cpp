@@ -36,8 +36,8 @@ bool StudentExpenses::cafeCinemaFileCheck(fileData& data) {
 void StudentExpenses::findCosts(Student& student, fileData& data) {
     bool find = false;
     for (int i = 0; i < data.size(); ++i) {
-        if (std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._city)) != data[i].end()
-            && std::find(data[i].begin(), data[i].end(), QString::fromStdString(std::to_string(student._age))) != data[i].end()) {
+        if (std::find(data[i].begin(), data[i].end(), student._city) != data[i].end()
+            && std::find(data[i].begin(), data[i].end(), QString::number(student._age)) != data[i].end()) {
             find = true;
             _avgFoodCost = data[i][2].toInt();
             _otherCost = data[i][3].toInt();
@@ -51,8 +51,8 @@ void StudentExpenses::findCosts(Student& student, fileData& data) {
 void StudentExpenses::findInstitute(Student &student, fileData& data) {
     bool find = false;
     for (int i = 0; i < data.size(); ++i) {
-        if (std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._city)) != data[i].end()
-            && std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._institute)) != data[i].end()) {
+        if (std::find(data[i].begin(), data[i].end(), student._city) != data[i].end()
+            && std::find(data[i].begin(), data[i].end(), student._institute) != data[i].end()) {
             find = true;
             _instituteFoodCost = data[i][2].toInt();
         }
@@ -65,9 +65,9 @@ void StudentExpenses::findInstitute(Student &student, fileData& data) {
 void StudentExpenses::findTransport(Student& student, fileData& data) {
     bool find = false;
     for (int i = 0; i < data.size(); ++i) {
-        if (std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._city)) != data[i].end()
-            && std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._address)) != data[i].end()
-            && std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._institute)) != data[i].end()) {
+        if (std::find(data[i].begin(), data[i].end(), student._city) != data[i].end()
+            && std::find(data[i].begin(), data[i].end(), student._address) != data[i].end()
+            && std::find(data[i].begin(), data[i].end(), student._institute) != data[i].end()) {
             find = true;
             _transportCost = data[i][3].toInt();
         }
@@ -80,10 +80,10 @@ void StudentExpenses::findTransport(Student& student, fileData& data) {
 void StudentExpenses::findCafeCinema(Student &student, fileData& data) {
     bool find = false;
     for (int i = 0; i < data.size(); ++i) {
-        if (std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._city)) != data[i].end()
-            && std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._cafe)) != data[i].end()
-            && std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._address)) != data[i].end()
-            && std::find(data[i].begin(), data[i].end(), QString::fromStdString(student._cinema)) != data[i].end()) {
+        if (std::find(data[i].begin(), data[i].end(), student._city) != data[i].end()
+            && std::find(data[i].begin(), data[i].end(), student._cafe) != data[i].end()
+            && std::find(data[i].begin(), data[i].end(), student._address) != data[i].end()
+            && std::find(data[i].begin(), data[i].end(), student._cinema) != data[i].end()) {
             find = true;
             _cafeCost = data[i][3].toInt();
             _cinemaCost = data[i][5].toInt();

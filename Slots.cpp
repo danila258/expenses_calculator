@@ -44,33 +44,33 @@ void StudentCalculator::monthEdited(int month) {
 }
 
 void StudentCalculator::nameEdited(const QString& name) {
-    _student._name = name.toStdString();
-    calculateButtonFlag(0, !_student._name.empty());
+    _student._name = name;
+    calculateButtonFlag(0, !_student._name.isEmpty());
 }
 
 void StudentCalculator::cityEdited(const QString& city) {
-    _student._city = city.toStdString();
-    calculateButtonFlag(1, !_student._city.empty());
+    _student._city = city;
+    calculateButtonFlag(1, !_student._city.isEmpty());
 }
 
 void StudentCalculator::addressEdited(const QString& address) {
-    _student._address = address.toStdString();
-    calculateButtonFlag(2, !_student._address.empty());
+    _student._address = address;
+    calculateButtonFlag(2, !_student._address.isEmpty());
 }
 
 void StudentCalculator::instituteEdited(const QString& institute) {
-    _student._institute = institute.toStdString();
-    calculateButtonFlag(3, !_student._institute.empty());
+    _student._institute = institute;
+    calculateButtonFlag(3, !_student._institute.isEmpty());
 }
 
 void StudentCalculator::cinemaEdited(const QString& cinema) {
-    _student._cinema = cinema.toStdString();
-    calculateButtonFlag(4, !_student._cinema.empty());
+    _student._cinema = cinema;
+    calculateButtonFlag(4, !_student._cinema.isEmpty());
 }
 
 void StudentCalculator::caffeEdited(const QString& caffe) {
-    _student._cafe = caffe.toStdString();
-    calculateButtonFlag(5, !_student._cafe.empty());
+    _student._cafe = caffe;
+    calculateButtonFlag(5, !_student._cafe.isEmpty());
 }
 
 void StudentCalculator::costsFileDialog() {

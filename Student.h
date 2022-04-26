@@ -6,18 +6,17 @@
 struct Student {
 public:
     Student() = default;
-    Student(int age, std::string& city, std::string& address, std::string& institute,
-            std::string cafe, std::string cinema) :
+    Student(int age, QString& city, QString& address, QString& institute, QString cafe, QString cinema) :
             _age(age), _city(city), _address(address), _institute(institute), _cafe(cafe), _cinema(cinema) {
     }
 
     int _age;
-    std::string _name;
-    std::string _city;
-    std::string _address;
-    std::string _institute;
-    std::string _cafe;
-    std::string _cinema;
+    QString _name;
+    QString _city;
+    QString _address;
+    QString _institute;
+    QString _cafe;
+    QString _cinema;
 };
 
 #endif //STUDENT_H
