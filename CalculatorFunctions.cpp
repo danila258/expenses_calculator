@@ -67,7 +67,10 @@ bool StudentCalculator::fileEditWidgetShow(QVector<QStringList>& _file) {
 
 void StudentCalculator::switchButtonMode(int index, bool flag) {
     calculateButtonFlag(index, flag);
-    errorDataLoadShow();
+
+    if (!flag) {
+        errorDataLoadShow();
+    }
 }
 
 void StudentCalculator::calculateButtonFlag(int index, bool flag) {
