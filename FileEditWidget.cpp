@@ -68,7 +68,12 @@ void FileEditWidget::saveNewFile() {
 
     for (int i = 0; i < _table->rowCount(); ++i) {
         for (int k = 0; k < _table->columnCount(); ++k) {
-            file[i + 1].push_back(_table->item(i, k)->text());
+            if (_table->item(i, k) == nullptr) {
+                file[i + 1].push_back("0");
+            }
+            else {
+                file[i + 1].push_back(_table->item(i, k)->text());
+            }
         }
     }
 
