@@ -34,12 +34,16 @@ void StudentCalculator::errorDataLoadShow(const QVector<QString>& dataLoudErrors
 
     for (int i = 0; i < dataLoudErrors.size(); ++i) {
         lineForWarning += "<font color=\"red\">" + dataLoudErrors[i] + "</font><br>";
-        lineForWarning += '\n';
     }
 
     QMessageBox* errorInput = new QMessageBox(QMessageBox::Warning, "Warning", lineForWarning,
                                               QMessageBox::Ok, this);
     errorInput->show();
+}
+
+void StudentCalculator::errorDataLoadShow() {
+    QVector<QString> errorsVector = {"File browsing error."};
+    errorDataLoadShow(errorsVector);
 }
 
 void StudentCalculator::studentMoneyShow(int sum) {
@@ -59,4 +63,10 @@ bool StudentCalculator::fileEditWidgetShow(QVector<QStringList>& _file) {
     this->move(fileEditWidget->pos());
 
     return dialogCode;
+}
+
+void StudentCalculator::switchButtonMode(int index, bool flag) {
+    _buttonEditCostsFile->setEnabled(flag);
+    _completeFieldsArr[index] = flag;
+    updateCalculateButton();
 }

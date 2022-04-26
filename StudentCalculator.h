@@ -17,12 +17,6 @@ using std::string;
 #define countFiles 4
 #define countCheckedFields 10
 
-//#define costsFile 0
-//#define instituteFile 1
-//#define transportFile 2
-//#define otherCostsFile 3
-// use define is a bad practice
-
 enum files { costsFile, instituteFile, transportFile, otherCostsFile };
 
 
@@ -68,9 +62,11 @@ private:
     QTabWidget* tabWidget();
     QPushButton* calculateButton();
 
+    void switchButtonMode(int index, bool flag);
     void updateCalculateButton();
 
     void errorDataLoadShow(const QVector<QString>& dataLoudErrors);
+    void errorDataLoadShow();
     void studentMoneyShow(int sum);
     bool fileEditWidgetShow (QVector<QStringList>& _file);
 

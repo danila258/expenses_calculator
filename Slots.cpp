@@ -2,7 +2,6 @@
 
 void StudentCalculator::startCalculate() {
     Student student(_student._age, _student._city, _student._address, _student._institute, _student._cafe, _student._cinema);
-    // TODO make Student a field of StudentCalculator.h
 
     _expenses = StudentExpenses(student, _database[0], _database[1], _database[2], _database[3]);
     StudentExpenses& exp = _expenses;
@@ -82,82 +81,73 @@ void StudentCalculator::caffeEdited(const QString& caffe) {
 
 void StudentCalculator::costsFileDialog() {
     string costsFilePath = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
-    bool flag;
 
-    if ( flag = costsFilePath.empty() ) {
+    if ( costsFilePath.empty() ) {
         return;
     }
 
     _database.storeFile(costsFilePath, costsFile);
 
-    if (_expenses.costsFileCheck(_database[costsFile])) {
-        _buttonEditCostsFile->setEnabled(!flag);
-        _completeFieldsArr[6] = true;
-        updateCalculateButton();
+    if ( _expenses.costsFileCheck(_database[costsFile]) ) {
+        switchButtonMode(6, true);
     }
     else {
-        // TODO show error file format
+        switchButtonMode(6, false);
+        errorDataLoadShow();
     }
 }
-// TODO bug when u choose another file checker for column doesnt work
 
 void StudentCalculator::instituteFileDialog() {
     string instituteFilePath = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
-    bool flag;
 
-    if ( flag = instituteFilePath.empty() ) {
+    if ( instituteFilePath.empty() ) {
         return;
     }
 
     _database.storeFile(instituteFilePath, instituteFile);
 
-    if (_expenses.instituteFileCheck(_database[instituteFile])) {
-        _buttonEditInstituteFile->setEnabled(!flag);
-        _completeFieldsArr[7] = true;
-        updateCalculateButton();
+    if ( _expenses.instituteFileCheck(_database[instituteFile]) ) {
+        switchButtonMode(7, true);
     }
     else {
-        // TODO show error file format
+        switchButtonMode(7, false);
+        errorDataLoadShow();
     }
 }
 
 void StudentCalculator::transportFileDialog() {
     string transportFilePath = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
-    bool flag;
 
-    if ( flag = transportFilePath.empty() ) {
+    if ( transportFilePath.empty() ) {
         return;
     }
 
     _database.storeFile(transportFilePath, transportFile);
 
-    if (_expenses.transportFileCheck(_database[transportFile])) {
-        _buttonEditTransportFile->setEnabled(!flag);
-        _completeFieldsArr[8] = true;
-        updateCalculateButton();
+    if ( _expenses.transportFileCheck(_database[transportFile]) ) {
+        switchButtonMode(8, true);
     }
     else {
-        // TODO show error file format
+        switchButtonMode(8, false);
+        errorDataLoadShow();
     }
 }
 
 void StudentCalculator::otherCostsFileDialog() {
     string otherCostsFilePath = QFileDialog::getOpenFileName(this, "Weekends File", "", "*.csv").toStdString();
-    bool flag;
 
-    if ( flag = otherCostsFilePath.empty() ) {
+    if ( otherCostsFilePath.empty() ) {
         return;
     }
 
     _database.storeFile(otherCostsFilePath, otherCostsFile);
 
-    if (_expenses.cafeCinemaFileCheck(_database[otherCostsFile])) {
-        _buttonEditOtherCostsFile->setEnabled(!flag);
-        _completeFieldsArr[9] = true;
-        updateCalculateButton();
+    if ( _expenses.cafeCinemaFileCheck(_database[otherCostsFile]) ) {
+        switchButtonMode(9, true);
     }
     else {
-        // TODO show error file format
+        switchButtonMode(9, false);
+        errorDataLoadShow();
     }
 }
 
