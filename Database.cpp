@@ -1,7 +1,6 @@
 #include "Database.h"
 
-//TODO rewrite all for to iterators
-// TODO выбираешь вместо Costs file - institute file
+// TODO rewrite all for to iterators
 
 Database::Database(int n) {
     _filesData.resize(n);
@@ -14,6 +13,8 @@ void Database::storeFile(std::string& filePath, int fileNum) {
         qDebug() << file.errorString();
         return;
     }
+    _filesData[fileNum].clear();
+
     _filesPathes[fileNum] = QString::fromStdString(filePath);
 
     QStringList buf;
@@ -21,6 +22,7 @@ void Database::storeFile(std::string& filePath, int fileNum) {
     while (!in.atEnd()) {
         QString line = in.readLine();
         buf.append(line.split(','));
+        // columnsNum I can check there
         _filesData[fileNum].push_back(buf);
         buf.clear();
     }
