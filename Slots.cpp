@@ -99,6 +99,7 @@ void StudentCalculator::costsFileDialog() {
         // TODO show error file format
     }
 }
+// TODO bug when u choose another file checker for column doesnt work
 
 void StudentCalculator::instituteFileDialog() {
     string instituteFilePath = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
@@ -110,7 +111,7 @@ void StudentCalculator::instituteFileDialog() {
 
     _database.storeFile(instituteFilePath, instituteFile);
 
-    if (_expenses.costsFileCheck(_database[instituteFile])) {
+    if (_expenses.instituteFileCheck(_database[instituteFile])) {
         _buttonEditInstituteFile->setEnabled(!flag);
         _completeFieldsArr[7] = true;
         updateCalculateButton();
@@ -130,7 +131,7 @@ void StudentCalculator::transportFileDialog() {
 
     _database.storeFile(transportFilePath, transportFile);
 
-    if (_expenses.costsFileCheck(_database[transportFile])) {
+    if (_expenses.transportFileCheck(_database[transportFile])) {
         _buttonEditTransportFile->setEnabled(!flag);
         _completeFieldsArr[8] = true;
         updateCalculateButton();
@@ -150,7 +151,7 @@ void StudentCalculator::otherCostsFileDialog() {
 
     _database.storeFile(otherCostsFilePath, otherCostsFile);
 
-    if (_expenses.costsFileCheck(_database[otherCostsFile])) {
+    if (_expenses.cafeCinemaFileCheck(_database[otherCostsFile])) {
         _buttonEditOtherCostsFile->setEnabled(!flag);
         _completeFieldsArr[9] = true;
         updateCalculateButton();
