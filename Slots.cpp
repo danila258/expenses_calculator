@@ -87,7 +87,6 @@ void StudentCalculator::costsFileDialog() {
     }
     else {
         switchButtonMode(6, false);
-        errorDataLoadShow();
     }
 }
 
@@ -105,7 +104,6 @@ void StudentCalculator::instituteFileDialog() {
     }
     else {
         switchButtonMode(7, false);
-        errorDataLoadShow();
     }
 }
 
@@ -123,7 +121,6 @@ void StudentCalculator::transportFileDialog() {
     }
     else {
         switchButtonMode(8, false);
-        errorDataLoadShow();
     }
 }
 
@@ -141,7 +138,6 @@ void StudentCalculator::otherCostsFileDialog() {
     }
     else {
         switchButtonMode(9, false);
-        errorDataLoadShow();
     }
 }
 
