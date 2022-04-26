@@ -16,7 +16,7 @@ public:
     Database() = default;
     explicit Database(int n);
 
-    void storeFile(std::string& filePath, int fileNum);
+    void storeFile(QString& filePath, int fileNum);
     void restoreFile(int fileNum);
 
     fileData& operator[](int i);

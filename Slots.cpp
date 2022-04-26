@@ -74,9 +74,9 @@ void StudentCalculator::caffeEdited(const QString& caffe) {
 }
 
 void StudentCalculator::costsFileDialog() {
-    string costsFilePath = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv").toStdString();
+    QString costsFilePath = QFileDialog::getOpenFileName(this, "Costs File", "", "*.csv");
 
-    if ( costsFilePath.empty() ) {
+    if ( costsFilePath.isEmpty() ) {
         return;
     }
 
@@ -91,9 +91,9 @@ void StudentCalculator::costsFileDialog() {
 }
 
 void StudentCalculator::instituteFileDialog() {
-    string instituteFilePath = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv").toStdString();
+    QString instituteFilePath = QFileDialog::getOpenFileName(this, "Institute File", "", "*.csv");
 
-    if ( instituteFilePath.empty() ) {
+    if ( instituteFilePath.isEmpty() ) {
         return;
     }
 
@@ -108,9 +108,9 @@ void StudentCalculator::instituteFileDialog() {
 }
 
 void StudentCalculator::transportFileDialog() {
-    string transportFilePath = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv").toStdString();
+    QString transportFilePath = QFileDialog::getOpenFileName(this, "Transport File", "", "*.csv");
 
-    if ( transportFilePath.empty() ) {
+    if ( transportFilePath.isEmpty() ) {
         return;
     }
 
@@ -125,9 +125,9 @@ void StudentCalculator::transportFileDialog() {
 }
 
 void StudentCalculator::otherCostsFileDialog() {
-    string otherCostsFilePath = QFileDialog::getOpenFileName(this, "Weekends File", "", "*.csv").toStdString();
+    QString otherCostsFilePath = QFileDialog::getOpenFileName(this, "Weekends File", "", "*.csv");
 
-    if ( otherCostsFilePath.empty() ) {
+    if ( otherCostsFilePath.isEmpty() ) {
         return;
     }
 

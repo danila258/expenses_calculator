@@ -7,15 +7,15 @@ Database::Database(int n) {
     _filesPathes.resize(n);
 }
 
-void Database::storeFile(std::string& filePath, int fileNum) {
-    QFile file(QString::fromStdString(filePath));
+void Database::storeFile(QString& filePath, int fileNum) {
+    QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() << file.errorString();
         return;
     }
     _filesData[fileNum].clear();
 
-    _filesPathes[fileNum] = QString::fromStdString(filePath);
+    _filesPathes[fileNum] = filePath;
 
     QStringList buf;
     QTextStream in(&file);
