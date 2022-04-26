@@ -83,10 +83,10 @@ void StudentCalculator::costsFileDialog() {
     _database.storeFile(costsFilePath, costsFile);
 
     if ( _expenses.costsFileCheck(_database[costsFile]) ) {
-        switchButtonMode(6, true);
+        switchButtonMode(6, true, _buttonEditCostsFile);
     }
     else {
-        switchButtonMode(6, false);
+        switchButtonMode(6, false, _buttonEditCostsFile);
     }
 }
 
@@ -100,10 +100,10 @@ void StudentCalculator::instituteFileDialog() {
     _database.storeFile(instituteFilePath, instituteFile);
 
     if ( _expenses.instituteFileCheck(_database[instituteFile]) ) {
-        switchButtonMode(7, true);
+        switchButtonMode(7, true, _buttonEditInstituteFile);
     }
     else {
-        switchButtonMode(7, false);
+        switchButtonMode(7, false, _buttonEditInstituteFile);
     }
 }
 
@@ -117,10 +117,10 @@ void StudentCalculator::transportFileDialog() {
     _database.storeFile(transportFilePath, transportFile);
 
     if ( _expenses.transportFileCheck(_database[transportFile]) ) {
-        switchButtonMode(8, true);
+        switchButtonMode(8, true, _buttonEditTransportFile);
     }
     else {
-        switchButtonMode(8, false);
+        switchButtonMode(8, false, _buttonEditTransportFile);
     }
 }
 
@@ -134,10 +134,10 @@ void StudentCalculator::otherCostsFileDialog() {
     _database.storeFile(otherCostsFilePath, otherCostsFile);
 
     if ( _expenses.cafeCinemaFileCheck(_database[otherCostsFile]) ) {
-        switchButtonMode(9, true);
+        switchButtonMode(9, true, _buttonEditOtherCostsFile);
     }
     else {
-        switchButtonMode(9, false);
+        switchButtonMode(9, false, _buttonEditOtherCostsFile);
     }
 }
 

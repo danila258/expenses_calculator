@@ -64,7 +64,7 @@ private:
 
     void updateCalculateButton();
     void calculateButtonFlag(int index, bool flag);
-    void switchButtonMode(int index, bool flag);
+    void switchButtonMode(int index, bool flag, QPushButton* button);
 
     void errorDataLoadShow(const QVector<QString>& dataLoudErrors);
     void errorDataLoadShow();
