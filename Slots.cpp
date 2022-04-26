@@ -4,7 +4,8 @@ void StudentCalculator::startCalculate() {
     Student student(_age, _city, _address, _institute, _cafe, _cinema);
     // TODO make Student a field of StudentCalculator.h
 
-    StudentExpenses exp(student, _database[0], _database[1], _database[2], _database[3]);
+    _expenses = StudentExpenses(student, _database[0], _database[1], _database[2], _database[3]);
+    StudentExpenses& exp = _expenses;
 
     if ( !exp.errors.empty() ) {
         errorDataLoadShow(exp.errors);
@@ -89,9 +90,14 @@ void StudentCalculator::costsFileDialog() {
 
     _database.storeFile(costsFilePath, costsFile);
 
-    _buttonEditCostsFile->setEnabled(!flag);
-    _completeFieldsArr[6] = true;
-    updateCalculateButton();
+    if (_expenses.costsFileCheck(_database[costsFile])) {
+        _buttonEditCostsFile->setEnabled(!flag);
+        _completeFieldsArr[6] = true;
+        updateCalculateButton();
+    }
+    else {
+        // TODO show error file format
+    }
 }
 
 void StudentCalculator::instituteFileDialog() {
@@ -104,9 +110,14 @@ void StudentCalculator::instituteFileDialog() {
 
     _database.storeFile(instituteFilePath, instituteFile);
 
-    _buttonEditInstituteFile->setEnabled(!flag);
-    _completeFieldsArr[7] = true;
-    updateCalculateButton();
+    if (_expenses.costsFileCheck(_database[instituteFile])) {
+        _buttonEditInstituteFile->setEnabled(!flag);
+        _completeFieldsArr[7] = true;
+        updateCalculateButton();
+    }
+    else {
+        // TODO show error file format
+    }
 }
 
 void StudentCalculator::transportFileDialog() {
@@ -119,9 +130,14 @@ void StudentCalculator::transportFileDialog() {
 
     _database.storeFile(transportFilePath, transportFile);
 
-    _buttonEditTransportFile->setEnabled(!flag);
-    _completeFieldsArr[8] = true;
-    updateCalculateButton();
+    if (_expenses.costsFileCheck(_database[transportFile])) {
+        _buttonEditTransportFile->setEnabled(!flag);
+        _completeFieldsArr[8] = true;
+        updateCalculateButton();
+    }
+    else {
+        // TODO show error file format
+    }
 }
 
 void StudentCalculator::otherCostsFileDialog() {
@@ -134,9 +150,14 @@ void StudentCalculator::otherCostsFileDialog() {
 
     _database.storeFile(otherCostsFilePath, otherCostsFile);
 
-    _buttonEditOtherCostsFile->setEnabled(!flag);
-    _completeFieldsArr[9] = true;
-    updateCalculateButton();
+    if (_expenses.costsFileCheck(_database[otherCostsFile])) {
+        _buttonEditOtherCostsFile->setEnabled(!flag);
+        _completeFieldsArr[9] = true;
+        updateCalculateButton();
+    }
+    else {
+        // TODO show error file format
+    }
 }
 
 void StudentCalculator::editCostsFile() {

@@ -13,8 +13,14 @@ typedef QVector<QStringList> fileData;
 
 struct StudentExpenses {
 public:
+    StudentExpenses() = default;
     StudentExpenses(Student& student, fileData& costs, fileData& institute,
                     fileData& transport, fileData& cafeCinema);
+
+    bool costsFileCheck(fileData& data);
+    bool instituteFileCheck(fileData& data);
+    bool transportFileCheck(fileData& data);
+    bool cafeCinemaFileCheck(fileData& data);
 
     void findCosts(Student& student, fileData& data);
     void findInstitute(Student &student, fileData& data);
@@ -29,6 +35,9 @@ public:
     int _cinemaCost{};
 
     QVector<QString> errors;
+
+private:
+    bool checkColumnsNum(fileData& data, int i) const;
 };
 
 

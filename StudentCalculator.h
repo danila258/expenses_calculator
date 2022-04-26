@@ -17,10 +17,13 @@ using std::string;
 #define countFiles 4
 #define countCheckedFields 10
 
-#define costsFile 0
-#define instituteFile 1
-#define transportFile 2
-#define otherCostsFile 3
+//#define costsFile 0
+//#define instituteFile 1
+//#define transportFile 2
+//#define otherCostsFile 3
+// use define is a bad practice!
+
+enum files { costsFile, instituteFile, transportFile, otherCostsFile };
 
 
 class StudentCalculator : public QWidget {
@@ -57,6 +60,7 @@ private slots:
     
 private:
     Database _database;
+    StudentExpenses _expenses;
 
     QWidget* fileChoiceWidget();
     QWidget* studentInputWidget();
@@ -87,6 +91,7 @@ private:
     string _institute;
     string _cinema;
     string _cafe;
+    // TODO student field
 
     std::vector<bool> _completeFieldsArr;
 

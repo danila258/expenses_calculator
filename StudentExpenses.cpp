@@ -8,6 +8,31 @@ StudentExpenses::StudentExpenses(Student& student, fileData& costs, fileData& in
     findCafeCinema(student, cafeCinema);
 }
 
+bool StudentExpenses::checkColumnsNum(fileData& data, int n) const {
+    for (int i = 0; i < data.size(); ++i) {
+        if (data[i].size() != n) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool StudentExpenses::costsFileCheck(fileData& data) {
+    return checkColumnsNum(data, 4);
+}
+
+bool StudentExpenses::instituteFileCheck(fileData& data) {
+    return checkColumnsNum(data, 3);
+}
+
+bool StudentExpenses::transportFileCheck(fileData& data) {
+    return checkColumnsNum(data, 4);
+}
+
+bool StudentExpenses::cafeCinemaFileCheck(fileData& data) {
+    return checkColumnsNum(data, 6);
+}
+
 void StudentExpenses::findCosts(Student& student, fileData& data) {
     bool find = false;
     for (int i = 0; i < data.size(); ++i) {
