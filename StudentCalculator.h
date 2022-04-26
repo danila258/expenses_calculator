@@ -62,8 +62,9 @@ private:
     QTabWidget* tabWidget();
     QPushButton* calculateButton();
 
-    void switchButtonMode(int index, bool flag);
     void updateCalculateButton();
+    void calculateButtonFlag(int index, bool flag);
+    void switchButtonMode(int index, bool flag);
 
     void errorDataLoadShow(const QVector<QString>& dataLoudErrors);
     void errorDataLoadShow();

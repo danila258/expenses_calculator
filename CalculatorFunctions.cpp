@@ -66,6 +66,11 @@ bool StudentCalculator::fileEditWidgetShow(QVector<QStringList>& _file) {
 }
 
 void StudentCalculator::switchButtonMode(int index, bool flag) {
+    calculateButtonFlag(index, flag);
+    errorDataLoadShow();
+}
+
+void StudentCalculator::calculateButtonFlag(int index, bool flag) {
     _buttonEditCostsFile->setEnabled(flag);
     _completeFieldsArr[index] = flag;
     updateCalculateButton();

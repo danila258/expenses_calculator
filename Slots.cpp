@@ -32,7 +32,7 @@ void StudentCalculator::startCalculate() {
 
 void StudentCalculator::regulateAgeSpinBox(int mode) {
     _ageSpinBox->setEnabled(mode);
-    _calculateAgeFlag = (mode) != 0;
+    _calculateAgeFlag = mode;
 }
 
 void StudentCalculator::ageEdited(int age) {
@@ -45,38 +45,32 @@ void StudentCalculator::monthEdited(int month) {
 
 void StudentCalculator::nameEdited(const QString& name) {
     _student._name = name.toStdString();
-    _completeFieldsArr[0] = !(_student._name.empty());
-    updateCalculateButton();
+    calculateButtonFlag(0, !_student._name.empty());
 }
 
 void StudentCalculator::cityEdited(const QString& city) {
     _student._city = city.toStdString();
-    _completeFieldsArr[1] = !(_student._city.empty());
-    updateCalculateButton();
+    calculateButtonFlag(1, !_student._city.empty());
 }
 
 void StudentCalculator::addressEdited(const QString& address) {
     _student._address = address.toStdString();
-    _completeFieldsArr[2] = !(_student._address.empty());
-    updateCalculateButton();
+    calculateButtonFlag(2, !_student._address.empty());
 }
 
 void StudentCalculator::instituteEdited(const QString& institute) {
     _student._institute = institute.toStdString();
-    _completeFieldsArr[3] = !(_student._institute.empty());
-    updateCalculateButton();
+    calculateButtonFlag(3, !_student._institute.empty());
 }
 
 void StudentCalculator::cinemaEdited(const QString& cinema) {
     _student._cinema = cinema.toStdString();
-    _completeFieldsArr[4] = !(_student._cinema.empty());
-    updateCalculateButton();
+    calculateButtonFlag(4, !_student._cinema.empty());
 }
 
 void StudentCalculator::caffeEdited(const QString& caffe) {
     _student._cafe = caffe.toStdString();
-    _completeFieldsArr[5] = !(_student._cafe.empty());
-    updateCalculateButton();
+    calculateButtonFlag(5, !_student._cafe.empty());
 }
 
 void StudentCalculator::costsFileDialog() {
