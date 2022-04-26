@@ -1,7 +1,7 @@
 #include "StudentCalculator.h"
 
 void StudentCalculator::startCalculate() {
-    Student student(_age, _city, _address, _institute, _cafe, _cinema);
+    Student student(_student._age, _student._city, _student._address, _student._institute, _student._cafe, _student._cinema);
     // TODO make Student a field of StudentCalculator.h
 
     _expenses = StudentExpenses(student, _database[0], _database[1], _database[2], _database[3]);
@@ -37,7 +37,7 @@ void StudentCalculator::regulateAgeSpinBox(int mode) {
 }
 
 void StudentCalculator::ageEdited(int age) {
-    _age = age;
+    _student._age = age;
 }
 
 void StudentCalculator::monthEdited(int month) {
@@ -45,38 +45,38 @@ void StudentCalculator::monthEdited(int month) {
 }
 
 void StudentCalculator::nameEdited(const QString& name) {
-    _name = name.toStdString();
-    _completeFieldsArr[0] = !(_name.empty());
+    _student._name = name.toStdString();
+    _completeFieldsArr[0] = !(_student._name.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::cityEdited(const QString& city) {
-    _city = city.toStdString();
-    _completeFieldsArr[1] = !(_city.empty());
+    _student._city = city.toStdString();
+    _completeFieldsArr[1] = !(_student._city.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::addressEdited(const QString& address) {
-    _address = address.toStdString();
-    _completeFieldsArr[2] = !(_address.empty());
+    _student._address = address.toStdString();
+    _completeFieldsArr[2] = !(_student._address.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::instituteEdited(const QString& institute) {
-    _institute = institute.toStdString();
-    _completeFieldsArr[3] = !(_institute.empty());
+    _student._institute = institute.toStdString();
+    _completeFieldsArr[3] = !(_student._institute.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::cinemaEdited(const QString& cinema) {
-    _cinema = cinema.toStdString();
-    _completeFieldsArr[4] = !(_cinema.empty());
+    _student._cinema = cinema.toStdString();
+    _completeFieldsArr[4] = !(_student._cinema.empty());
     updateCalculateButton();
 }
 
 void StudentCalculator::caffeEdited(const QString& caffe) {
-    _cafe = caffe.toStdString();
-    _completeFieldsArr[5] = !(_cafe.empty());
+    _student._cafe = caffe.toStdString();
+    _completeFieldsArr[5] = !(_student._cafe.empty());
     updateCalculateButton();
 }
 

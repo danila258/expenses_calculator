@@ -21,7 +21,7 @@ using std::string;
 //#define instituteFile 1
 //#define transportFile 2
 //#define otherCostsFile 3
-// use define is a bad practice!
+// use define is a bad practice
 
 enum files { costsFile, instituteFile, transportFile, otherCostsFile };
 
@@ -59,6 +59,7 @@ private slots:
     void startCalculate();
     
 private:
+    Student _student;
     Database _database;
     StudentExpenses _expenses;
 
@@ -82,16 +83,7 @@ private:
 
     QPushButton* _calculateButton;
 
-    int _age;
     int _month;
-
-    string _name;
-    string _city;
-    string _address;
-    string _institute;
-    string _cinema;
-    string _cafe;
-    // TODO student field
 
     std::vector<bool> _completeFieldsArr;
 

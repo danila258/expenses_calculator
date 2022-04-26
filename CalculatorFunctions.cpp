@@ -43,7 +43,7 @@ void StudentCalculator::errorDataLoadShow(const QVector<QString>& dataLoudErrors
 }
 
 void StudentCalculator::studentMoneyShow(int sum) {
-    QString line = "The " + QString::fromStdString(_name) + " spend " + QString::number(sum) + " rubles";
+    QString line = "The " + QString::fromStdString(_student._name) + " spend " + QString::number(sum) + " rubles";
 
     QMessageBox* studentMoney = new QMessageBox(QMessageBox::Information, " ", line,
                                                 QMessageBox::Ok, this);

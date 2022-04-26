@@ -5,12 +5,14 @@
 
 struct Student {
 public:
+    Student() = default;
     Student(int age, std::string& city, std::string& address, std::string& institute,
             std::string cafe, std::string cinema) :
             _age(age), _city(city), _address(address), _institute(institute), _cafe(cafe), _cinema(cinema) {
     }
 
     int _age;
+    std::string _name;
     std::string _city;
     std::string _address;
     std::string _institute;
