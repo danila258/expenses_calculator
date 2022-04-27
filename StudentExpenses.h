@@ -7,8 +7,6 @@
 #include <QVector>
 #include <QString>
 
-//#include <algorithm>
-
 typedef QVector<QStringList> fileData;
 
 struct StudentExpenses {

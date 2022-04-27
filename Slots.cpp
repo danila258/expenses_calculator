@@ -1,9 +1,7 @@
 #include "StudentCalculator.h"
 
 void StudentCalculator::startCalculate() {
-    Student student(_student._age, _student._city, _student._address, _student._institute, _student._cafe, _student._cinema);
-
-    _expenses = StudentExpenses(student, _database[0], _database[1], _database[2], _database[3]);
+    _expenses = StudentExpenses(_student, _database[0], _database[1], _database[2], _database[3]);
     StudentExpenses& exp = _expenses;
 
     if ( !exp.errors.empty() ) {
@@ -87,6 +85,7 @@ void StudentCalculator::costsFileDialog() {
     }
     else {
         switchButtonMode(6, false, _buttonEditCostsFile);
+        _database.clearData(costsFile);
     }
 }
 
@@ -104,6 +103,7 @@ void StudentCalculator::instituteFileDialog() {
     }
     else {
         switchButtonMode(7, false, _buttonEditInstituteFile);
+        _database.clearData(instituteFile);
     }
 }
 
@@ -121,6 +121,7 @@ void StudentCalculator::transportFileDialog() {
     }
     else {
         switchButtonMode(8, false, _buttonEditTransportFile);
+        _database.clearData(transportFile);
     }
 }
 
@@ -138,6 +139,7 @@ void StudentCalculator::otherCostsFileDialog() {
     }
     else {
         switchButtonMode(9, false, _buttonEditOtherCostsFile);
+        _database.clearData(otherCostsFile);
     }
 }
 

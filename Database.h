@@ -21,6 +21,8 @@ public:
 
     fileData& operator[](int i);
 
+    void clearData(int fileNum);
+
 
 private:
     std::vector<fileData> _filesData;

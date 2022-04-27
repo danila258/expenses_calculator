@@ -50,3 +50,8 @@ void Database::restoreFile(int fileNum) {
 fileData& Database::operator[](int i) {
     return _filesData[i];
 }
+
+void Database::clearData(int fileNum) {
+    _filesData[fileNum].clear();
+    _filesPathes[fileNum].clear();
+}

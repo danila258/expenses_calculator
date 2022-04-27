@@ -18,19 +18,31 @@ bool StudentExpenses::checkColumnsNum(fileData& data, int n) const {
 }
 
 bool StudentExpenses::costsFileCheck(fileData& data) {
-    return checkColumnsNum(data, 4);
+    if (data[0].join(",") == "City,Age,Average food cost per month,Other costs") {
+        return checkColumnsNum(data, 4);
+    }
+    return false;
 }
 
 bool StudentExpenses::instituteFileCheck(fileData& data) {
-    return checkColumnsNum(data, 3);
+    if (data[0].join(",") == "City,Institute,Dinner cost") {
+        return checkColumnsNum(data, 3);
+    }
+    return false;
 }
 
 bool StudentExpenses::transportFileCheck(fileData& data) {
-    return checkColumnsNum(data, 4);
+    if (data[0].join(",") == "City,District,Institute,Transport cost") {
+        return checkColumnsNum(data, 4);
+    }
+    return false;
 }
 
 bool StudentExpenses::cafeCinemaFileCheck(fileData& data) {
-    return checkColumnsNum(data, 6);
+    if (data[0].join(",") == "City,Address,Caffe,Average caffe cost,Cinema,Cinema cost") {
+        return checkColumnsNum(data, 6);
+    }
+    return false;
 }
 
 void StudentExpenses::findCosts(Student& student, fileData& data) {
