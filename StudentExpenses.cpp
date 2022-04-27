@@ -45,6 +45,7 @@ bool StudentExpenses::cafeCinemaFileCheck(fileData& data) {
     return false;
 }
 
+// TODO display data which I didn't find at all
 void StudentExpenses::findCosts(Student& student, fileData& data) {
     bool find = false;
     for (int i = 0; i < data.size(); ++i) {
