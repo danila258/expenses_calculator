@@ -2,7 +2,6 @@
 #define DATABASE_H
 
 #include "Student.h"
-#include <string>
 #include <vector>
 #include <QFile>
 #include <QStringList>

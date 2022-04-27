@@ -1,5 +1,4 @@
 #include "StudentCalculator.h"
-#include <QTimer>
 
 StudentCalculator::~StudentCalculator() {
     delete _ageSpinBox;

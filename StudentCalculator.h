@@ -3,14 +3,11 @@
 
 #include <QtWidgets>
 #include <QApplication>
-#include <string>
 
 #include "Database.h"
 #include "Student.h"
 #include "StudentExpenses.h"
 #include "FileEditWidget.h"
-
-using std::string;
 
 #define ageByDefault 18
 
