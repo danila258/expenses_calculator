@@ -42,12 +42,12 @@ void StudentCalculator::errorDataLoadShow(const QVector<QString>& dataLoudErrors
 }
 
 void StudentCalculator::errorDataLoadShow() {
-    QVector<QString> errorsVector = {"File browsing error."};
+    QVector<QString> errorsVector = {"File structure error."};
     errorDataLoadShow(errorsVector);
 }
 
 void StudentCalculator::studentMoneyShow(int sum) {
-    QString line = "The " + _student._name + " spend " + QString::number(sum) + " rubles";
+    QString line = "Student " + _student._name + " spend " + QString::number(sum) + " rubles";
 
     QMessageBox* studentMoney = new QMessageBox(QMessageBox::Information, " ", line,
                                                 QMessageBox::Ok, this);
