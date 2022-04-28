@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QVector>
 #include <QString>
+#include <QDebug>
 
 typedef QVector<QStringList> fileData;
 
