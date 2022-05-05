@@ -4,9 +4,10 @@ void StudentCalculator::startCalculate() {
     _expenses = StudentExpenses(_student, _database[0], _database[1], _database[2], _database[3]);
     StudentExpenses& exp = _expenses;
 
-    if ( !exp.errors.empty() ) {
-        errorDataLoadShow(exp.errors);
-    }
+//    if ( !exp.errors.empty() ) {
+//        errorDataLoadShow(exp.errors);
+//    }
+//    catch there
 
     const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     const int workdays[] = {16, 19, 22, 21, 18, 21, 21, 23, 22, 21, 21, 22};
@@ -14,9 +15,9 @@ void StudentCalculator::startCalculate() {
     int workdaysCost = workdays[_month] * (exp._instituteFoodCost + 2 * exp._transportCost);
     int weekdaysCost = (daysInMonth[_month] - workdays[_month]) * (exp._cinemaCost + exp._cafeCost);
 
-    if ( !exp.errors.empty() ) {
-        return;
-    }
+//    if ( !exp.errors.empty() ) {
+//        return;
+//    }
 
     if (_calculateAgeFlag) {
         studentMoneyShow(weekdaysCost + workdaysCost + exp._avgFoodCost + exp._otherCost);

@@ -3,6 +3,7 @@
 
 #include "Student.h"
 #include <vector>
+#include <exception>
 #include <QFile>
 #include <QStringList>
 #include <QTextStream>
@@ -22,10 +23,12 @@ public:
 
     void clearData(int fileNum);
 
-
 private:
     std::vector<fileData> _filesData;
     std::vector<QString> _filesPathes;
 };
 
 #endif //DATABASE_H
+
+// GET HEADER
+// FIND

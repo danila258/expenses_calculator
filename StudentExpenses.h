@@ -33,10 +33,9 @@ public:
     int _cafeCost{};
     int _cinemaCost{};
 
-    QVector<QString> errors;
-
 private:
     bool checkColumnsNum(fileData& data, int i) const;
+    QVector<QString> errors;
 };
 
 

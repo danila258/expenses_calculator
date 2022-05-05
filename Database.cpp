@@ -11,7 +11,8 @@ void Database::storeFile(QString& filePath, int fileNum) {
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() << file.errorString();
-        return;
+//        return;
+        throw "File open error";
     }
     _filesData[fileNum].clear();
 
@@ -33,7 +34,8 @@ void Database::restoreFile(int fileNum) {
     QFile file(_filesPathes[fileNum]);
     if (!file.open(QIODevice::WriteOnly)) {
         qDebug() << file.errorString();
-        return;
+//        return;
+        throw "File open error";
     }
     for (int i = 0; i < _filesData[fileNum].size(); ++i) {
         for (int j = 0; j < _filesData[fileNum][j].size(); ++j) {

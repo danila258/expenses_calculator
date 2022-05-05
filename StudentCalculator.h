@@ -16,7 +16,6 @@
 
 enum files { costsFile, instituteFile, transportFile, otherCostsFile };
 
-
 class StudentCalculator : public QWidget {
     Q_OBJECT
 
