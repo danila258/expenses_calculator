@@ -1,13 +1,15 @@
 #include "StudentCalculator.h"
 
 void StudentCalculator::startCalculate() {
-    _expenses = StudentExpenses(_student, _database[0], _database[1], _database[2], _database[3]);
-    StudentExpenses& exp = _expenses;
+    try {
+        _expenses = StudentExpenses(_student, _database[0], _database[1], _database[2], _database[3]);
+    }
+    catch (QVector<QString>& error) {
+        errorDataLoadShow(error);
+        return;
+    }
 
-//    if ( !exp.errors.empty() ) {
-//        errorDataLoadShow(exp.errors);
-//    }
-//    catch there
+    StudentExpenses& exp = _expenses;
 
     const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     const int workdays[] = {16, 19, 22, 21, 18, 21, 21, 23, 22, 21, 21, 22};
@@ -15,18 +17,12 @@ void StudentCalculator::startCalculate() {
     int workdaysCost = workdays[_month] * (exp._instituteFoodCost + 2 * exp._transportCost);
     int weekdaysCost = (daysInMonth[_month] - workdays[_month]) * (exp._cinemaCost + exp._cafeCost);
 
-//    if ( !exp.errors.empty() ) {
-//        return;
-//    }
-
     if (_calculateAgeFlag) {
         studentMoneyShow(weekdaysCost + workdaysCost + exp._avgFoodCost + exp._otherCost);
     }
     else {
         studentMoneyShow(weekdaysCost + workdaysCost + 15000 + exp._otherCost);
     }
-
-    exp.errors.clear();
 }
 
 void StudentCalculator::regulateAgeSpinBox(int mode) {
@@ -79,9 +75,15 @@ void StudentCalculator::costsFileDialog() {
         return;
     }
 
-    _database.storeFile(costsFilePath, costsFile);
+    bool flag = true;
+    try {
+        _database.storeFile(costsFilePath, costsFile);
+    }
+    catch (string& line) {
+        flag = false;
+    }
 
-    if ( _expenses.costsFileCheck(_database[costsFile]) ) {
+    if ( _expenses.costsFileCheck(_database[costsFile]) && flag ) {
         switchButtonMode(6, true, _buttonEditCostsFile);
     }
     else {
@@ -97,9 +99,15 @@ void StudentCalculator::instituteFileDialog() {
         return;
     }
 
-    _database.storeFile(instituteFilePath, instituteFile);
+    bool flag = true;
+    try {
+        _database.storeFile(instituteFilePath, instituteFile);
+    }
+    catch (string& line) {
+        flag = false;
+    }
 
-    if ( _expenses.instituteFileCheck(_database[instituteFile]) ) {
+    if ( _expenses.instituteFileCheck(_database[instituteFile]) && flag ) {
         switchButtonMode(7, true, _buttonEditInstituteFile);
     }
     else {
@@ -115,9 +123,15 @@ void StudentCalculator::transportFileDialog() {
         return;
     }
 
-    _database.storeFile(transportFilePath, transportFile);
+    bool flag = true;
+    try {
+        _database.storeFile(transportFilePath, transportFile);
+    }
+    catch (string& line) {
+        flag = false;
+    }
 
-    if ( _expenses.transportFileCheck(_database[transportFile]) ) {
+    if ( _expenses.transportFileCheck(_database[transportFile]) && flag ) {
         switchButtonMode(8, true, _buttonEditTransportFile);
     }
     else {
@@ -133,9 +147,15 @@ void StudentCalculator::otherCostsFileDialog() {
         return;
     }
 
-    _database.storeFile(otherCostsFilePath, otherCostsFile);
+    bool flag = true;
+    try {
+        _database.storeFile(otherCostsFilePath, otherCostsFile);
+    }
+    catch (string& line) {
+        flag = false;
+    }
 
-    if ( _expenses.cafeCinemaFileCheck(_database[otherCostsFile]) ) {
+    if ( _expenses.cafeCinemaFileCheck(_database[otherCostsFile]) && flag ) {
         switchButtonMode(9, true, _buttonEditOtherCostsFile);
     }
     else {

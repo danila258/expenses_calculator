@@ -9,6 +9,8 @@ StudentExpenses::   StudentExpenses(Student& student, fileData& costs, fileData&
     if (!errors.isEmpty()) {
         throw errors;
     }
+
+    errors.clear();
 }
 
 bool StudentExpenses::checkColumnsNum(fileData& data, int n) const {
@@ -24,28 +26,24 @@ bool StudentExpenses::costsFileCheck(fileData& data) {
     if (data[0].join(",") == "City,Age,Average food cost per month,Other costs") {
         return checkColumnsNum(data, 4);
     }
-    return "Invalid columns number.";
 }
 
 bool StudentExpenses::instituteFileCheck(fileData& data) {
     if (data[0].join(",") == "City,Institute,Dinner cost") {
         return checkColumnsNum(data, 3);
     }
-    return "Invalid columns number.";
 }
 
 bool StudentExpenses::transportFileCheck(fileData& data) {
     if (data[0].join(",") == "City,District,Institute,Transport cost") {
         return checkColumnsNum(data, 4);
     }
-    return "Invalid columns number.";
 }
 
 bool StudentExpenses::cafeCinemaFileCheck(fileData& data) {
     if (data[0].join(",") == "City,Address,Caffe,Average caffe cost,Cinema,Cinema cost") {
         return checkColumnsNum(data, 6);
     }
-    throw "Invalid columns number.";
 }
 
 // TODO display data which I didn't find at all
