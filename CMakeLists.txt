@@ -11,7 +11,7 @@ find_package(
         Widgets
         REQUIRED)
 
-add_executable(student-calculator main.cpp UI.cpp StudentCalculator.h Database.cpp Database.h Student.h
+add_executable(student-calculator main.cpp UI.cpp StudentCalculator.h Parcer.cpp Parcer.h Student.h
         Slots.cpp CalculatorFunctions.cpp FileEditWidget.cpp FileEditWidget.h StudentExpenses.cpp StudentExpenses.h)
 
 target_link_libraries(

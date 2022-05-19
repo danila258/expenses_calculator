@@ -11,13 +11,15 @@
 
 typedef QVector<QStringList> fileData;
 
-class Database {
+class Parcer {
 public:
-    Database() = default;
-    explicit Database(int n);
+    Parcer() = default;
+    explicit Parcer(int n);
 
     void storeFile(QString& filePath, int fileNum);
     void restoreFile(int fileNum);
+
+    static QVector<QString> findData(fileData& data, QVector<QString> toFind);
 
     fileData& operator[](int i);
 

@@ -48,36 +48,15 @@ bool StudentExpenses::cafeCinemaFileCheck(fileData& data) {
 
 // TODO display data which I didn't find at all
 void StudentExpenses::findCosts(Student& student, fileData& data) {
-    bool find = false;
-    bool city = false;
-    bool age = false;
-
-    for (int i = 0; i < data.size(); ++i) {
-        if (std::find(data[i].begin(), data[i].end(), student._city) != data[i].end()
-            && std::find(data[i].begin(), data[i].end(), QString::number(student._age)) != data[i].end()) {
-            find = true;
-            _avgFoodCost = data[i][2].toInt();
-            _otherCost = data[i][3].toInt();
-        }
-        if (std::find(data[i].begin(), data[i].end(), student._city) != data[i].end()) {
-            city = true;
-        }
-        if (std::find(data[i].begin(), data[i].end(), QString::number(student._age)) != data[i].end()) {
-            age = true;
-        }
+    QVector<QString> toFind = {student._city, QString::number(student._age)};
+    try {
+        QVector<QString> costs = Parcer::findData(data, toFind);
+        _avgFoodCost = costs[0].toInt();
+        _otherCost = costs[1].toInt();
+        qDebug() << costs;
     }
-    QString buf;
-    if (!find) {
-        buf += "Costs file error.";
-    }
-    if (!city) {
-        buf +=" City was not found.";
-    }
-    if (!age) {
-        buf +=" Age was not found.";
-    }
-    if (!buf.isEmpty()) {
-        errors.push_back(buf);
+    catch (const QString& error) {
+        errors.push_back(error + "in costs");
     }
     qDebug() << errors;
 }

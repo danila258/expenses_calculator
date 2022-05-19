@@ -1,13 +1,13 @@
-#include "Database.h"
+#include "Parcer.h"
 
 // TODO rewrite all for to iterators
 
-Database::Database(int n) {
+Parcer::Parcer(int n) {
     _filesData.resize(n);
     _filesPathes.resize(n);
 }
 
-void Database::storeFile(QString& filePath, int fileNum) {
+void Parcer::storeFile(QString& filePath, int fileNum) {
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() << file.errorString();
@@ -30,7 +30,7 @@ void Database::storeFile(QString& filePath, int fileNum) {
     qDebug() << _filesData[fileNum];
 }
 
-void Database::restoreFile(int fileNum) {
+void Parcer::restoreFile(int fileNum) {
     QFile file(_filesPathes[fileNum]);
     if (!file.open(QIODevice::WriteOnly)) {
         qDebug() << file.errorString();
@@ -49,11 +49,35 @@ void Database::restoreFile(int fileNum) {
     qDebug() << _filesData[fileNum];
 }
 
-fileData& Database::operator[](int i) {
+QVector<QString> Parcer::findData(fileData& data, QVector<QString> toFind) {
+    QVector<QString> output;
+    for (int i = 0; i < data.size(); ++i) {
+        bool flag = true;
+        for (QString str : toFind) {
+            if (std::find(data[i].begin(), data[i].end(), str) == data[i].end()) {
+                flag = false;
+            }
+        }
+        if (flag) {
+            for (int j = 0; j < data[i].size(); ++j) {
+                if (std::find(toFind.begin(), toFind.end(), data[i][j]) == toFind.end()) {
+                    output.push_back(data[i][j]);
+                }
+            }
+        }
+    }
+    if (output.empty()) {
+        throw "Can't find data. ";
+    }
+    return output;
+}
+
+
+fileData& Parcer::operator[](int i) {
     return _filesData[i];
 }
 
-void Database::clearData(int fileNum) {
+void Parcer::clearData(int fileNum) {
     _filesData[fileNum].clear();
     _filesPathes[fileNum].clear();
 }

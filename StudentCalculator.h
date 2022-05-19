@@ -4,7 +4,7 @@
 #include <QtWidgets>
 #include <QApplication>
 
-#include "Database.h"
+#include "Parcer.h"
 #include "Student.h"
 #include "StudentExpenses.h"
 #include "FileEditWidget.h"
@@ -50,7 +50,7 @@ private slots:
     
 private:
     Student _student;
-    Database _database;
+    Parcer _database;
     StudentExpenses _expenses;
 
     QWidget* fileChoiceWidget();
