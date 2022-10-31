@@ -1,29 +1,22 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include <string>
-#include "Database.h"
+#include <QString>
 
-using std::string;
-
-class Student {
+struct Student {
 public:
-    Student(size_t age, const string& city, const string& address, const string& institute,
-            const string& cinema, const string& caffe, const Database& data);
+    Student() = default;
+    Student(int age, QString& city, QString& address, QString& institute, QString cafe, QString cinema) :
+            _age(age), _city(city), _address(address), _institute(institute), _cafe(cafe), _cinema(cinema) {
+    }
 
-    size_t getWeekendCost() const;
-    size_t getWorkdayCost() const;
-    size_t getCosts(size_t month) const;
-
-private:
-    size_t _age;
-    string _city;
-    string _address;
-    string _institute;
-    string _cinema;
-    string _caffe;
-
-    Database _data;
+    int _age;
+    QString _name;
+    QString _city;
+    QString _address;
+    QString _institute;
+    QString _cafe;
+    QString _cinema;
 };
 
 #endif //STUDENT_H

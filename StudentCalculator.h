@@ -2,65 +2,85 @@
 #define STUDENTCALCULATOR_H
 
 #include <QtWidgets>
-#include "Database.h"
-#include "Student.h"
+#include <QApplication>
 
-#include <string>
-using std::string;
+#include "Parcer.h"
+#include "Student.h"
+#include "StudentExpenses.h"
+#include "FileEditWidget.h"
+
+#define ageByDefault 18
+
+#define countFiles 4
+#define countCheckedFields 10
+
+enum files { costsFile, instituteFile, transportFile, otherCostsFile };
 
 class StudentCalculator : public QWidget {
     Q_OBJECT
 
 public:
-    StudentCalculator(QWidget* parent = nullptr);
+    explicit StudentCalculator(QWidget* parent = nullptr);
+    ~StudentCalculator() override;
 
 private slots:
-    void calculateButtonClicked();
 
-    void ageEdited(const QString& age);
-    void monthEdited(const QString& month);
+    void ageEdited(int age);
+    void regulateAgeSpinBox(int mode);
+
+    void monthEdited(int month);
+    void nameEdited(const QString& name);
     void cityEdited(const QString& city);
     void addressEdited(const QString& address);
     void instituteEdited(const QString& institute);
     void cinemaEdited(const QString& cinema);
     void caffeEdited(const QString& caffe);
 
-    void costsFileEdited(const QString& costsFile);
-    void instituteFileEdited(const QString& instituteFile);
-    void transportFileEdited(const QString& transportFile);
-    void caffeCinemaFileEdited(const QString& caffeCinemaFile);
-    
-private:
-    QWidget* fileChoiceWidget();
-    QWidget* studentInfoWidget();
-    QWidget* tabWidget();
-    QWidget* calculateButton();
+    void costsFileDialog();
+    void instituteFileDialog();
+    void transportFileDialog();
+    void otherCostsFileDialog();
 
-    void errorAgeMonthShow();
-    void errorFileShow();
-    void errorInputShow();
-    void studentMoneyShow(size_t count);
+    void editCostsFile();
+    void editInstituteFile();
+    void editTransportFile();
+    void editCaffeCinemaFile();
 
     void startCalculate();
-    bool inputInspection();
+    
+private:
+    Student _student;
+    Parcer _database;
+    StudentExpenses _expenses;
 
-    QWidget* _messagePosition;
+    QWidget* fileChoiceWidget();
+    QWidget* studentInputWidget();
+    QTabWidget* tabWidget();
+    QPushButton* calculateButton();
 
-    string _age;
-    string _month;
-    string _city;
-    string _address;
-    string _institute;
-    string _cinema;
-    string _caffe;
+    void updateCalculateButton();
+    void calculateButtonFlag(int index, bool flag);
+    void switchButtonMode(int index, bool flag, QPushButton* button);
 
-    size_t _ageI;
-    size_t _monthI;
+    void errorDataLoadShow(const QVector<QString>& dataLoudErrors);
+    void errorDataLoadShow();
+    void studentMoneyShow(int sum);
+    bool fileEditWidgetShow (QVector<QStringList>& _file);
 
-    string _costsFile;
-    string _instituteFile;
-    string _transportFile;
-    string _caffeCinemaFile;
+    QSpinBox* _ageSpinBox;
+
+    QPushButton* _buttonEditCostsFile;
+    QPushButton* _buttonEditInstituteFile;
+    QPushButton* _buttonEditTransportFile;
+    QPushButton* _buttonEditOtherCostsFile;
+
+    QPushButton* _calculateButton;
+
+    int _month;
+
+    std::vector<bool> _completeFieldsArr;
+
+    bool _calculateAgeFlag = true;
 };
 
 
