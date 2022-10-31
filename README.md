@@ -1,4 +1,4 @@
-# expense_calculator
+# Expense Calculator
 
 A cross-platform application for students which predicts spending for the month.
 
